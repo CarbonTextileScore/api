@@ -2,12 +2,6 @@
 DROP SCHEMA "UserInformation" CASCADE;
 CREATE SCHEMA "UserInformation";
 
-CREATE TYPE "UserInformation"."Role" AS ENUM(
-    'ROLE_USER',
-    'ROLE_CITY',
-    'ROLE_COUNTRY'
-);
-
 CREATE TABLE "UserInformation"."Country" (
                                              "id" SERIAL PRIMARY KEY,
                                              "Name" VARCHAR NOT NULL UNIQUE
@@ -17,14 +11,20 @@ CREATE TABLE "UserInformation"."City" (
                                           "id" SERIAL PRIMARY KEY,
                                           "Name" VARCHAR NOT NULL UNIQUE,
                                           "CountryId" INT NOT NULL,
-                                          FOREIGN KEY ("CountryId") REFERENCES "UserInformation"."Country"("id")
+                                          FOREIGN KEY ("CountryId") REFERENCES "UserInformation"."Country" ("id")
+);
+
+CREATE TABLE "UserInformation"."Role" (
+                                          "id" SERIAL PRIMARY KEY,
+                                          "Name" VARCHAR NOT NULL UNIQUE
 );
 
 CREATE TABLE "UserInformation"."Authority" (
                                                "id" SERIAL PRIMARY KEY,
                                                "Username" VARCHAR NOT NULL,
-                                               "Role" "UserInformation"."Role" NOT NULL,
-                                               "Password" VARCHAR NOT NULL
+                                               "RoleId" int NOT NULL,
+                                               "Password" VARCHAR NOT NULL,
+                                               FOREIGN KEY ("RoleId") REFERENCES "UserInformation"."Role" ("id")
 );
 
 CREATE TABLE "UserInformation"."User" (
@@ -50,8 +50,8 @@ CREATE TABLE "UserInformation"."UserToFamily" (
                                                    "id" SERIAL PRIMARY KEY,
                                                    "UserId" INT NOT NULL UNIQUE,
                                                    "FamilyId" INT NOT NULL,
-                                                   FOREIGN KEY ("UserId") REFERENCES "UserInformation"."User"("id"),
-                                                   FOREIGN KEY ("FamilyId") REFERENCES "UserInformation"."Family"("id")
+                                                   FOREIGN KEY ("UserId") REFERENCES "UserInformation"."User" ("id"),
+                                                   FOREIGN KEY ("FamilyId") REFERENCES "UserInformation"."Family" ("id")
 );
 
 CREATE TABLE "UserInformation"."Invoice" (
@@ -59,14 +59,14 @@ CREATE TABLE "UserInformation"."Invoice" (
                                              "Date" TIMESTAMP NOT NULL,
                                              "Quota" INT NOT NULL,
                                              "UserId" INT NOT NULL,
-                                             FOREIGN KEY ("UserId") REFERENCES "UserInformation"."User"("id")
+                                             FOREIGN KEY ("UserId") REFERENCES "UserInformation"."User" ("id")
 );
 
 CREATE TABLE "UserInformation"."TIGInfrastructure" (
                                                        "id" SERIAL PRIMARY KEY,
                                                        "Name" VARCHAR NOT NULL,
                                                        "CityId" INT NOT NULL,
-                                                       FOREIGN KEY ("CityId") REFERENCES "UserInformation"."City"("id")
+                                                       FOREIGN KEY ("CityId") REFERENCES "UserInformation"."City" ("id")
 );
 
 -- MarketInformation schema
@@ -88,8 +88,8 @@ CREATE TABLE "MarketInformation"."FabricsToProduct" (
                                                         "id" SERIAL PRIMARY KEY,
                                                         "ProductId" INT NOT NULL,
                                                         "FabricId" INT NOT NULL,
-                                                        FOREIGN KEY ("ProductId") REFERENCES "MarketInformation"."Product"("id"),
-                                                        FOREIGN KEY ("FabricId") REFERENCES "MarketInformation"."Fabric"("id")
+                                                        FOREIGN KEY ("ProductId") REFERENCES "MarketInformation"."Product" ("id"),
+                                                        FOREIGN KEY ("FabricId") REFERENCES "MarketInformation"."Fabric" ("id")
 );
 
 -- QuotaInformation schema
@@ -118,5 +118,5 @@ CREATE TABLE "QuotaInformation"."Quota" (
                                                      "id" SERIAL PRIMARY KEY,
                                                      "PunishmentRequirementId" INT NOT NULL,
                                                      "MaxQuotaQuarterly" INT NOT NULL,
-                                                     FOREIGN KEY ("PunishmentRequirementId") REFERENCES "QuotaInformation"."RetributionRequirement"("id")
+                                                     FOREIGN KEY ("PunishmentRequirementId") REFERENCES "QuotaInformation"."RetributionRequirement" ("id")
 );
