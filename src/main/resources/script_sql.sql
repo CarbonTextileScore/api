@@ -2,6 +2,12 @@
 DROP SCHEMA "UserInformation" CASCADE;
 CREATE SCHEMA "UserInformation";
 
+CREATE TYPE "UserInformation"."Role" AS ENUM(
+    'ROLE_USER',
+    'ROLE_CITY',
+    'ROLE_COUNTRY'
+);
+
 CREATE TABLE "UserInformation"."Country" (
                                              "id" SERIAL PRIMARY KEY,
                                              "Name" VARCHAR NOT NULL UNIQUE
@@ -14,6 +20,13 @@ CREATE TABLE "UserInformation"."City" (
                                           FOREIGN KEY ("CountryId") REFERENCES "UserInformation"."Country"("id")
 );
 
+CREATE TABLE "UserInformation"."Authority" (
+                                               "id" SERIAL PRIMARY KEY,
+                                               "Username" VARCHAR NOT NULL,
+                                               "Role" "UserInformation"."Role" NOT NULL,
+                                               "Password" VARCHAR NOT NULL
+);
+
 CREATE TABLE "UserInformation"."User" (
                                           "id" SERIAL PRIMARY KEY,
                                           "Name" VARCHAR NOT NULL,
@@ -22,9 +35,10 @@ CREATE TABLE "UserInformation"."User" (
                                           "Birthdate" TIMESTAMP NOT NULL,
                                           "QuotaId" INT NOT NULL,
                                           "ProfilePicture" BYTEA NOT NULL,
-                                          "Password" VARCHAR NOT NULL,
                                           "Gender" VARCHAR NOT NULL,
-                                          FOREIGN KEY ("CityId") REFERENCES "UserInformation"."City"("id")
+                                          "AuthorityId" int NOT NULL,
+                                          FOREIGN KEY ("CityId") REFERENCES "UserInformation"."City" ("id"),
+                                          FOREIGN KEY ("AuthorityId") REFERENCES "UserInformation"."Authority" ("id")
 );
 
 CREATE TABLE "UserInformation"."Family" (

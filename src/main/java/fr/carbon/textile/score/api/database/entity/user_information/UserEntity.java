@@ -26,9 +26,6 @@ public class UserEntity {
     @Column(name = "`Birthdate`", nullable = false)
     private Timestamp _birthdate;
     @Basic
-    @Column(name = "`Password`", nullable = false)
-    private String _password;
-    @Basic
     @Column(name = "Gender", nullable = false)
     private String _gender;
     @OneToOne
@@ -39,6 +36,9 @@ public class UserEntity {
     private byte[] _profilePicture;
     @OneToOne(mappedBy = "_user")
     private UserToFamilyEntity _userToFamily;
+    @OneToOne
+    @JoinColumn(name = "`AuthorityId`", nullable = false)
+    private AuthorityEntity _authority;
 
     public UserEntity() {
     }
@@ -48,21 +48,21 @@ public class UserEntity {
             String lastname,
             CityEntity city,
             Timestamp birthdate,
-            String password,
             String gender,
             QuotaEntity quota,
             byte[] profilePicture,
-            UserToFamilyEntity userToFamily
+            UserToFamilyEntity userToFamily,
+            AuthorityEntity authority
     ) {
         _name = name;
         _lastname = lastname;
         _city = city;
         _birthdate = birthdate;
-        _password = password;
         _gender = gender;
         _quota = quota;
         _profilePicture = profilePicture;
         _userToFamily = userToFamily;
+        _authority = authority;
     }
 
     public int getId() {
@@ -129,20 +129,20 @@ public class UserEntity {
         _userToFamily = userToFamily;
     }
 
-    public String getPassword() {
-        return _password;
-    }
-
-    public void setPassword(String password) {
-        _password = password;
-    }
-
     public String getGender() {
         return _gender;
     }
 
     public void setGender(String gender) {
         _gender = gender;
+    }
+
+    public AuthorityEntity getAuthority() {
+        return _authority;
+    }
+
+    public void setAuthority(AuthorityEntity authority) {
+        this._authority = authority;
     }
 
     @Override
@@ -155,14 +155,14 @@ public class UserEntity {
                 Objects.equals(_lastname, that._lastname) &&
                 Objects.equals(_city, that._city) &&
                 Objects.equals(_birthdate, that._birthdate) &&
-                Objects.equals(_password, that._password) &&
                 Objects.equals(_gender, that._gender) &&
                 Objects.equals(_quota, that._quota) &&
-                Objects.equals(_userToFamily, that._userToFamily);
+                Objects.equals(_userToFamily, that._userToFamily) &&
+                Objects.equals(_authority, that._authority);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(_id, _name, _lastname, _city, _birthdate, _password, _gender, _quota, _userToFamily);
+        return Objects.hash(_id, _name, _lastname, _city, _birthdate, _gender, _quota, _userToFamily, _authority);
     }
 }
