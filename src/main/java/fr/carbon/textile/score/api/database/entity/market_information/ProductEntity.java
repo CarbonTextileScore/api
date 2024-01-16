@@ -11,8 +11,8 @@ import java.util.Objects;
 public class ProductEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "`id`", nullable = false)
-    private int _id;
+    @Column(name = "`id`")
+    private Integer _id;
     @Basic
     @Column(name = "`Name`", nullable = false)
     private String _name;
@@ -22,9 +22,9 @@ public class ProductEntity {
     public ProductEntity() {
     }
 
-    public ProductEntity(String _name, List<FabricsToProductEntity> fabrics) {
-        this._name = _name;
-        this._fabrics = fabrics;
+    public ProductEntity(String name, List<FabricsToProductEntity> fabrics) {
+        _name = name;
+        _fabrics = fabrics;
     }
 
     public int getId() {
@@ -32,7 +32,7 @@ public class ProductEntity {
     }
 
     public void setId(int id) {
-        this._id = id;
+        _id = id;
     }
 
     public String getName() {
@@ -40,7 +40,7 @@ public class ProductEntity {
     }
 
     public void setName(String name) {
-        this._name = name;
+        _name = name;
     }
 
     public List<FabricsToProductEntity> getFabrics() {
@@ -48,7 +48,7 @@ public class ProductEntity {
     }
 
     public void setFabrics(List<FabricsToProductEntity> fabrics) {
-        this._fabrics = fabrics;
+        _fabrics = fabrics;
     }
 
     @Override
@@ -56,7 +56,9 @@ public class ProductEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProductEntity that = (ProductEntity) o;
-        return _id == that._id && Objects.equals(_name, that._name) && Objects.equals(_fabrics, that._fabrics);
+        return Objects.equals(_id, that._id) &&
+                Objects.equals(_name, that._name) &&
+                Objects.equals(_fabrics, that._fabrics);
     }
 
     @Override

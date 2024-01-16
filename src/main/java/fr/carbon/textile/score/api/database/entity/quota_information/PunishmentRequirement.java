@@ -22,8 +22,8 @@ public class PunishmentRequirement {
     }
 
     public PunishmentRequirement(int minAge, int maxAge) {
-        this._minAge = minAge;
-        this._maxAge = maxAge;
+        _minAge = minAge;
+        _maxAge = maxAge;
     }
 
     public Integer getId() {
@@ -31,7 +31,7 @@ public class PunishmentRequirement {
     }
 
     public void setId(Integer id) {
-        this._id = id;
+        _id = id;
     }
 
     public int getMinAge() {
@@ -39,7 +39,7 @@ public class PunishmentRequirement {
     }
 
     public void setMinAge(int minAge) {
-        this._minAge = minAge;
+        _minAge = minAge;
     }
 
     public int getMaxAge() {
@@ -47,7 +47,7 @@ public class PunishmentRequirement {
     }
 
     public void setMaxAge(int maxAge) {
-        this._maxAge = maxAge;
+        _maxAge = maxAge;
     }
 
     @Override

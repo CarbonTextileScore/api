@@ -9,8 +9,8 @@ import java.util.Objects;
 public class RetributionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "`id`", nullable = false)
-    private int _id;
+    @Column(name = "`id`")
+    private Integer _id;
     @Basic
     @Column(name = "`QuotaGains`", nullable = false)
     private int _quotaGains;
@@ -22,8 +22,8 @@ public class RetributionEntity {
     }
 
     public RetributionEntity(int quotaGains, String punishment) {
-        this._quotaGains = quotaGains;
-        this._punishment = punishment;
+        _quotaGains = quotaGains;
+        _punishment = punishment;
     }
 
     public int getId() {
@@ -31,7 +31,7 @@ public class RetributionEntity {
     }
 
     public void setId(int id) {
-        this._id = id;
+        _id = id;
     }
 
     public int getQuotaGains() {
@@ -39,7 +39,7 @@ public class RetributionEntity {
     }
 
     public void setQuotaGains(int quotaGains) {
-        this._quotaGains = quotaGains;
+        _quotaGains = quotaGains;
     }
 
     public String getPunishment() {
@@ -47,7 +47,7 @@ public class RetributionEntity {
     }
 
     public void setPunishment(String punishment) {
-        this._punishment = punishment;
+        _punishment = punishment;
     }
 
 
@@ -56,7 +56,9 @@ public class RetributionEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RetributionEntity that = (RetributionEntity) o;
-        return _id == that._id && _quotaGains == that._quotaGains && Objects.equals(_punishment, that._punishment);
+        return Objects.equals(_id, that._id) &&
+                _quotaGains == that._quotaGains &&
+                Objects.equals(_punishment, that._punishment);
     }
 
     @Override

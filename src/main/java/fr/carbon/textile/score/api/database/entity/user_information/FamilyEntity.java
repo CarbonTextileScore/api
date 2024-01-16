@@ -10,8 +10,8 @@ import java.util.Objects;
 public class FamilyEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id", nullable = false)
-    private int _id;
+    @Column(name = "`id`")
+    private Integer _id;
     @Basic
     @Column(name = "`Address`", nullable = false)
     private String _address;
@@ -22,8 +22,8 @@ public class FamilyEntity {
     }
 
     public FamilyEntity(String address, List<UserToFamilyEntity> userToFamily) {
-        this._address = address;
-        this._userToFamily = userToFamily;
+        _address = address;
+        _userToFamily = userToFamily;
     }
 
     public int getId() {
@@ -47,7 +47,7 @@ public class FamilyEntity {
     }
 
     public void setUserToFamily(List<UserToFamilyEntity> userToFamily) {
-        this._userToFamily = userToFamily;
+        _userToFamily = userToFamily;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class FamilyEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FamilyEntity that = (FamilyEntity) o;
-        return _id == that._id &&
+        return Objects.equals(_id, that._id) &&
                 Objects.equals(_address, that._address) &&
                 Objects.equals(_userToFamily, that._userToFamily);
     }

@@ -5,12 +5,12 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity(name = "UserToFamily")
-@Table(name = "`UserToFamily`", schema = "UserInformation", catalog = "postgres")
+@Table(name = "`UserToFamily`", schema = "`UserInformation`", catalog = "postgres")
 public class UserToFamilyEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "`id`", nullable = false)
-    private int _id;
+    @Column(name = "`id`")
+    private Integer _id;
     @OneToOne
     @JoinColumn(name = "`UserId`", nullable = false)
     private UserEntity _user;
@@ -55,7 +55,9 @@ public class UserToFamilyEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserToFamilyEntity that = (UserToFamilyEntity) o;
-        return _id == that._id && Objects.equals(_user, that._user) && Objects.equals(_family, that._family);
+        return Objects.equals(_id, that._id) &&
+                Objects.equals(_user, that._user) &&
+                Objects.equals(_family, that._family);
     }
 
     @Override

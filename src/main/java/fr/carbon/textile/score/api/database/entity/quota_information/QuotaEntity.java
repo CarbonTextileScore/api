@@ -22,8 +22,8 @@ public class QuotaEntity {
     }
 
     public QuotaEntity(PunishmentRequirement punishmentRequirement, int maxQuotaQuarterly) {
-        this._punishmentRequirement = punishmentRequirement;
-        this._maxQuotaQuarterly = maxQuotaQuarterly;
+        _punishmentRequirement = punishmentRequirement;
+        _maxQuotaQuarterly = maxQuotaQuarterly;
     }
 
     public Integer getId() {
@@ -31,7 +31,7 @@ public class QuotaEntity {
     }
 
     public void setId(Integer id) {
-        this._id = id;
+        _id = id;
     }
 
     public PunishmentRequirement getPunishmentRequirement() {
@@ -39,7 +39,7 @@ public class QuotaEntity {
     }
 
     public void setPunishmentRequirement(PunishmentRequirement characteristicId) {
-        this._punishmentRequirement = characteristicId;
+        _punishmentRequirement = characteristicId;
     }
 
     public int getMaxQuotaQuarterly() {
@@ -47,7 +47,7 @@ public class QuotaEntity {
     }
 
     public void setMaxQuotaQuarterly(int maxQuotaQuarterly) {
-        this._maxQuotaQuarterly = maxQuotaQuarterly;
+        _maxQuotaQuarterly = maxQuotaQuarterly;
     }
 
     @Override

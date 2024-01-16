@@ -9,8 +9,8 @@ import java.util.Objects;
 public class FabricEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "`id`", nullable = false)
-    private int _id;
+    @Column(name = "`id`")
+    private Integer _id;
     @Basic
     @Column(name = "`Name`", nullable = false)
     private String _name;
@@ -22,8 +22,8 @@ public class FabricEntity {
     }
 
     public FabricEntity(String name, int costPerGram) {
-        this._name = name;
-        this._costPerGram = costPerGram;
+        _name = name;
+        _costPerGram = costPerGram;
     }
 
     public int getId() {
@@ -31,7 +31,7 @@ public class FabricEntity {
     }
 
     public void setId(int id) {
-        this._id = id;
+        _id = id;
     }
 
     public String getName() {
@@ -39,7 +39,7 @@ public class FabricEntity {
     }
 
     public void setName(String name) {
-        this._name = name;
+        _name = name;
     }
 
     public int getCostPerGram() {
@@ -47,7 +47,7 @@ public class FabricEntity {
     }
 
     public void setCostPerGram(int costPerGram) {
-        this._costPerGram = costPerGram;
+        _costPerGram = costPerGram;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class FabricEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FabricEntity that = (FabricEntity) o;
-        return _id == that._id && _costPerGram == that._costPerGram && Objects.equals(_name, that._name);
+        return Objects.equals(_id, that._id) && _costPerGram == that._costPerGram && Objects.equals(_name, that._name);
     }
 
     @Override

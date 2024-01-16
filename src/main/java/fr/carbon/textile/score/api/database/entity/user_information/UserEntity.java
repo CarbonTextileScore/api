@@ -3,7 +3,6 @@ package fr.carbon.textile.score.api.database.entity.user_information;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
-import java.util.Arrays;
 import java.util.Objects;
 
 @Entity(name = "User")
@@ -11,8 +10,8 @@ import java.util.Objects;
 public class UserEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "`id`", nullable = false)
-    private int _id;
+    @Column(name = "`id`")
+    private Integer _id;
     @Basic
     @Column(name = "`Name`", nullable = false)
     private String _name;
@@ -117,7 +116,7 @@ public class UserEntity {
     }
 
     public void setUserToFamily(UserToFamilyEntity userToFamily) {
-        this._userToFamily = userToFamily;
+        _userToFamily = userToFamily;
     }
 
     @Override
@@ -125,7 +124,7 @@ public class UserEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserEntity that = (UserEntity) o;
-        return _id == that._id &&
+        return Objects.equals(_id, that._id) &&
                 _quotaId == that._quotaId &&
                 Objects.equals(_name, that._name) &&
                 Objects.equals(_lastname, that._lastname) &&

@@ -9,8 +9,8 @@ import java.util.Objects;
 public class CityEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "`id`", nullable = false)
-    private int _id;
+    @Column(name = "`id`")
+    private Integer _id;
     @Basic
     @Column(name = "`Name`", nullable = false)
     private String _name;
@@ -55,7 +55,7 @@ public class CityEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CityEntity that = (CityEntity) o;
-        return _id == that._id &&
+        return Objects.equals(_id, that._id) &&
                 Objects.equals(_country, that._country) &&
                 Objects.equals(_name, that._name);
     }
