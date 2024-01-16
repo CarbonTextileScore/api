@@ -1,4 +1,7 @@
 -- UserInformation schema
+DROP SCHEMA "UserInformation" CASCADE;
+CREATE SCHEMA "UserInformation";
+
 CREATE TABLE "UserInformation"."Country" (
                                              "id" SERIAL PRIMARY KEY,
                                              "Name" VARCHAR NOT NULL UNIQUE
@@ -19,6 +22,8 @@ CREATE TABLE "UserInformation"."User" (
                                           "Birthdate" TIMESTAMP NOT NULL,
                                           "QuotaId" INT NOT NULL,
                                           "ProfilePicture" BYTEA NOT NULL,
+                                          "Password" VARCHAR NOT NULL,
+                                          "Gender" VARCHAR NOT NULL,
                                           FOREIGN KEY ("CityId") REFERENCES "UserInformation"."City"("id")
 );
 
@@ -51,6 +56,9 @@ CREATE TABLE "UserInformation"."TIGInfrastructure" (
 );
 
 -- MarketInformation schema
+DROP SCHEMA "MarketInformation" CASCADE ;
+CREATE SCHEMA "MarketInformation"
+
 CREATE TABLE "MarketInformation"."Product" (
                                                "id" SERIAL PRIMARY KEY,
                                                "Name" VARCHAR NOT NULL UNIQUE
@@ -71,6 +79,9 @@ CREATE TABLE "MarketInformation"."FabricsToProduct" (
 );
 
 -- QuotaInformation schema
+DROP SCHEMA "QuotaInformation" CASCADE ;
+CREATE SCHEMA "QuotaInformation"
+
 CREATE TABLE "QuotaInformation"."UserRetribution" (
                                                   "id"         SERIAL PRIMARY KEY,
                                                   "QuotaGains" INT NOT NULL,

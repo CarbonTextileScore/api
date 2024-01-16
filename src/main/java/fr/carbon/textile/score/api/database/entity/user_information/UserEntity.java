@@ -25,6 +25,12 @@ public class UserEntity {
     @Basic
     @Column(name = "`Birthdate`", nullable = false)
     private Timestamp _birthdate;
+    @Basic
+    @Column(name = "`Password`", nullable = false)
+    private String _password;
+    @Basic
+    @Column(name = "Gender", nullable = false)
+    private String _gender;
     @OneToOne
     @JoinColumn(name = "`QuotaId`", nullable = false)
     private QuotaEntity _quota;
@@ -42,6 +48,8 @@ public class UserEntity {
             String lastname,
             CityEntity city,
             Timestamp birthdate,
+            String password,
+            String gender,
             QuotaEntity quota,
             byte[] profilePicture,
             UserToFamilyEntity userToFamily
@@ -50,6 +58,8 @@ public class UserEntity {
         _lastname = lastname;
         _city = city;
         _birthdate = birthdate;
+        _password = password;
+        _gender = gender;
         _quota = quota;
         _profilePicture = profilePicture;
         _userToFamily = userToFamily;
@@ -119,22 +129,40 @@ public class UserEntity {
         _userToFamily = userToFamily;
     }
 
+    public String getPassword() {
+        return _password;
+    }
+
+    public void setPassword(String password) {
+        _password = password;
+    }
+
+    public String getGender() {
+        return _gender;
+    }
+
+    public void setGender(String gender) {
+        _gender = gender;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserEntity that = (UserEntity) o;
         return Objects.equals(_id, that._id) &&
-                Objects.equals(_quota, that._quota) &&
                 Objects.equals(_name, that._name) &&
                 Objects.equals(_lastname, that._lastname) &&
                 Objects.equals(_city, that._city) &&
                 Objects.equals(_birthdate, that._birthdate) &&
+                Objects.equals(_password, that._password) &&
+                Objects.equals(_gender, that._gender) &&
+                Objects.equals(_quota, that._quota) &&
                 Objects.equals(_userToFamily, that._userToFamily);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(_id, _name, _lastname, _city, _birthdate, _quota, _userToFamily);
+        return Objects.hash(_id, _name, _lastname, _city, _birthdate, _password, _gender, _quota, _userToFamily);
     }
 }
