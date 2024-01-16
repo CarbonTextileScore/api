@@ -97,9 +97,15 @@ DROP SCHEMA "QuotaInformation" CASCADE ;
 CREATE SCHEMA "QuotaInformation"
 
 CREATE TABLE "QuotaInformation"."UserRetribution" (
-                                                  "id"         SERIAL PRIMARY KEY,
-                                                  "QuotaGains" INT NOT NULL,
-                                                  "Retribution" VARCHAR NOT NULL UNIQUE
+                                                      "id"         SERIAL PRIMARY KEY,
+                                                      "QuotaGains" INT NOT NULL,
+                                                      "Retribution" VARCHAR NOT NULL UNIQUE
+);
+
+CREATE TABLE "QuotaInformation"."CityRetribution" (
+                                                      "id" SERIAL PRIMARY KEY,
+                                                      "Retribution" VARCHAR NOT NULL UNIQUE,
+                                                      "TriggerPercentage" int NOT NULL UNIQUE
 );
 
 CREATE TABLE "QuotaInformation"."RetributionRequirement" (
