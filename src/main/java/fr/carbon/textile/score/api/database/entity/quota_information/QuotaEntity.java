@@ -12,7 +12,7 @@ public class QuotaEntity {
     @Column(name = "`id`")
     private Integer _id;
     @OneToOne
-    @Column(name = "`PunishmentRequirementId`", nullable = false)
+    @JoinColumn(name = "`PunishmentRequirementId`", nullable = false)
     private PunishmentRequirement _punishmentRequirement;
     @Basic
     @Column(name = "`maxQuotaQuarterly`", nullable = false)

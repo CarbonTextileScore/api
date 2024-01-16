@@ -2,8 +2,6 @@ package fr.carbon.textile.score.api.database.entity.market_information;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "Product")
@@ -16,15 +14,15 @@ public class ProductEntity {
     @Basic
     @Column(name = "`Name`", nullable = false)
     private String _name;
-    @OneToMany(mappedBy = "_fabric")
-    List<FabricsToProductEntity> _fabrics = new ArrayList<>();
+    @OneToOne(mappedBy = "_product")
+    FabricsToProductEntity _fabric;
 
     public ProductEntity() {
     }
 
-    public ProductEntity(String name, List<FabricsToProductEntity> fabrics) {
+    public ProductEntity(String name, FabricsToProductEntity fabrics) {
         _name = name;
-        _fabrics = fabrics;
+        _fabric = fabrics;
     }
 
     public int getId() {
@@ -43,12 +41,12 @@ public class ProductEntity {
         _name = name;
     }
 
-    public List<FabricsToProductEntity> getFabrics() {
-        return _fabrics;
+    public FabricsToProductEntity getFabric() {
+        return _fabric;
     }
 
-    public void setFabrics(List<FabricsToProductEntity> fabrics) {
-        _fabrics = fabrics;
+    public void setFabric(FabricsToProductEntity fabric) {
+        _fabric = fabric;
     }
 
     @Override
@@ -58,11 +56,11 @@ public class ProductEntity {
         ProductEntity that = (ProductEntity) o;
         return Objects.equals(_id, that._id) &&
                 Objects.equals(_name, that._name) &&
-                Objects.equals(_fabrics, that._fabrics);
+                Objects.equals(_fabric, that._fabric);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(_id, _name, _fabrics);
+        return Objects.hash(_id, _name, _fabric);
     }
 }
