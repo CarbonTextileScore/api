@@ -1,5 +1,6 @@
 package fr.carbon.textile.score.api.database.entity.user_information;
 
+import fr.carbon.textile.score.api.database.entity.quota_information.QuotaEntity;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
@@ -24,10 +25,9 @@ public class UserEntity {
     @Basic
     @Column(name = "`Birthdate`", nullable = false)
     private Timestamp _birthdate;
-    //TODO Change to OneToOne
-    @Basic
-    @Column(name = "`QuotaId`", nullable = false)
-    private int _quotaId;
+    @OneToOne
+    @JoinColumn(name = "`QuotaId`", nullable = false)
+    private QuotaEntity _quota;
     @Basic
     @Column(name = "`ProfilePicture`", nullable = false)
     private byte[] _profilePicture;
@@ -42,7 +42,7 @@ public class UserEntity {
             String lastname,
             CityEntity city,
             Timestamp birthdate,
-            int quotaId,
+            QuotaEntity quota,
             byte[] profilePicture,
             UserToFamilyEntity userToFamily
     ) {
@@ -50,7 +50,7 @@ public class UserEntity {
         _lastname = lastname;
         _city = city;
         _birthdate = birthdate;
-        _quotaId = quotaId;
+        _quota = quota;
         _profilePicture = profilePicture;
         _userToFamily = userToFamily;
     }
@@ -95,12 +95,12 @@ public class UserEntity {
         _birthdate = birthdate;
     }
 
-    public int getQuotaId() {
-        return _quotaId;
+    public QuotaEntity getQuota() {
+        return _quota;
     }
 
-    public void setQuotaId(int quotaId) {
-        _quotaId = quotaId;
+    public void setQuota(QuotaEntity quotaId) {
+        _quota = quotaId;
     }
 
     public byte[] getProfilePicture() {
@@ -125,7 +125,7 @@ public class UserEntity {
         if (o == null || getClass() != o.getClass()) return false;
         UserEntity that = (UserEntity) o;
         return Objects.equals(_id, that._id) &&
-                _quotaId == that._quotaId &&
+                Objects.equals(_quota, that._quota) &&
                 Objects.equals(_name, that._name) &&
                 Objects.equals(_lastname, that._lastname) &&
                 Objects.equals(_city, that._city) &&
@@ -135,6 +135,6 @@ public class UserEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(_id, _name, _lastname, _city, _birthdate, _quotaId, _userToFamily);
+        return Objects.hash(_id, _name, _lastname, _city, _birthdate, _quota, _userToFamily);
     }
 }
