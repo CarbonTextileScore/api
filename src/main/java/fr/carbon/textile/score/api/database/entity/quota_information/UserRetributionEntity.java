@@ -23,7 +23,7 @@ public class UserRetributionEntity {
 
     public UserRetributionEntity(int quotaGains, String retribution) {
         _quotaGains = quotaGains;
-        this._retribution = retribution;
+        _retribution = retribution;
     }
 
     public int getId() {
@@ -47,7 +47,7 @@ public class UserRetributionEntity {
     }
 
     public void setRetribution(String punishment) {
-        this._retribution = punishment;
+        _retribution = punishment;
     }
 
 
