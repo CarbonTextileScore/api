@@ -71,13 +71,13 @@ CREATE TABLE "MarketInformation"."FabricsToProduct" (
 );
 
 -- QuotaInformation schema
-CREATE TABLE "QuotaInformation"."Retribution" (
+CREATE TABLE "QuotaInformation"."UserRetribution" (
                                                   "id"         SERIAL PRIMARY KEY,
                                                   "QuotaGains" INT NOT NULL,
-                                                  "Punishment" VARCHAR NOT NULL UNIQUE
+                                                  "Retribution" VARCHAR NOT NULL UNIQUE
 );
 
-CREATE TABLE "QuotaInformation"."PunishmentRequirement" (
+CREATE TABLE "QuotaInformation"."RetributionRequirement" (
                                                      "id" SERIAL PRIMARY KEY,
                                                      "MinAge" INT NOT NULL UNIQUE,
                                                      "MaxAge" INT NOT NULL UNIQUE
@@ -87,5 +87,5 @@ CREATE TABLE "QuotaInformation"."Quota" (
                                                      "id" SERIAL PRIMARY KEY,
                                                      "PunishmentRequirementId" INT NOT NULL,
                                                      "MaxQuotaQuarterly" INT NOT NULL,
-                                                     FOREIGN KEY ("PunishmentRequirementId") REFERENCES "QuotaInformation"."PunishmentRequirement"("id")
+                                                     FOREIGN KEY ("PunishmentRequirementId") REFERENCES "QuotaInformation"."RetributionRequirement"("id")
 );

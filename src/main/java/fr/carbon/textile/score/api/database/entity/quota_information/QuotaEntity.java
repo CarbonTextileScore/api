@@ -13,7 +13,7 @@ public class QuotaEntity {
     private Integer _id;
     @OneToOne
     @JoinColumn(name = "`PunishmentRequirementId`", nullable = false)
-    private PunishmentRequirement _punishmentRequirement;
+    private RetributionRequirementEntity _punishmentRequirement;
     @Basic
     @Column(name = "`MaxQuotaQuarterly`", nullable = false)
     private int _maxQuotaQuarterly;
@@ -21,7 +21,7 @@ public class QuotaEntity {
     public QuotaEntity() {
     }
 
-    public QuotaEntity(PunishmentRequirement punishmentRequirement, int maxQuotaQuarterly) {
+    public QuotaEntity(RetributionRequirementEntity punishmentRequirement, int maxQuotaQuarterly) {
         _punishmentRequirement = punishmentRequirement;
         _maxQuotaQuarterly = maxQuotaQuarterly;
     }
@@ -34,11 +34,11 @@ public class QuotaEntity {
         _id = id;
     }
 
-    public PunishmentRequirement getPunishmentRequirement() {
+    public RetributionRequirementEntity getPunishmentRequirement() {
         return _punishmentRequirement;
     }
 
-    public void setPunishmentRequirement(PunishmentRequirement characteristicId) {
+    public void setPunishmentRequirement(RetributionRequirementEntity characteristicId) {
         _punishmentRequirement = characteristicId;
     }
 

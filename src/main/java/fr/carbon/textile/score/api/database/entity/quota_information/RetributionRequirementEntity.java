@@ -4,9 +4,9 @@ import jakarta.persistence.*;
 
 import java.util.Objects;
 
-@Entity(name = "PunishmentRequirement")
-@Table(name = "`PunishmentRequirement`", schema = "`QuotaInformation`", catalog = "postgres")
-public class PunishmentRequirement {
+@Entity(name = "RetributionRequirement")
+@Table(name = "`RetributionRequirement`", schema = "`QuotaInformation`", catalog = "postgres")
+public class RetributionRequirementEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "`id`")
@@ -18,10 +18,10 @@ public class PunishmentRequirement {
     @Column(name = "`MaxAge`", nullable = false)
     private int _maxAge;
 
-    public PunishmentRequirement() {
+    public RetributionRequirementEntity() {
     }
 
-    public PunishmentRequirement(int minAge, int maxAge) {
+    public RetributionRequirementEntity(int minAge, int maxAge) {
         _minAge = minAge;
         _maxAge = maxAge;
     }
@@ -54,7 +54,7 @@ public class PunishmentRequirement {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        PunishmentRequirement that = (PunishmentRequirement) o;
+        RetributionRequirementEntity that = (RetributionRequirementEntity) o;
         return _minAge == that._minAge && _maxAge == that._maxAge && Objects.equals(_id, that._id);
     }
 

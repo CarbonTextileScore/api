@@ -4,9 +4,9 @@ import jakarta.persistence.*;
 
 import java.util.Objects;
 
-@Entity(name = "Retribution")
-@Table(name = "`Retribution`", schema = "`QuotaInformation`", catalog = "postgres")
-public class RetributionEntity {
+@Entity(name = "UserRetribution")
+@Table(name = "`UserRetribution`", schema = "`QuotaInformation`", catalog = "postgres")
+public class UserRetributionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "`id`")
@@ -15,15 +15,15 @@ public class RetributionEntity {
     @Column(name = "`QuotaGains`", nullable = false)
     private int _quotaGains;
     @Basic
-    @Column(name = "`Punishment`", nullable = false)
-    private String _punishment;
+    @Column(name = "`Retribution`", nullable = false)
+    private String _retribution;
 
-    public RetributionEntity() {
+    public UserRetributionEntity() {
     }
 
-    public RetributionEntity(int quotaGains, String punishment) {
+    public UserRetributionEntity(int quotaGains, String retribution) {
         _quotaGains = quotaGains;
-        _punishment = punishment;
+        this._retribution = retribution;
     }
 
     public int getId() {
@@ -42,12 +42,12 @@ public class RetributionEntity {
         _quotaGains = quotaGains;
     }
 
-    public String getPunishment() {
-        return _punishment;
+    public String getRetribution() {
+        return _retribution;
     }
 
-    public void setPunishment(String punishment) {
-        _punishment = punishment;
+    public void setRetribution(String punishment) {
+        this._retribution = punishment;
     }
 
 
@@ -55,14 +55,14 @@ public class RetributionEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        RetributionEntity that = (RetributionEntity) o;
+        UserRetributionEntity that = (UserRetributionEntity) o;
         return Objects.equals(_id, that._id) &&
                 _quotaGains == that._quotaGains &&
-                Objects.equals(_punishment, that._punishment);
+                Objects.equals(_retribution, that._retribution);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(_id, _quotaGains, _punishment);
+        return Objects.hash(_id, _quotaGains, _retribution);
     }
 }
