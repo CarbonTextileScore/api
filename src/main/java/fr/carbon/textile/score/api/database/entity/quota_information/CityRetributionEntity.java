@@ -22,8 +22,8 @@ public class CityRetributionEntity {
     }
 
     public CityRetributionEntity(String retribution, int triggerPercentage) {
-        this._retribution = retribution;
-        this._triggerPercentage = triggerPercentage;
+        _retribution = retribution;
+        _triggerPercentage = triggerPercentage;
     }
 
     public Integer getId() {
@@ -31,7 +31,7 @@ public class CityRetributionEntity {
     }
 
     public void setId(Integer id) {
-        this._id = id;
+        _id = id;
     }
 
     public String getRetribution() {
@@ -39,7 +39,7 @@ public class CityRetributionEntity {
     }
 
     public void setRetribution(String retribution) {
-        this._retribution = retribution;
+        _retribution = retribution;
     }
 
     public int getTriggerPercentage() {
@@ -47,7 +47,7 @@ public class CityRetributionEntity {
     }
 
     public void setTriggerPercentage(int triggerPercentage) {
-        this._triggerPercentage = triggerPercentage;
+        _triggerPercentage = triggerPercentage;
     }
 
     @Override

@@ -142,7 +142,7 @@ public class UserEntity {
     }
 
     public void setAuthority(AuthorityEntity authority) {
-        this._authority = authority;
+        _authority = authority;
     }
 
     @Override

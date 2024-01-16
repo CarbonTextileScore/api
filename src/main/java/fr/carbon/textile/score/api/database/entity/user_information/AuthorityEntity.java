@@ -29,9 +29,9 @@ public class AuthorityEntity {
     }
 
     public AuthorityEntity(String username, Role role, String password) {
-        this._username = username;
-        this._role = role;
-        this._password = password;
+        _username = username;
+        _role = role;
+        _password = password;
     }
 
     public Integer getId() {
@@ -39,7 +39,7 @@ public class AuthorityEntity {
     }
 
     public void setId(Integer id) {
-        this._id = id;
+        _id = id;
     }
 
     public String getUsername() {
@@ -47,7 +47,7 @@ public class AuthorityEntity {
     }
 
     public void setUsername(String username) {
-        this._username = username;
+        _username = username;
     }
 
     public Object getRole() {
@@ -55,7 +55,7 @@ public class AuthorityEntity {
     }
 
     public void setRole(Role role) {
-        this._role = role;
+        _role = role;
     }
 
     public String getPassword() {
@@ -63,7 +63,7 @@ public class AuthorityEntity {
     }
 
     public void setPassword(String password) {
-        this._password = password;
+        _password = password;
     }
 
     @Override
