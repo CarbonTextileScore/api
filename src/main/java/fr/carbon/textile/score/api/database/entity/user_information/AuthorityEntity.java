@@ -20,7 +20,7 @@ public class AuthorityEntity {
     @Column(name = "`Role`", nullable = false)
     @Enumerated(EnumType.STRING)
     @Type(PostgreSQLEnumType.class)
-    private Object _role;
+    private Role _role;
     @Basic
     @Column(name = "`Password`", nullable = false)
     private String _password;
@@ -28,7 +28,7 @@ public class AuthorityEntity {
     public AuthorityEntity() {
     }
 
-    public AuthorityEntity(String username, Object role, String password) {
+    public AuthorityEntity(String username, Role role, String password) {
         this._username = username;
         this._role = role;
         this._password = password;
@@ -54,7 +54,7 @@ public class AuthorityEntity {
         return _role;
     }
 
-    public void setRole(Object role) {
+    public void setRole(Role role) {
         this._role = role;
     }
 
