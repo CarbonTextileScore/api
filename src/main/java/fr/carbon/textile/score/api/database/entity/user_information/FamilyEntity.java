@@ -2,6 +2,7 @@ package fr.carbon.textile.score.api.database.entity.user_information;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "Family")
@@ -14,6 +15,16 @@ public class FamilyEntity {
     @Basic
     @Column(name = "`Address`", nullable = false)
     private String _address;
+    @OneToMany(mappedBy = "_family")
+    private List<UserToFamilyEntity> _userToFamily;
+
+    public FamilyEntity() {
+    }
+
+    public FamilyEntity(String address, List<UserToFamilyEntity> userToFamily) {
+        this._address = address;
+        this._userToFamily = userToFamily;
+    }
 
     public int getId() {
         return _id;
@@ -31,11 +42,12 @@ public class FamilyEntity {
         _address = address;
     }
 
-    public FamilyEntity() {
+    public List<UserToFamilyEntity> getUserToFamily() {
+        return _userToFamily;
     }
 
-    public FamilyEntity(String address) {
-        _address = address;
+    public void setUserToFamily(List<UserToFamilyEntity> userToFamily) {
+        this._userToFamily = userToFamily;
     }
 
     @Override
@@ -43,11 +55,13 @@ public class FamilyEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FamilyEntity that = (FamilyEntity) o;
-        return _id == that._id && Objects.equals(_address, that._address);
+        return _id == that._id &&
+                Objects.equals(_address, that._address) &&
+                Objects.equals(_userToFamily, that._userToFamily);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(_id, _address);
+        return Objects.hash(_id, _address, _userToFamily);
     }
 }
