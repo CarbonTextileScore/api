@@ -1,8 +1,6 @@
-package fr.carbon.textile.score.api.database.entity.user_information;
+package fr.carbon.textile.score.api.database.entity.user.information;
 
-import io.hypersistence.utils.hibernate.type.basic.PostgreSQLEnumType;
 import jakarta.persistence.*;
-import org.hibernate.annotations.Type;
 
 import java.util.Objects;
 
@@ -16,11 +14,9 @@ public class AuthorityEntity {
     @Basic
     @Column(name = "`Username`", nullable = false)
     private String _username;
-    @Basic
-    @Column(name = "`Role`", nullable = false)
-    @Enumerated(EnumType.STRING)
-    @Type(PostgreSQLEnumType.class)
-    private Role _role;
+    @OneToOne
+    @JoinColumn(name = "`RoleId`", nullable = false)
+    private RoleEntity _role;
     @Basic
     @Column(name = "`Password`", nullable = false)
     private String _password;
@@ -28,7 +24,7 @@ public class AuthorityEntity {
     public AuthorityEntity() {
     }
 
-    public AuthorityEntity(String username, Role role, String password) {
+    public AuthorityEntity(String username, RoleEntity role, String password) {
         _username = username;
         _role = role;
         _password = password;
@@ -50,11 +46,11 @@ public class AuthorityEntity {
         _username = username;
     }
 
-    public Object getRole() {
+    public RoleEntity getRole() {
         return _role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(RoleEntity role) {
         _role = role;
     }
 
