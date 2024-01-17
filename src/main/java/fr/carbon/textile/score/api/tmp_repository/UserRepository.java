@@ -10,7 +10,7 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<UserEntity, Integer> {
     @Query(
-            "SELECT user FROM User user WHERE user._authority._username = :username"
+            "SELECT user FROM User user WHERE upper(user._authority._username) = upper(:username)"
     )
     Optional<UserEntity> queryByAuthorityUsername(@NotBlank @Param("username") String username);
 }
