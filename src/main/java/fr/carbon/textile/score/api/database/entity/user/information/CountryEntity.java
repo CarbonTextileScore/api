@@ -14,6 +14,25 @@ public class CountryEntity {
     @Basic
     @Column(name = "`Name`", nullable = false)
     private String _name;
+    @Basic
+    @Column(name = "`Lat`", nullable = false, precision = 8)
+    private double _lat;
+    @Basic
+    @Column(name = "`Lon`", nullable = false, precision = 8)
+    private double _lon;
+
+    public CountryEntity() {
+    }
+
+    public CountryEntity(
+            String name,
+            double lat,
+            double lon
+    ) {
+        this._name = name;
+        this._lat = lat;
+        this._lon = lon;
+    }
 
     public int getId() {
         return _id;
@@ -31,11 +50,20 @@ public class CountryEntity {
         _name = name;
     }
 
-    public CountryEntity() {
+    public double getLat() {
+        return _lat;
     }
 
-    public CountryEntity(String name) {
-        _name = name;
+    public void setLat(double lat) {
+        this._lat = lat;
+    }
+
+    public double getLon() {
+        return _lon;
+    }
+
+    public void setLon(double lon) {
+        this._lon = lon;
     }
 
     @Override
@@ -43,11 +71,14 @@ public class CountryEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         CountryEntity that = (CountryEntity) o;
-        return Objects.equals(_id, that._id) && Objects.equals(_name, that._name);
+        return Double.compare(_lat, that._lat) == 0 &&
+                Double.compare(_lon, that._lon) == 0 &&
+                Objects.equals(_id, that._id) &&
+                Objects.equals(_name, that._name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(_id, _name);
+        return Objects.hash(_id, _name, _lat, _lon);
     }
 }

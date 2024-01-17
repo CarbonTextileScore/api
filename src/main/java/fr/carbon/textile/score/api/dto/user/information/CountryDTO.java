@@ -12,4 +12,6 @@ import java.io.Serializable;
 public class CountryDTO implements Serializable {
     Integer id;
     String name;
+    Double lat;
+    Double lon;
 }
