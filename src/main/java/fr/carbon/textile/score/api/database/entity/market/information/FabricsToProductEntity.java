@@ -59,7 +59,7 @@ public class FabricsToProductEntity {
     }
 
     public void setPercentage(int percentage) {
-        this._percentage = percentage;
+        _percentage = percentage;
     }
 
     @Override

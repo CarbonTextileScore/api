@@ -25,8 +25,8 @@ public class ProductCostCoefficientEntity {
             String name,
             double penaltyCoefficient
     ) {
-        this._name = name;
-        this._penaltyCoefficient = penaltyCoefficient;
+        _name = name;
+        _penaltyCoefficient = penaltyCoefficient;
     }
 
     public Integer getId() {
@@ -34,7 +34,7 @@ public class ProductCostCoefficientEntity {
     }
 
     public void setId(Integer id) {
-        this._id = id;
+        _id = id;
     }
 
     public String getName() {
@@ -42,7 +42,7 @@ public class ProductCostCoefficientEntity {
     }
 
     public void setName(String name) {
-        this._name = name;
+        _name = name;
     }
 
     public double getPenaltyCoefficient() {
@@ -50,7 +50,7 @@ public class ProductCostCoefficientEntity {
     }
 
     public void setPenaltyCoefficient(double penaltyCoefficient) {
-        this._penaltyCoefficient = penaltyCoefficient;
+        _penaltyCoefficient = penaltyCoefficient;
     }
 
     @Override

@@ -19,7 +19,7 @@ public class FabricAnimalOriginEntity {
     }
 
     public FabricAnimalOriginEntity(String name) {
-        this._name = name;
+        _name = name;
     }
 
     public Integer getId() {
@@ -27,7 +27,7 @@ public class FabricAnimalOriginEntity {
     }
 
     public void setId(Integer id) {
-        this._id = id;
+        _id = id;
     }
 
     public String getName() {
@@ -35,7 +35,7 @@ public class FabricAnimalOriginEntity {
     }
 
     public void setName(String name) {
-        this._name = name;
+        _name = name;
     }
 
     @Override

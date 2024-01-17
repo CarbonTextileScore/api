@@ -38,11 +38,11 @@ public class FabricEntity {
             FabricAnimalOriginEntity fabricAnimalOrigin,
             CountryEntity country
     ) {
-        this._name = name;
-        this._waterConsumptionCubicCentimeterPerGram = waterConsumptionCubicCentimeterPerGram;
-        this._kilogramCO2EquivalentPerSquareMetre = kilogramCO2EquivalentPerSquareMetre;
-        this._fabricAnimalOrigin = fabricAnimalOrigin;
-        this._country = country;
+        _name = name;
+        _waterConsumptionCubicCentimeterPerGram = waterConsumptionCubicCentimeterPerGram;
+        _kilogramCO2EquivalentPerSquareMetre = kilogramCO2EquivalentPerSquareMetre;
+        _fabricAnimalOrigin = fabricAnimalOrigin;
+        _country = country;
     }
 
     public int getId() {
@@ -66,7 +66,7 @@ public class FabricEntity {
     }
 
     public void setWaterConsumptionCubicCentimeterPerGram(double waterConsumptionCubicCentimeterPerGram) {
-        this._waterConsumptionCubicCentimeterPerGram = waterConsumptionCubicCentimeterPerGram;
+        _waterConsumptionCubicCentimeterPerGram = waterConsumptionCubicCentimeterPerGram;
     }
 
     public double getKilogramCO2EquivalentPerSquareMetre() {
@@ -74,7 +74,7 @@ public class FabricEntity {
     }
 
     public void setKilogramCO2EquivalentPerSquareMetre(double kilogramCo2EquivalentPerSquareMetre) {
-        this._kilogramCO2EquivalentPerSquareMetre = kilogramCo2EquivalentPerSquareMetre;
+        _kilogramCO2EquivalentPerSquareMetre = kilogramCo2EquivalentPerSquareMetre;
     }
 
     public FabricAnimalOriginEntity getFabricAnimalOrigin() {
@@ -82,7 +82,7 @@ public class FabricEntity {
     }
 
     public void setFabricAnimalOrigin(FabricAnimalOriginEntity fabricAnimalOriginId) {
-        this._fabricAnimalOrigin = fabricAnimalOriginId;
+        _fabricAnimalOrigin = fabricAnimalOriginId;
     }
 
     public CountryEntity getCountry() {
@@ -90,7 +90,7 @@ public class FabricEntity {
     }
 
     public void setCountry(CountryEntity countryId) {
-        this._country = countryId;
+        _country = countryId;
     }
 
     @Override

@@ -32,10 +32,10 @@ public class ProductEntity {
             boolean isSecondHand,
             FabricsToProductEntity fabric
     ) {
-        this._name = name;
-        this._area = area;
-        this._isSecondHand = isSecondHand;
-        this._fabric = fabric;
+        _name = name;
+        _area = area;
+        _isSecondHand = isSecondHand;
+        _fabric = fabric;
     }
 
     public int getId() {
@@ -67,7 +67,7 @@ public class ProductEntity {
     }
 
     public void setArea(Double area) {
-        this._area = area;
+        _area = area;
     }
 
     public boolean isSecondHand() {

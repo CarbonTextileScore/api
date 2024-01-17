@@ -29,9 +29,9 @@ public class CountryEntity {
             double lat,
             double lon
     ) {
-        this._name = name;
-        this._lat = lat;
-        this._lon = lon;
+        _name = name;
+        _lat = lat;
+        _lon = lon;
     }
 
     public int getId() {
@@ -55,7 +55,7 @@ public class CountryEntity {
     }
 
     public void setLat(double lat) {
-        this._lat = lat;
+        _lat = lat;
     }
 
     public double getLon() {
@@ -63,7 +63,7 @@ public class CountryEntity {
     }
 
     public void setLon(double lon) {
-        this._lon = lon;
+        _lon = lon;
     }
 
     @Override
