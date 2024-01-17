@@ -16,10 +16,16 @@ public class ProductEntity {
     private String _name;
     @Basic
     @Column(name = "`Area`", nullable = false, precision = 4)
-    private Double _area;
+    private double _area;
     @Basic
     @Column(name = "`IsSecondHand`", nullable = false)
     private boolean _isSecondHand = false;
+    @Basic
+    @Column(name = "`IsSold`", nullable = false)
+    private boolean _isSold = false;
+    @OneToOne
+    @JoinColumn(name = "`ProductTypeId`", nullable = false)
+    ProductTypeEntity _productType;
     @OneToOne(mappedBy = "_product")
     private FabricsToProductEntity _fabric;
 
@@ -30,12 +36,14 @@ public class ProductEntity {
             String name,
             Double area,
             boolean isSecondHand,
-            FabricsToProductEntity fabric
+            FabricsToProductEntity fabric,
+            ProductTypeEntity productType
     ) {
         _name = name;
         _area = area;
         _isSecondHand = isSecondHand;
         _fabric = fabric;
+        _productType = productType;
     }
 
     public int getId() {
@@ -62,11 +70,11 @@ public class ProductEntity {
         _fabric = fabric;
     }
 
-    public Double getArea() {
+    public double getArea() {
         return _area;
     }
 
-    public void setArea(Double area) {
+    public void setArea(double area) {
         _area = area;
     }
 
@@ -78,20 +86,38 @@ public class ProductEntity {
         _isSecondHand = secondHand;
     }
 
+    public boolean isSold() {
+        return _isSold;
+    }
+
+    public void setSold(boolean sold) {
+        _isSold = sold;
+    }
+
+    public ProductTypeEntity getProductType() {
+        return _productType;
+    }
+
+    public void setProductType(ProductTypeEntity productType) {
+        _productType = productType;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProductEntity that = (ProductEntity) o;
-        return _isSecondHand == that._isSecondHand &&
+        return Double.compare(_area, that._area) == 0 &&
+                _isSecondHand == that._isSecondHand &&
+                _isSold == that._isSold &&
                 Objects.equals(_id, that._id) &&
                 Objects.equals(_name, that._name) &&
-                Objects.equals(_area, that._area) &&
+                Objects.equals(_productType, that._productType) &&
                 Objects.equals(_fabric, that._fabric);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(_id, _name, _area, _isSecondHand, _fabric);
+        return Objects.hash(_id, _name, _area, _isSecondHand, _isSold, _productType, _fabric);
     }
 }

@@ -252,5 +252,10 @@ VALUES
     )
 ON CONFLICT ("Name") DO NOTHING;
 
+-- Product Type SCRIPT
+INSERT INTO "MarketInformation"."ProductType" ("Name")
+VALUES ('T-SHIRT'), ('PULL'), ('JEAN'), ('ROBE'), ('MANTEAU'), ('CHEMISE'), ('CHAUSSURE')
+ON CONFLICT ("Name") DO NOTHING;
+
 
 

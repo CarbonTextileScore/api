@@ -2,18 +2,26 @@
 DROP SCHEMA "MarketInformation" CASCADE;
 CREATE SCHEMA "MarketInformation";
 
+CREATE TABLE "MarketInformation"."ProductType" (
+                                                   "id" SERIAL PRIMARY KEY,
+                                                   "Name" VARCHAR NOT NULL UNIQUE
+);
+
 CREATE TABLE "MarketInformation"."Product" (
                                                "id" SERIAL PRIMARY KEY,
                                                "Name" VARCHAR NOT NULL UNIQUE,
                                                "Area" FLOAT NOT NULL,
                                                "IsSecondHand" BOOLEAN NOT NULL DEFAULT FALSE,
+                                               "IsSold" BOOLEAN NOT NULL DEFAULT FALSE,
                                                "CountryId" INT NOT NULL,
+                                               "ProductTypeId" INT NOT NULL,
+                                               FOREIGN KEY ("ProductTypeId") REFERENCES "MarketInformation"."ProductType" ("id"),
                                                FOREIGN KEY ("CountryId") REFERENCES "UserInformation"."Country" ("id")
 );
 
 CREATE TABLE "MarketInformation"."FabricAnimalOrigin" (
-                                                    "id" SERIAL PRIMARY KEY,
-                                                    "Name" VARCHAR NOT NULL UNIQUE
+                                                          "id" SERIAL PRIMARY KEY,
+                                                          "Name" VARCHAR NOT NULL UNIQUE
 );
 
 CREATE TABLE "MarketInformation"."Fabric" (
