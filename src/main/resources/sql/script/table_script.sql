@@ -78,10 +78,19 @@ CREATE TABLE "MarketInformation"."Product" (
                                                "Name" VARCHAR NOT NULL UNIQUE
 );
 
+CREATE TABLE "MarketInformation"."FabricOrigin" (
+                                                    "id" SERIAL PRIMARY KEY,
+                                                    "Name" VARCHAR NOT NULL UNIQUE,
+                                                    "PenaltyCoefficient" FLOAT NOT NULL
+);
+
 CREATE TABLE "MarketInformation"."Fabric" (
                                               "id" SERIAL PRIMARY KEY,
                                               "Name" VARCHAR NOT NULL UNIQUE,
-                                              "CostPerGram" INT NOT NULL
+                                              "WaterConsumptionCubicCentimeterPerGram" FLOAT NOT NULL,
+                                              "KilogramCO2EquivalentPerSquareMetre" FLOAT NOT NULL,
+                                              "FabricOriginId" INT NOT NULL,
+                                              FOREIGN KEY ("FabricOriginId") REFERENCES "MarketInformation"."FabricOrigin" ("id")
 );
 
 CREATE TABLE "MarketInformation"."FabricsToProduct" (
@@ -109,14 +118,14 @@ CREATE TABLE "QuotaInformation"."CityRetribution" (
 );
 
 CREATE TABLE "QuotaInformation"."RetributionRequirement" (
-                                                     "id" SERIAL PRIMARY KEY,
-                                                     "MinAge" INT NOT NULL UNIQUE,
-                                                     "MaxAge" INT NOT NULL UNIQUE
+                                                             "id" SERIAL PRIMARY KEY,
+                                                             "MinAge" INT NOT NULL UNIQUE,
+                                                             "MaxAge" INT NOT NULL UNIQUE
 );
 
 CREATE TABLE "QuotaInformation"."Quota" (
-                                                     "id" SERIAL PRIMARY KEY,
-                                                     "PunishmentRequirementId" INT NOT NULL,
-                                                     "MaxQuotaQuarterly" INT NOT NULL,
-                                                     FOREIGN KEY ("PunishmentRequirementId") REFERENCES "QuotaInformation"."RetributionRequirement" ("id")
+                                            "id" SERIAL PRIMARY KEY,
+                                            "PunishmentRequirementId" INT NOT NULL,
+                                            "MaxQuotaQuarterly" INT NOT NULL,
+                                            FOREIGN KEY ("PunishmentRequirementId") REFERENCES "QuotaInformation"."RetributionRequirement" ("id")
 );
