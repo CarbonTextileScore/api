@@ -143,6 +143,8 @@ CREATE TABLE "UserInformation"."Invoice" (
                                              "Date" TIMESTAMP NOT NULL,
                                              "Quota" INT NOT NULL,
                                              "UserId" INT NOT NULL,
+                                             "ProductTypeId" INT NOT NULL,
+                                             FOREIGN KEY ("ProductTypeId") REFERENCES "MarketInformation"."ProductType" ("id"),
                                              FOREIGN KEY ("UserId") REFERENCES "UserInformation"."User" ("id")
 );
 
