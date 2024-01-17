@@ -17,13 +17,17 @@ public class FabricsToProductEntity {
     @ManyToOne
     @JoinColumn(name = "`FabricId`", nullable = false)
     private FabricEntity _fabric;
+    @Basic
+    @Column(name = "`Percentage`", nullable = false)
+    private int _percentage;
 
     public FabricsToProductEntity() {
     }
 
-    public FabricsToProductEntity(ProductEntity product, FabricEntity fabric) {
+    public FabricsToProductEntity(ProductEntity product, FabricEntity fabric, int percentage) {
         _product = product;
         _fabric = fabric;
+        _percentage = percentage;
     }
 
     public int getId() {
@@ -50,18 +54,27 @@ public class FabricsToProductEntity {
         _fabric = fabric;
     }
 
+    public int getPercentage() {
+        return _percentage;
+    }
+
+    public void setPercentage(int percentage) {
+        _percentage = percentage;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FabricsToProductEntity that = (FabricsToProductEntity) o;
-        return Objects.equals(_id, that._id) &&
+        return _percentage == that._percentage &&
+                Objects.equals(_id, that._id) &&
                 Objects.equals(_product, that._product) &&
                 Objects.equals(_fabric, that._fabric);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(_id, _product, _fabric);
+        return Objects.hash(_id, _product, _fabric, _percentage);
     }
 }

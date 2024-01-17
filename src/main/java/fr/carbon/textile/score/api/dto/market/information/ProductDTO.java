@@ -12,4 +12,7 @@ import java.io.Serializable;
 public class ProductDTO implements Serializable {
     Integer id;
     String name;
+    Double area;
+    boolean isSecondHand;
+    FabricToProductDTO fabric;
 }
