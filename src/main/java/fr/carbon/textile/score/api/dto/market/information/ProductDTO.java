@@ -1,7 +1,6 @@
 package fr.carbon.textile.score.api.dto.market.information;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import fr.carbon.textile.score.api.database.entity.market.information.FabricsToProductEntity;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -15,5 +14,5 @@ public class ProductDTO implements Serializable {
     String name;
     Double area;
     boolean isSecondHand;
-    FabricsToProductEntity fabric;
+    FabricToProductDTO fabric;
 }

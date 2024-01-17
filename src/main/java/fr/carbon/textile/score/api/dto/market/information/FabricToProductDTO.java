@@ -13,5 +13,5 @@ public class FabricToProductDTO implements Serializable {
     Integer id;
     FabricDTO fabric;
     ProductDTO product;
-    int percentage;
+    Integer percentage;
 }

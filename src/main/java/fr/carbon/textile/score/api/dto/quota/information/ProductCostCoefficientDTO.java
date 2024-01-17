@@ -7,8 +7,8 @@ import lombok.Getter;
 @Builder
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class QuotaDTO {
+public class ProductCostCoefficientDTO {
     Integer id;
-    RetributionRequirementDTO characteristic;
-    Integer maxQuotaQuarterly;
+    String name;
+    Double penaltyCoefficient;
 }
