@@ -2,9 +2,12 @@
 INSERT INTO "UserInformation"."Country" ("Name", "Lon", "Lat")
 VALUES
     ('FRANCE', 2.3522, 48.8566),
-    ('PAKISTAN', 73.0479, 33.6844 ),
+    ('PAKISTAN', 73.0479, 33.6844),
     ('BANGLADESH', 90.4125, 23.8103),
-    ('CHINE', 116.4074, 39.9042)
+    ('CHINE', 116.4074, 39.9042),
+    ('BRESIL', -47.9292, -15.7801),
+    ('ETATS-UNIS', -77.0369, 38.8951),
+    ('AUSTRALIE', 133.7751, -25.2744)
 ON CONFLICT ("Name") DO NOTHING;
 
 -- City SCRIPT
@@ -70,7 +73,7 @@ VALUES
         'Tangui',
         'STEIMETZ',
         (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'CAEN'),
-        TO_TIMESTAMP('2016-09-05 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
+        TO_TIMESTAMP('2001-09-05 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
         null,
         'profile_picture.jpg',
         'M',
@@ -80,7 +83,7 @@ VALUES
         'Valentin',
         'LEBARBANCHON',
         (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'CAEN'),
-        TO_TIMESTAMP('2016-09-05 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
+        TO_TIMESTAMP('2000-09-05 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
         null,
         'profile_picture.jpg',
         'M',
@@ -195,30 +198,59 @@ ON CONFLICT ("Retribution") DO NOTHING;
 -- Retribution Requirement SCRIPT
 INSERT INTO "QuotaInformation"."RetributionRequirement" ("MinAge", "MaxAge")
 VALUES
-    (
-     0, 12
-    ),
-    (
-     13, 99
-    )
-ON CONFLICT ("MinAge", "MaxAge") DO NOTHING;
-
+    (0, 12),
+    (13, 99)
+ON CONFLICT ("MaxAge") DO NOTHING;
 
 -- Fabric Animal Origin
-/*
+
 INSERT INTO "MarketInformation"."FabricAnimalOrigin" ("Name")
 VALUES
-    ('ANIMAL'), ('ORGANIC_VEGETATION'), ('ORGANIC_AND_HIGHLY_MANUFACTURED')
+    ('ANIMAL'), ('ORGANIC_VEGETATION'), ('OTHER')
 ON CONFLICT ("Name") DO NOTHING;
 
--- Fabric Territorial Origin
-INSERT INTO "MarketInformation"."FabricTerritorialOrigin" ("CountryId")
+-- Fabric
+
+INSERT INTO "MarketInformation"."Fabric"
+    ("Name", "WaterConsumptionCubicCentimeterPerGram",
+     "KilogramCO2EquivalentPerSquareMetre", "FabricAnimalOriginId", "CountryId")
 VALUES
-    ()
-
- */
-
-
+    (
+        ('LAINE'), 883, 13.89,
+        (SELECT "id" FROM "MarketInformation"."FabricAnimalOrigin" WHERE "FabricAnimalOrigin"."Name" = 'ANIMAL'),
+        (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'AUSTRALIE')
+    ),
+    (
+        ('COTON'), 50000, 8.3,
+        (SELECT "id" FROM "MarketInformation"."FabricAnimalOrigin" WHERE "FabricAnimalOrigin"."Name" = 'OTHER'),
+        (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'CHINE')
+    ),
+    (
+        ('SYNTHETIQUE'), 62, 6.4,
+        (SELECT "id" FROM "MarketInformation"."FabricAnimalOrigin" WHERE "FabricAnimalOrigin"."Name" = 'OTHER'),
+        (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'CHINE')
+    ),
+    (
+        ('CUIR_ANIMALE'), 37, 110,
+        (SELECT "id" FROM "MarketInformation"."FabricAnimalOrigin" WHERE "FabricAnimalOrigin"."Name" = 'ANIMAL'),
+        (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'FRANCE')
+    ),
+    (
+        ('CUIR_VEGETAL'), 37, 15.8,
+        (SELECT "id" FROM "MarketInformation"."FabricAnimalOrigin" WHERE "FabricAnimalOrigin"."Name" = 'ORGANIC_VEGETATION'),
+        (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'BRESIL')
+    ),
+    (
+        ('LYOCELL'), 1000, 10.1,
+        (SELECT "id" FROM "MarketInformation"."FabricAnimalOrigin" WHERE "FabricAnimalOrigin"."Name" = 'OTHER'),
+        (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'ETATS-UNIS')
+    ),
+    (
+        ('LIN'), 0, 4.5,
+        (SELECT "id" FROM "MarketInformation"."FabricAnimalOrigin" WHERE "FabricAnimalOrigin"."Name" = 'ORGANIC_VEGETATION'),
+        (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'FRANCE')
+    )
+ON CONFLICT ("Name") DO NOTHING;
 
 
 
