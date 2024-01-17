@@ -1,4 +1,4 @@
-package fr.carbon.textile.score.api.database.entity.market_information;
+package fr.carbon.textile.score.api.database.entity.market.information;
 
 import jakarta.persistence.*;
 

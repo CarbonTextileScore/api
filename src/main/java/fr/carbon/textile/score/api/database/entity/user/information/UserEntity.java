@@ -1,6 +1,6 @@
-package fr.carbon.textile.score.api.database.entity.user_information;
+package fr.carbon.textile.score.api.database.entity.user.information;
 
-import fr.carbon.textile.score.api.database.entity.quota_information.QuotaEntity;
+import fr.carbon.textile.score.api.database.entity.quota.information.QuotaEntity;
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
