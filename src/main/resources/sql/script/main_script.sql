@@ -205,6 +205,7 @@ ON CONFLICT ("MinAge", "MaxAge") DO NOTHING;
 
 
 -- Fabric Animal Origin
+/*
 INSERT INTO "MarketInformation"."FabricAnimalOrigin" ("Name")
 VALUES
     ('ANIMAL'), ('ORGANIC_VEGETATION'), ('ORGANIC_AND_HIGHLY_MANUFACTURED')
@@ -214,6 +215,8 @@ ON CONFLICT ("Name") DO NOTHING;
 INSERT INTO "MarketInformation"."FabricTerritorialOrigin" ("CountryId")
 VALUES
     ()
+
+ */
 
 
 
