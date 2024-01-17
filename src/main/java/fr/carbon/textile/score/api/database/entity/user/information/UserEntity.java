@@ -26,7 +26,7 @@ public class UserEntity {
     @Column(name = "`Birthdate`", nullable = false)
     private Timestamp _birthdate;
     @Basic
-    @Column(name = "Gender", nullable = false)
+    @Column(name = "`Gender`", nullable = false)
     private String _gender;
     @OneToOne
     @JoinColumn(name = "`QuotaId`", nullable = false)
