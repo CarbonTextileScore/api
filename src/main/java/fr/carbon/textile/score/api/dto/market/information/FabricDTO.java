@@ -12,5 +12,7 @@ import java.io.Serializable;
 public class FabricDTO implements Serializable {
     Integer id;
     String name;
-    String description;
+    Double waterConsumptionCubicCentimeterPerGram;
+    Double kilogramCO2EquivalentPerSquareMetre;
+    FabricAnimalOriginDTO fabricAnimalOrigin;
 }

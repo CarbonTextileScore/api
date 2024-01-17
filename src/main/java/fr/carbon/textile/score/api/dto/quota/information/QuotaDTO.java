@@ -10,5 +10,5 @@ import lombok.Getter;
 public class QuotaDTO {
     Integer id;
     RetributionRequirementDTO characteristic;
-    Integer maxQuotaQuaterly;
+    Integer maxQuotaQuarterly;
 }
