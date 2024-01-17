@@ -1,6 +1,7 @@
 package fr.carbon.textile.score.api.repository.user.information;
 
 import fr.carbon.textile.score.api.database.entity.user.information.UserEntity;
+import fr.carbon.textile.score.api.dto.user.information.UserDTO;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,6 +12,7 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Integer> {
+    UserDTO getUserIdentity(Integer id);
     @Query(
             "SELECT user FROM User user WHERE upper(user._authority._username) = upper(:username)"
     )

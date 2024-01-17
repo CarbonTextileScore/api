@@ -15,8 +15,11 @@ public class UserDTO implements Serializable {
     Integer id;
     String name;
     String lastname;
+    String gender;
     Date birthdate;
     byte[] picture;
     QuotaDTO availableQuota;
     CityDTO city;
+
+    Integer numberOfChildren;
 }

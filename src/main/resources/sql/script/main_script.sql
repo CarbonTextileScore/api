@@ -59,8 +59,13 @@ VALUES
     )
 ON CONFLICT ("Username") DO NOTHING;
 
+-- Family SCRIPT
+INSERT INTO "UserInformation"."Family" ("Address")
+VALUES ('3 Esp. Stéphane Hessel, 14000 Caen')
+ON CONFLICT ("Address") DO NOTHING;
+
 -- User SCRIPT
-INSERT INTO "UserInformation"."User" ("Name", "Lastname", "CityId", "Birthdate", "QuotaId", "ProfilePicture", "Gender", "AuthorityId")
+INSERT INTO "UserInformation"."User" ("Name", "Lastname", "CityId", "Birthdate", "QuotaId", "ProfilePicture", "Gender", "AuthorityId", "FamilyId")
 VALUES
     (
         'Tangui',
@@ -70,7 +75,8 @@ VALUES
         null,
         'profile_picture.jpg',
         'M',
-        (SELECT "id" FROM "UserInformation"."Authority" WHERE "Username" = 'TAN')
+        (SELECT "id" FROM "UserInformation"."Authority" WHERE "Username" = 'TAN'),
+        (SELECT "id" FROM "UserInformation"."Family" WHERE "Address" = '3 Esp. Stéphane Hessel, 14000 Caen')
     ),
     (
         'Valentin',
@@ -80,7 +86,8 @@ VALUES
         null,
         'profile_picture.jpg',
         'M',
-        (SELECT "id" FROM "UserInformation"."Authority" WHERE "Username" = 'VAL')
+        (SELECT "id" FROM "UserInformation"."Authority" WHERE "Username" = 'VAL'),
+        (SELECT "id" FROM "UserInformation"."Family" WHERE "Address" = '3 Esp. Stéphane Hessel, 14000 Caen')
     ),
     (
         'Maire',
@@ -90,7 +97,8 @@ VALUES
         null,
         'profile_picture.jpg',
         'M',
-        (SELECT "id" FROM "UserInformation"."Authority" WHERE "Username" = 'MAYOR-CAEN')
+        (SELECT "id" FROM "UserInformation"."Authority" WHERE "Username" = 'MAYOR-CAEN'),
+        null
     ),
     (
         'President',
@@ -100,24 +108,8 @@ VALUES
         null,
         'profile_picture.jpg',
         'M',
-        (SELECT "id" FROM "UserInformation"."Authority" WHERE "Username" = 'PRESIDENT-FRANCE')
+        (SELECT "id" FROM "UserInformation"."Authority" WHERE "Username" = 'PRESIDENT-FRANCE'),
+        null
     )
 ON CONFLICT ("AuthorityId") DO NOTHING;
-
--- Family SCRIPT
-INSERT INTO "UserInformation"."Family" ("Address")
-VALUES ('3 Esp. Stéphane Hessel, 14000 Caen')
-ON CONFLICT ("Address") DO NOTHING;
-
--- userToFamily SCRIPT
-INSERT INTO "UserInformation"."UserToFamily" ("UserId", "FamilyId")
-VALUES
-    (
-        (SELECT "id" FROM "UserInformation"."User" WHERE "Name" = 'Valentin' AND "Lastname" = 'LEBARBANCHON'),
-        (SELECT "id" FROM "UserInformation"."Family" WHERE "Address" = '3 Esp. Stéphane Hessel, 14000 Caen')
-    ),
-    (
-        (SELECT "id" FROM "UserInformation"."User" WHERE "Name" = 'Tangui' AND "Lastname" = 'STEIMETZ'),
-        (SELECT "id" FROM "UserInformation"."Family" WHERE "Address" = '3 Esp. Stéphane Hessel, 14000 Caen')
-    );
 

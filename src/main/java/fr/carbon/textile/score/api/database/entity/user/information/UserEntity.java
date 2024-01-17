@@ -34,8 +34,9 @@ public class UserEntity {
     @Basic
     @Column(name = "`ProfilePicture`", nullable = false)
     private byte[] _profilePicture;
-    @OneToOne(mappedBy = "_user")
-    private UserToFamilyEntity _userToFamily;
+    @ManyToOne
+    @JoinColumn( name="`FamilyId`" )
+    private FamilyEntity _family;
     @OneToOne
     @JoinColumn(name = "`AuthorityId`", nullable = false)
     private AuthorityEntity _authority;
@@ -51,7 +52,7 @@ public class UserEntity {
             String gender,
             QuotaEntity quota,
             byte[] profilePicture,
-            UserToFamilyEntity userToFamily,
+            FamilyEntity family,
             AuthorityEntity authority
     ) {
         _name = name;
@@ -61,7 +62,7 @@ public class UserEntity {
         _gender = gender;
         _quota = quota;
         _profilePicture = profilePicture;
-        _userToFamily = userToFamily;
+        _family = family;
         _authority = authority;
     }
 
@@ -121,12 +122,12 @@ public class UserEntity {
         _profilePicture = profilePicture;
     }
 
-    public UserToFamilyEntity getUserToFamily() {
-        return _userToFamily;
+    public FamilyEntity getFamily() {
+        return _family;
     }
 
-    public void setUserToFamily(UserToFamilyEntity userToFamily) {
-        _userToFamily = userToFamily;
+    public void setUserToFamily(FamilyEntity family) {
+        _family = family;
     }
 
     public String getGender() {
@@ -157,12 +158,12 @@ public class UserEntity {
                 Objects.equals(_birthdate, that._birthdate) &&
                 Objects.equals(_gender, that._gender) &&
                 Objects.equals(_quota, that._quota) &&
-                Objects.equals(_userToFamily, that._userToFamily) &&
+                Objects.equals(_family, that._family) &&
                 Objects.equals(_authority, that._authority);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(_id, _name, _lastname, _city, _birthdate, _gender, _quota, _userToFamily, _authority);
+        return Objects.hash(_id, _name, _lastname, _city, _birthdate, _gender, _quota, _family, _authority);
     }
 }
