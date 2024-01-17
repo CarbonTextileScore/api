@@ -21,7 +21,7 @@ CREATE TABLE "UserInformation"."Role" (
 
 CREATE TABLE "UserInformation"."Authority" (
                                                "id" SERIAL PRIMARY KEY,
-                                               "Username" VARCHAR NOT NULL,
+                                               "Username" VARCHAR NOT NULL UNIQUE,
                                                "RoleId" int NOT NULL,
                                                "Password" VARCHAR NOT NULL,
                                                FOREIGN KEY ("RoleId") REFERENCES "UserInformation"."Role" ("id")
@@ -33,7 +33,7 @@ CREATE TABLE "UserInformation"."User" (
                                           "Lastname" VARCHAR NOT NULL,
                                           "CityId" INT NOT NULL,
                                           "Birthdate" TIMESTAMP NOT NULL,
-                                          "QuotaId" INT NOT NULL,
+                                          "QuotaId" INT,
                                           "ProfilePicture" BYTEA NOT NULL,
                                           "Gender" VARCHAR NOT NULL,
                                           "AuthorityId" int NOT NULL,
@@ -64,7 +64,7 @@ CREATE TABLE "UserInformation"."Invoice" (
 
 CREATE TABLE "UserInformation"."TIGInfrastructure" (
                                                        "id" SERIAL PRIMARY KEY,
-                                                       "Name" VARCHAR NOT NULL,
+                                                       "Name" VARCHAR NOT NULL UNIQUE,
                                                        "CityId" INT NOT NULL,
                                                        FOREIGN KEY ("CityId") REFERENCES "UserInformation"."City" ("id")
 );

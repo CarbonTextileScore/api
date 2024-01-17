@@ -1,3 +1,0 @@
-INSERT INTO "UserInformation"."Role" ("Name")
-VALUES ('ROLE_USER'), ('ROLE_CITY'), ('ROLE_COUNTRY')
-ON CONFLICT ("Name") DO NOTHING;
