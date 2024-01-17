@@ -36,7 +36,7 @@ CREATE TABLE "UserInformation"."User" (
                                           "QuotaId" INT,
                                           "ProfilePicture" BYTEA NOT NULL,
                                           "Gender" VARCHAR NOT NULL,
-                                          "AuthorityId" int NOT NULL,
+                                          "AuthorityId" int NOT NULL UNIQUE,
                                           FOREIGN KEY ("CityId") REFERENCES "UserInformation"."City" ("id"),
                                           FOREIGN KEY ("AuthorityId") REFERENCES "UserInformation"."Authority" ("id")
 );

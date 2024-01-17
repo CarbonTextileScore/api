@@ -1,8 +1,8 @@
 package fr.carbon.textile.score.api.service;
 
 import fr.carbon.textile.score.api.database.entity.user.information.UserEntity;
+import fr.carbon.textile.score.api.repository.user.information.UserRepository;
 import fr.carbon.textile.score.api.security.jwt.JwtUtils;
-import fr.carbon.textile.score.api.tmp_repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;

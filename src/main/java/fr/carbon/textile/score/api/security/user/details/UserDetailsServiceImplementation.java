@@ -1,7 +1,7 @@
 package fr.carbon.textile.score.api.security.user.details;
 
 import fr.carbon.textile.score.api.database.entity.user.information.AuthorityEntity;
-import fr.carbon.textile.score.api.tmp_repository.AuthorityRepository;
+import fr.carbon.textile.score.api.repository.user.information.AuthorityRepository;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

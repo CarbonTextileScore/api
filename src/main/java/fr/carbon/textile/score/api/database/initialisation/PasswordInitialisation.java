@@ -2,14 +2,16 @@ package fr.carbon.textile.score.api.database.initialisation;
 
 import fr.carbon.textile.score.api.database.entity.user.information.AuthorityEntity;
 import fr.carbon.textile.score.api.database.entity.user.information.UserEntity;
+import fr.carbon.textile.score.api.repository.user.information.AuthorityRepository;
+import fr.carbon.textile.score.api.repository.user.information.UserRepository;
 import fr.carbon.textile.score.api.security.PasswordEncoderBean;
-import fr.carbon.textile.score.api.tmp_repository.AuthorityRepository;
-import fr.carbon.textile.score.api.tmp_repository.UserRepository;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.NonNull;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Configuration
@@ -17,6 +19,7 @@ public class PasswordInitialisation {
     private final UserRepository _userRepository;
     private final AuthorityRepository _authorityRepository;
     private final PasswordEncoder _bCryptPasswordEncoder;
+    private final Map<String, String> _usernamePassword;
 
     public PasswordInitialisation(
             UserRepository userRepository,
@@ -26,6 +29,7 @@ public class PasswordInitialisation {
         _userRepository = userRepository;
         _bCryptPasswordEncoder = passwordEncoderBean.getPasswordEncoder();
         _authorityRepository = authorityRepository;
+        _usernamePassword = new HashMap<>();
         initiatePassword();
     }
 
@@ -42,8 +46,18 @@ public class PasswordInitialisation {
         _authorityRepository.save(toModify);
     }
 
+    private void initiateUsernamePasswordMap() {
+        _usernamePassword.put("TAN", "intensive-project-03-tan");
+        _usernamePassword.put("VAL", "intensive-project-03-val");
+        _usernamePassword.put("MAYOR-CAEN", "intensive-project-03-mayor-caen");
+        _usernamePassword.put("PRESIDENT-FRANCE", "intensive-project-03-president-france");
+    }
+
     private void initiatePassword() {
-        AuthorityEntity tanAuthority = getAuthorityEntity("TAN");
-        setNewPassword(tanAuthority, "intensive-project-03-tan");
+        initiateUsernamePasswordMap();
+        for (Map.Entry<String, String> entry : _usernamePassword.entrySet()) {
+            AuthorityEntity authority = getAuthorityEntity(entry.getKey());
+            setNewPassword(authority, entry.getValue());
+        }
     }
 }
