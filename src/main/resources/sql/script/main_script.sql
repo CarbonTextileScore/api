@@ -1,6 +1,10 @@
 -- Country SCRIPT
-INSERT INTO "UserInformation"."Country" ("Name")
-VALUES ('FRANCE'), ('PAKISTAN'), ('BANGLADESH'), ('CHINE')
+INSERT INTO "UserInformation"."Country" ("Name", "Lon", "Lat")
+VALUES
+    ('FRANCE', 2.3522, 48.8566),
+    ('PAKISTAN', 73.0479, 33.6844 ),
+    ('BANGLADESH', 90.4125, 23.8103),
+    ('CHINE', 116.4074, 39.9042)
 ON CONFLICT ("Name") DO NOTHING;
 
 -- City SCRIPT
@@ -106,7 +110,13 @@ ON CONFLICT ("AuthorityId") DO NOTHING;
 
 -- Family SCRIPT
 INSERT INTO "UserInformation"."Family" ("Address")
-VALUES ('3 Esp. Stéphane Hessel, 14000 Caen')
+VALUES
+    (
+        '3 Esp. Stéphane Hessel, 14000 Caen'
+    ),
+    (
+        'testing'
+    )
 ON CONFLICT ("Address") DO NOTHING;
 
 -- userToFamily SCRIPT
@@ -119,5 +129,93 @@ VALUES
     (
         (SELECT "id" FROM "UserInformation"."User" WHERE "Name" = 'Tangui' AND "Lastname" = 'STEIMETZ'),
         (SELECT "id" FROM "UserInformation"."Family" WHERE "Address" = '3 Esp. Stéphane Hessel, 14000 Caen')
-    );
+    ),
+    (
+        (SELECT "id" FROM "UserInformation"."User" WHERE "Name" = 'Maire' AND "Lastname" = 'CAEN'),
+        (SELECT "id" FROM "UserInformation"."Family" WHERE "Address" = 'testing')
+    ),
+    (
+        (SELECT "id" FROM "UserInformation"."User" WHERE "Name" = 'President' AND "Lastname" = 'FRANCE'),
+        (SELECT "id" FROM "UserInformation"."Family" WHERE "Address" = 'testing')
+    )
+ON CONFLICT ("UserId") DO NOTHING;
+
+-- User Retribution SCRIPT
+INSERT INTO "QuotaInformation"."UserRetribution" ("QuotaGains", "Retribution")
+VALUES
+    (
+        100, 'Travaux forcés en usine de textile - Réparer une pièce'
+    ),
+    (
+        50, 'Travaux forcés en usine de textile - 4h couture à la chaîne'
+    ),
+    (
+        100, 'Travaux forcés en usine de textile - 8h couture à la chaîne'
+    ),
+    (
+        200, 'Travaux forcés en usine de textile - 12h couture à la chaîne'
+    ),
+    (
+        50, 'Vente d`un doigt'
+    ),
+    (
+        250, 'Vente d`une main / pied'
+    ),
+    (
+        300, 'Vente d`un avant-bras'
+    ),
+    (
+        500, 'Vente d`un bras'
+    ),
+    (
+        300, 'Vente d`un mollet'
+    ),
+    (
+        800, 'Vente d`une jambe'
+    ),
+    (
+        500, 'Utilisation des corps A à Z'
+    )
+ON CONFLICT ("Retribution") DO NOTHING;
+
+-- City Retribution SCRIPT
+INSERT INTO "QuotaInformation"."CityRetribution" ("TriggerPercentage", "Retribution")
+VALUES
+    (
+        5, 'Public shaming'
+    ),
+    (
+        10, 'Privation des aides de l’Etat'
+    ),
+    (
+        20, 'Augmentation du prix du textile'
+    )
+ON CONFLICT ("Retribution") DO NOTHING;
+
+-- Retribution Requirement SCRIPT
+INSERT INTO "QuotaInformation"."RetributionRequirement" ("MinAge", "MaxAge")
+VALUES
+    (
+     0, 12
+    ),
+    (
+     13, 99
+    )
+ON CONFLICT ("MinAge", "MaxAge") DO NOTHING;
+
+
+-- Fabric Animal Origin
+INSERT INTO "MarketInformation"."FabricAnimalOrigin" ("Name")
+VALUES
+    ('ANIMAL'), ('ORGANIC_VEGETATION'), ('ORGANIC_AND_HIGHLY_MANUFACTURED')
+ON CONFLICT ("Name") DO NOTHING;
+
+-- Fabric Territorial Origin
+INSERT INTO "MarketInformation"."FabricTerritorialOrigin" ("CountryId")
+VALUES
+    ()
+
+
+
+
 
