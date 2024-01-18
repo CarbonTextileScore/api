@@ -28,10 +28,17 @@ public class UserController {
         return _userService.getUsers();
     }
 
-    @GetMapping("/{id}/identity")
+    @GetMapping("/identity")
     @ResponseStatus(HttpStatus.OK)
     @PreAuthorize("hasRole('ROLE_USER')")
-    public UserDTO getUserIdentity(@PathVariable("id") Integer id) throws CustomException {
-        return _userService.getUserIdentity(id, _jwtDecoderService.recoverUserOfThisRequest());
+    public UserDTO getUserIdentity() {
+        return _userService.getUserIdentity(_jwtDecoderService.recoverUserOfThisRequest());
+    }
+
+    @GetMapping("/quota/personal")
+    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public UserDTO getQuotaPersonal() throws CustomException {
+        return _userService.getQuotaPersonal(_jwtDecoderService.recoverUserOfThisRequest());
     }
 }

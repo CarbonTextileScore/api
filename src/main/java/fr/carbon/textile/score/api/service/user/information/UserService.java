@@ -8,5 +8,7 @@ import java.util.List;
 public interface UserService {
     List<UserDTO> getUsers();
 
-    UserDTO getUserIdentity(Integer id, UserDTO userDTO) throws CustomException;
+    UserDTO getUserIdentity(UserEntity userEntity);
+
+    UserDTO getQuotaPersonal(UserEntity userEntity) throws CustomException;
 }

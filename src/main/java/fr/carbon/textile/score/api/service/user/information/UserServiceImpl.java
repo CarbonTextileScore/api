@@ -27,10 +27,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO getUserIdentity(Integer id, UserDTO userDTO) throws CustomException {
-        if (Objects.equals(userDTO.getId(), id)) {
-            return _userRepository.getUserIdentity(id);
-        }
-        throw new CustomException("You are not allowed to access this resource");
+    public UserDTO getUserIdentity(UserEntity userEntity) {
+        return _userRepository.getUserIdentity(userEntity.getId());
+    }
+
+    @Override
+    public UserDTO getQuotaPersonal(UserEntity userEntity) throws CustomException {
+            UserEntity user = getUserEntity(userEntity.getId());
+            return _userMapper.toQuotaPersonal(user);
+    }
+
+    private UserEntity getUserEntity(Integer id) throws CustomException {
+        return _userRepository.findById(id).orElseThrow(() -> new CustomException("User not found"));
     }
 }

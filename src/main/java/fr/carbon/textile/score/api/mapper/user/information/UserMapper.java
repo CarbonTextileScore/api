@@ -45,4 +45,11 @@ public class UserMapper implements DTOEntityMapper<UserDTO, UserEntity> {
         entity.setId(dto.getId());
         return entity;
     }
+
+    public UserDTO toQuotaPersonal(UserEntity user) {
+        return UserDTO.builder()
+                .personalQuota(
+                        (double) user.getInvoices().stream().mapToInt(InvoiceEntity::getQuota).sum() / (double) user.getQuota().getMaxQuotaQuarterly())
+                .build();
+    }
 }

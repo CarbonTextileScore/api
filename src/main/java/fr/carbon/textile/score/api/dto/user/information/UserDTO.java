@@ -32,7 +32,9 @@ public class UserDTO implements Serializable {
     @NotNull(message = "User city must not be null")
     CityDTO city;
     FamilyDTO family;
+
     Integer numberOfChildren;
     @Null
     List<InvoiceDTO> invoices;
+    Double personalQuota;
 }

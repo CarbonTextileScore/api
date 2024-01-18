@@ -14,9 +14,9 @@ public class CorsConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins("http://localhost:4200")
-                .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
+                .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE")
                 .allowedHeaders(CorsConfiguration.ALL)
-                .exposedHeaders("Authorization")
+                .exposedHeaders("Token")
                 .allowCredentials(true)
                 .maxAge(3600);
     }
@@ -27,13 +27,12 @@ public class CorsConfig implements WebMvcConfigurer {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.addAllowedOrigin("http://localhost:4200");
         corsConfiguration.addAllowedHeader("*");
-        corsConfiguration.addAllowedMethod("OPTIONS");
         corsConfiguration.addAllowedMethod("GET");
         corsConfiguration.addAllowedMethod("POST");
         corsConfiguration.addAllowedMethod("PUT");
         corsConfiguration.addAllowedMethod("PATCH");
         corsConfiguration.addAllowedMethod("DELETE");
-        corsConfiguration.addExposedHeader("Authorization");
+        corsConfiguration.addExposedHeader("Token");
         source.registerCorsConfiguration("/**", corsConfiguration);
         return source;
     }
