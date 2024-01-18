@@ -1,28 +1,28 @@
-package fr.carbon.textile.score.api.database.entity.user.information;
+package fr.carbon.textile.score.api.database.entity.market.information;
 
 import jakarta.persistence.*;
 
 import java.util.Objects;
 
-@Entity(name = "Role")
-@Table(name = "`Role`", schema = "`UserInformation`", catalog = "postgres")
-public class RoleEntity {
+@Entity(name = "ProductType")
+@Table(name = "`ProductType`", schema = "`MarketInformation`", catalog = "postgres")
+public class ProductTypeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "`id`")
     private Integer _id;
     @Basic
-    @Column(name = "`Name`", nullable = false, unique = true)
+    @Column(name = "`Name`", nullable = false)
     private String _name;
 
-    public RoleEntity() {
+    public ProductTypeEntity() {
     }
 
-    public RoleEntity(String name) {
+    public ProductTypeEntity(String name) {
         _name = name;
     }
 
-    public int getId() {
+    public Integer getId() {
         return _id;
     }
 
@@ -42,7 +42,7 @@ public class RoleEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        RoleEntity that = (RoleEntity) o;
+        ProductTypeEntity that = (ProductTypeEntity) o;
         return Objects.equals(_id, that._id) && Objects.equals(_name, that._name);
     }
 

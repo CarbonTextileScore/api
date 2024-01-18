@@ -4,6 +4,8 @@ import fr.carbon.textile.score.api.database.entity.quota.information.QuotaEntity
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -41,6 +43,8 @@ public class UserEntity {
     @OneToOne
     @JoinColumn(name = "`AuthorityId`", nullable = false)
     private AuthorityEntity _authority;
+    @OneToMany(targetEntity = InvoiceEntity.class, mappedBy = "_user")
+    List<InvoiceEntity> _invoices = new ArrayList<>();
 
     @OneToMany(mappedBy = "_user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<InvoiceEntity> _invoices;
@@ -57,7 +61,8 @@ public class UserEntity {
             QuotaEntity quota,
             byte[] profilePicture,
             FamilyEntity family,
-            AuthorityEntity authority
+            AuthorityEntity authority,
+            List<InvoiceEntity> invoices
     ) {
         _name = name;
         _lastname = lastname;
@@ -68,13 +73,14 @@ public class UserEntity {
         _profilePicture = profilePicture;
         _family = family;
         _authority = authority;
+        _invoices = invoices;
     }
 
     public int getId() {
         return _id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         _id = id;
     }
 
@@ -154,6 +160,10 @@ public class UserEntity {
         return _invoices;
     }
 
+    public void setInvoices(List<InvoiceEntity> invoices) {
+        _invoices = invoices;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -166,12 +176,18 @@ public class UserEntity {
                 Objects.equals(_birthdate, that._birthdate) &&
                 Objects.equals(_gender, that._gender) &&
                 Objects.equals(_quota, that._quota) &&
+                Arrays.equals(_profilePicture, that._profilePicture) &&
                 Objects.equals(_family, that._family) &&
-                Objects.equals(_authority, that._authority);
+                Objects.equals(_authority, that._authority) &&
+                Objects.equals(_invoices, that._invoices);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(_id, _name, _lastname, _city, _birthdate, _gender, _quota, _family, _authority);
+        int result = Objects.hash(
+                _id, _name, _lastname, _city, _birthdate, _gender, _quota, _family, _authority, _invoices
+        );
+        result = 31 * result + Arrays.hashCode(_profilePicture);
+        return result;
     }
 }

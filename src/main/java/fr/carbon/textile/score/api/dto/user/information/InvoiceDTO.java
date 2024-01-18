@@ -1,6 +1,7 @@
 package fr.carbon.textile.score.api.dto.user.information;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import fr.carbon.textile.score.api.dto.market.information.ProductTypeDTO;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -13,5 +14,7 @@ public class InvoiceDTO {
     Integer id;
     Date date;
     Integer quota;
-
+    Double productPrice;
+    UserDTO user;
+    ProductTypeDTO productType;
 }
