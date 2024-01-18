@@ -2,6 +2,7 @@ package fr.carbon.textile.score.api.service.market.information;
 
 import fr.carbon.textile.score.api.database.entity.market.information.FabricsToProductEntity;
 import fr.carbon.textile.score.api.database.entity.market.information.ProductEntity;
+import fr.carbon.textile.score.api.dto.market.information.ProductDTO;
 import fr.carbon.textile.score.api.exception.CustomException;
 import fr.carbon.textile.score.api.repository.market.information.ProductRepository;
 import jakarta.validation.Valid;
@@ -74,5 +75,20 @@ public class ProductServiceImpl implements ProductService {
             quotas.add(calculateQuotaFromProductId(id));
         }
         return quotas;
+    }
+
+    @Override
+    public List<ProductDTO> getAllProducts() throws CustomException {
+        List<ProductDTO> DTOs = new ArrayList<>();
+        for (ProductEntity entity : _productRepository.findAll()) {
+            DTOs.add(ProductDTO.builder()
+                    .name(entity.getName())
+                    .price(entity.getPrice())
+                    .countryName(entity.getCountry().getName())
+                    .description(entity.getDescription())
+                    .quota(calculateQuotaFromProductId(entity.getId()))
+                    .build());
+        }
+        return DTOs;
     }
 }
