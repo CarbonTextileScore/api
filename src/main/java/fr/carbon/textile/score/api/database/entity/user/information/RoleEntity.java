@@ -26,7 +26,7 @@ public class RoleEntity {
         return _id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         _id = id;
     }
 

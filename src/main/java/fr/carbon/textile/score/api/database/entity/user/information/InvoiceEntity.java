@@ -19,7 +19,7 @@ public class InvoiceEntity {
     @Basic
     @Column(name = "`Quota`", nullable = false)
     private int _quota;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "`UserId`", nullable = false)
     private UserEntity _user;
     @OneToOne
@@ -40,7 +40,7 @@ public class InvoiceEntity {
         return _id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         _id = id;
     }
 

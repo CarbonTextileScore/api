@@ -50,7 +50,7 @@ public class ProductEntity {
         return _id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         _id = id;
     }
 
