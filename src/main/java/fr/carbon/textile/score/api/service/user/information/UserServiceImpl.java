@@ -1,5 +1,6 @@
 package fr.carbon.textile.score.api.service.user.information;
 
+import fr.carbon.textile.score.api.database.entity.user.information.UserEntity;
 import fr.carbon.textile.score.api.dto.user.information.UserDTO;
 import fr.carbon.textile.score.api.exception.CustomException;
 import fr.carbon.textile.score.api.mapper.user.information.UserMapper;
@@ -7,7 +8,6 @@ import fr.carbon.textile.score.api.repository.user.information.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Objects;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -27,12 +27,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO getUserIdentity(UserEntity userEntity) {
+    public UserDTO getUserIdentity(UserDTO userEntity) {
         return _userRepository.getUserIdentity(userEntity.getId());
     }
 
     @Override
-    public UserDTO getQuotaPersonal(UserEntity userEntity) throws CustomException {
+    public UserDTO getQuotaPersonal(UserDTO userEntity) throws CustomException {
             UserEntity user = getUserEntity(userEntity.getId());
             return _userMapper.toQuotaPersonal(user);
     }

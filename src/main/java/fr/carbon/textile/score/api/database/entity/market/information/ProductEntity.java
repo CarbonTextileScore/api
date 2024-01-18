@@ -26,6 +26,15 @@ public class ProductEntity {
     @Basic
     @Column(name = "`Price`", nullable = false, precision = 4)
     private double _price;
+    @Basic
+    @Column(name = "`Mass`", nullable = false, precision = 4)
+    private double _mass;
+    @Basic
+    @Column(name = "`Description`", nullable = false)
+    private String _description;
+    @Basic
+    @Column(name = "`ProfilePicture`", nullable = false)
+    private byte[] _profilePicture;
     @OneToOne
     @JoinColumn(name = "`ProductTypeId`", nullable = false)
     ProductTypeEntity _productType;
@@ -41,7 +50,10 @@ public class ProductEntity {
             boolean isSecondHand,
             FabricsToProductEntity fabric,
             ProductTypeEntity productType,
-            Double price
+            Double price,
+            Double mass,
+            String description,
+            byte[] profilePicture
     ) {
         _name = name;
         _area = area;
@@ -49,6 +61,9 @@ public class ProductEntity {
         _fabric = fabric;
         _productType = productType;
         _price = price;
+        _mass = mass;
+        _description = description;
+        _profilePicture = profilePicture;
     }
 
     public int getId() {
@@ -115,6 +130,31 @@ public class ProductEntity {
         _price = price;
     }
 
+    public double getMass() {
+        return _mass;
+    }
+
+    public void setMass(double mass) {
+        this._mass = mass;
+    }
+
+    public String getDescription() {
+        return _description;
+    }
+
+    public void setDescription(String description) {
+        this._description = description;
+    }
+
+    public byte[] getProfilePicture() {
+        return _profilePicture;
+    }
+
+    public void setProfilePicture(byte[] profilePicture) {
+        this._profilePicture = profilePicture;
+    }
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -124,14 +164,18 @@ public class ProductEntity {
                 _isSecondHand == that._isSecondHand &&
                 _isSold == that._isSold &&
                 Double.compare(_price, that._price) == 0 &&
+                Double.compare(_mass, that._mass) == 0 &&
                 Objects.equals(_id, that._id) &&
                 Objects.equals(_name, that._name) &&
+                Objects.equals(_description, that._description) &&
                 Objects.equals(_productType, that._productType) &&
                 Objects.equals(_fabric, that._fabric);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(_id, _name, _area, _isSecondHand, _isSold, _price, _productType, _fabric);
+        return Objects.hash(
+                _id, _name, _area, _isSecondHand, _isSold, _price, _mass, _description, _productType, _fabric
+        );
     }
 }
