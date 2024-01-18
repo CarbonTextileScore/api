@@ -22,7 +22,7 @@ public class UserEntity {
     @Basic
     @Column(name = "`Lastname`", nullable = false)
     private String _lastname;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "`CityId`", nullable = false)
     private CityEntity _city;
     @Basic

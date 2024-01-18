@@ -11,4 +11,6 @@ public interface UserService {
     UserDTO getUserIdentity(UserDTO userEntity);
 
     UserDTO getQuotaPersonal(UserDTO userEntity) throws CustomException;
+
+    UserDTO getDashboard(UserDTO userDTO) throws CustomException;
 }

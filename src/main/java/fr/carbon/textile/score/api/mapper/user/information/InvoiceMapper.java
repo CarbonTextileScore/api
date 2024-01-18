@@ -7,6 +7,9 @@ import fr.carbon.textile.score.api.mapper.market.information.ProductTypeMapper;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Component
 public class InvoiceMapper implements DTOEntityMapper<InvoiceDTO, InvoiceEntity> {
@@ -23,7 +26,7 @@ public class InvoiceMapper implements DTOEntityMapper<InvoiceDTO, InvoiceEntity>
         return InvoiceDTO.builder()
                 .id(entity.getId())
                 .quota(entity.getQuota())
-                .date(entity.getDate())
+                .date(new SimpleDateFormat("dd/MM/yyyy").format(entity.getDate()))
                 .productType(_productTypeMapper.toDTO(entity.getProductType()))
                 .user(_userMapper.toDTO(entity.getUser()))
                 .productPrice(entity.getProductPrice())
@@ -33,7 +36,7 @@ public class InvoiceMapper implements DTOEntityMapper<InvoiceDTO, InvoiceEntity>
     @Override
     public InvoiceEntity toEntity(InvoiceDTO dto) {
         InvoiceEntity entity = new InvoiceEntity(
-                new Timestamp(dto.getDate().getTime()),
+                Timestamp.valueOf(LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy").parse(dto.getDate()))),
                 dto.getQuota(),
                 _userMapper.toEntity(dto.getUser()),
                 _productTypeMapper.toEntity(dto.getProductType()),
