@@ -18,4 +18,7 @@ public class ProductDTO implements Serializable {
     Boolean isSold;
     ProductTypeDTO productType;
     FabricToProductDTO fabric;
+    Double mass;
+    String description;
+    Byte[] profileProduction;
 }

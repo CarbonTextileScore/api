@@ -7,7 +7,10 @@ VALUES
     ('CHINE', 116.4074, 39.9042),
     ('BRESIL', -47.9292, -15.7801),
     ('ETATS-UNIS', -77.0369, 38.8951),
-    ('AUSTRALIE', 133.7751, -25.2744)
+    ('AUSTRALIE', 133.7751, -25.2744),
+    ('TURQUIE', 35.2433, 38.9637),
+    ('INDONESIE', 113.9213, -0.7893),
+    ('BIRMANIE', 95.9550, 21.9162)
 ON CONFLICT ("Name") DO NOTHING;
 
 -- City SCRIPT
@@ -234,8 +237,122 @@ ON CONFLICT ("Name") DO NOTHING;
 
 -- Product Type SCRIPT
 INSERT INTO "MarketInformation"."ProductType" ("Name")
-VALUES ('T-SHIRT'), ('PULL'), ('JEAN'), ('ROBE'), ('MANTEAU'), ('CHEMISE'), ('CHAUSSURE')
+VALUES ('T-SHIRT'), ('PULL'), ('PANTALON'), ('ROBE'), ('MANTEAU'), ('CHEMISE'), ('CHAUSSURE')
 ON CONFLICT ("Name") DO NOTHING;
+
+-- Product SCRIPT
+INSERT INTO "MarketInformation"."Product" ("Name", "Area", "CountryId", "ProductTypeId", "Price", "Mass", "Description", "ProfilePicture")
+VALUES
+    (
+        'Tee-Shirt', 4800,
+        (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'BANGLADESH'),
+        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'T-SHIRT'), 7.99, 150,
+        'C`est un magnifique t-shirt !', 'picture.jpg'
+    ),
+    (
+        'Pull', 6100,
+        (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'TURQUIE'),
+        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'PULL'), 25.99, 300,
+        'C`est un magnifique pull !', 'picture.jpg'
+    ),
+    (
+        'Jean droit-regular', 9500,
+        (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'INDONESIE'),
+        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'PANTALON'), 34.99, 800,
+        'C`est un magnifique jean !', 'picture.jpg'
+    ),
+    (
+        'Robe à effet drapé', 21000,
+        (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'BIRMANIE'),
+        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'ROBE'), 30, 200,
+        'C`est une magnifique robe !', 'picture.jpg'
+    ),
+    (
+        'Trench-coat', 21000,
+        (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'CHINE'),
+        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'MANTEAU'), 49.99, 600,
+        'C`est un magnifique trench-coat !', 'picture.jpg'
+    ),
+    (
+        'Manteau', 21000,
+        (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'CHINE'),
+        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'MANTEAU'), 78.99, 1200,
+        'C`est un magnifique manteau !', 'picture.jpg'
+    ),
+    (
+        'Chemise Blanche', 6100,
+        (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'CHINE'),
+        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'CHEMISE'), 25.99, 200,
+        'C`est une magnifique chemise blanche !', 'picture.jpg'
+    ),
+    (
+        'Chaussure en Cuir', 1193.2,
+        (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'FRANCE'),
+        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'CHAUSSURE'), 135, 800,
+        'C`est une paire de chausse magnifique !', 'picture.jpg'
+    ),
+    (
+        'Pantalon en Lin', 9500,
+        (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'FRANCE'),
+        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'PANTALON'), 145, 500,
+        'C`est un magnifique pantalon en lin !', 'picture.jpg'
+    )
+ON CONFLICT ("Name") DO NOTHING;
+
+-- Script Fabrics To Product
+INSERT INTO "MarketInformation"."FabricsToProduct" ("ProductId", "FabricId", "Percentage")
+VALUES
+    (
+        (SELECT "id" FROM "MarketInformation"."Product" WHERE "Name" = 'Tee-Shirt'),
+        (SELECT "id" FROM "MarketInformation"."Fabric" WHERE "Name" = 'COTON'),
+        100
+    ),
+    (
+        (SELECT "id" FROM "MarketInformation"."Product" WHERE "Name" = 'Pull'),
+        (SELECT "id" FROM "MarketInformation"."Fabric" WHERE "Name" = 'SYNTHETIQUE'),
+        94
+    ),
+    (
+        (SELECT "id" FROM "MarketInformation"."Product" WHERE "Name" = 'Pull'),
+        (SELECT "id" FROM "MarketInformation"."Fabric" WHERE "Name" = 'LAINE'),
+        6
+    ),
+    (
+        (SELECT "id" FROM "MarketInformation"."Product" WHERE "Name" = 'Jean droit-regular'),
+        (SELECT "id" FROM "MarketInformation"."Fabric" WHERE "Name" = 'COTON'),
+        100
+    ),
+    (
+        (SELECT "id" FROM "MarketInformation"."Product" WHERE "Name" = 'Robe à effet drapé'),
+        (SELECT "id" FROM "MarketInformation"."Fabric" WHERE "Name" = 'SYNTHETIQUE'),
+        100
+    ),
+    (
+        (SELECT "id" FROM "MarketInformation"."Product" WHERE "Name" = 'Trench-coat'),
+        (SELECT "id" FROM "MarketInformation"."Fabric" WHERE "Name" = 'SYNTHETIQUE'),
+        100
+    ),
+    (
+        (SELECT "id" FROM "MarketInformation"."Product" WHERE "Name" = 'Manteau'),
+        (SELECT "id" FROM "MarketInformation"."Fabric" WHERE "Name" = 'LAINE'),
+        100
+    ),
+    (
+        (SELECT "id" FROM "MarketInformation"."Product" WHERE "Name" = 'Chemise Blanche'),
+        (SELECT "id" FROM "MarketInformation"."Fabric" WHERE "Name" = 'SYNTHETIQUE'),
+        100
+    ),
+    (
+        (SELECT "id" FROM "MarketInformation"."Product" WHERE "Name" = 'Chaussure en Cuir'),
+        (SELECT "id" FROM "MarketInformation"."Fabric" WHERE "Name" = 'CUIR_ANIMALE'),
+        100
+    ),
+    (
+        (SELECT "id" FROM "MarketInformation"."Product" WHERE "Name" = 'Pantalon en Lin'),
+        (SELECT "id" FROM "MarketInformation"."Fabric" WHERE "Name" = 'LIN'),
+        100
+    )
+ON CONFLICT ("ProductId", "FabricId") DO NOTHING;
 
 
 

@@ -1,5 +1,5 @@
 -- MarketInformation schema
-DROP SCHEMA "MarketInformation" CASCADE;
+DROP SCHEMA IF EXISTS "MarketInformation" CASCADE;
 CREATE SCHEMA "MarketInformation";
 
 CREATE TABLE "MarketInformation"."ProductType" (
@@ -16,6 +16,9 @@ CREATE TABLE "MarketInformation"."Product" (
                                                "CountryId" INT NOT NULL,
                                                "ProductTypeId" INT NOT NULL,
                                                "Price" FLOAT NOT NULL,
+                                               "Mass" FLOAT NOT NULL,
+                                               "Description" VARCHAR NOT NULL,
+                                               "ProfilePicture" BYTEA NOT NULL,
                                                FOREIGN KEY ("ProductTypeId") REFERENCES "MarketInformation"."ProductType" ("id"),
                                                FOREIGN KEY ("CountryId") REFERENCES "UserInformation"."Country" ("id")
 );
@@ -45,8 +48,10 @@ CREATE TABLE "MarketInformation"."FabricsToProduct" (
                                                         FOREIGN KEY ("FabricId") REFERENCES "MarketInformation"."Fabric" ("id")
 );
 
+ALTER TABLE "MarketInformation"."FabricsToProduct" ADD CONSTRAINT "unique_product_fabric_combination" UNIQUE ("ProductId", "FabricId");
+
 -- QuotaInformation schema
-DROP SCHEMA "QuotaInformation" CASCADE ;
+DROP SCHEMA IF EXISTS "QuotaInformation" CASCADE ;
 CREATE SCHEMA "QuotaInformation";
 
 CREATE TABLE "QuotaInformation"."UserRetribution" (
@@ -81,7 +86,7 @@ CREATE TABLE "QuotaInformation"."ProductCostCoefficient" (
 );
 
 -- UserInformation schema
-DROP SCHEMA "UserInformation" CASCADE;
+DROP SCHEMA IF EXISTS "UserInformation" CASCADE;
 CREATE SCHEMA "UserInformation";
 
 CREATE TABLE "UserInformation"."Country" (
@@ -149,4 +154,24 @@ CREATE TABLE "UserInformation"."TIGInfrastructure" (
                                                        "Name" VARCHAR NOT NULL UNIQUE,
                                                        "CityId" INT NOT NULL,
                                                        FOREIGN KEY ("CityId") REFERENCES "UserInformation"."City" ("id")
+);
+
+-- TrainingInformation schema
+DROP SCHEMA IF EXISTS "TrainingInformation" CASCADE;
+CREATE SCHEMA "TrainingInformation";
+
+CREATE TABLE "TrainingInformation"."VideoCategory" (
+                                                       "id" SERIAL PRIMARY KEY,
+                                                       "Name" VARCHAR NOT NULL UNIQUE
+);
+
+CREATE TABLE "TrainingInformation"."Training" (
+                                                  "id" SERIAL PRIMARY KEY,
+                                                  "Name" VARCHAR NOT NULL UNIQUE,
+                                                  "Video" VARCHAR NOT NULL,
+                                                  "CategoryId" INT NOT NULL,
+                                                  "Stars" INT NOT NULL,
+                                                  "UserFullName" VARCHAR NOT NULL,
+                                                  "UserPicture" BYTEA NOT NULL,
+                                                  FOREIGN KEY ("CategoryId") REFERENCES "TrainingInformation"."VideoCategory" ("id")
 );
