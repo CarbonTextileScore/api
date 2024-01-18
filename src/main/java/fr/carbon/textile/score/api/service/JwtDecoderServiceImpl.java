@@ -1,6 +1,9 @@
 package fr.carbon.textile.score.api.service;
 
 import fr.carbon.textile.score.api.database.entity.user.information.UserEntity;
+import fr.carbon.textile.score.api.dto.user.information.UserDTO;
+import fr.carbon.textile.score.api.exception.CustomException;
+import fr.carbon.textile.score.api.mapper.user.information.UserMapper;
 import fr.carbon.textile.score.api.repository.user.information.UserRepository;
 import fr.carbon.textile.score.api.security.jwt.JwtUtils;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,13 +28,13 @@ public class JwtDecoderServiceImpl implements JwtDecoderService {
     }
 
     @Override
-    public UserEntity recoverUserOfThisRequest() {
+    public UserDTO recoverUserOfThisRequest() throws CustomException {
         String token = _jwtUtils.parseJwt(_httpServletRequest);
         String username = _jwtUtils.getUsernameFromJwtToken(token);
         Optional<UserEntity> user = _userRepository.queryByAuthorityUsername(username);
         if (user.isEmpty()) {
-            throw new RuntimeException("Token could not be properly parsed during User Entity recovery");
+            throw new CustomException("Token could not be properly parsed during User Entity recovery");
         }
-        return user.get();
+        return UserDTO.builder().id(user.get().getId()).build();
     }
 }

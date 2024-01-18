@@ -217,7 +217,7 @@ VALUES
     ),
     (
         ('CUIR_VEGETAL'), 37, 15.8,
-        (SELECT "id" FROM "MarketInformation"."FabricAnimalOrigin" WHERE "FabricAnimalOrigin"."Name" = 'ORGANIC_VEGETATION'),
+        (SELECT "id" FROM "MarketInformation"."FabricAnimalOrigin" WHERE "FabricAnimalOrigin"."Name" = 'OTHER'),
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'BRESIL')
     ),
     (

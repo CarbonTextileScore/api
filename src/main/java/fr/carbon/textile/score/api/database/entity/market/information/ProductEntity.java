@@ -24,7 +24,7 @@ public class ProductEntity {
     @Column(name = "`IsSold`", nullable = false)
     private boolean _isSold = false;
     @Basic
-    @Column(name = "`Price`", nullable = false)
+    @Column(name = "`Price`", nullable = false, precision = 4)
     private double _price;
     @OneToOne
     @JoinColumn(name = "`ProductTypeId`", nullable = false)
