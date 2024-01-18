@@ -1,7 +1,9 @@
 package fr.carbon.textile.score.api.database.entity.market.information;
 
+import fr.carbon.textile.score.api.database.entity.user.information.CountryEntity;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "Product")
@@ -38,8 +40,11 @@ public class ProductEntity {
     @OneToOne
     @JoinColumn(name = "`ProductTypeId`", nullable = false)
     ProductTypeEntity _productType;
-    @OneToOne(mappedBy = "_product")
-    private FabricsToProductEntity _fabric;
+    @OneToOne
+    @JoinColumn(name = "`CountryId`", nullable = false)
+    CountryEntity _country;
+    @OneToMany(mappedBy = "_product")
+    private List<FabricsToProductEntity> _fabrics;
 
     public ProductEntity() {
     }
@@ -48,22 +53,24 @@ public class ProductEntity {
             String name,
             Double area,
             boolean isSecondHand,
-            FabricsToProductEntity fabric,
+            List<FabricsToProductEntity> fabrics,
             ProductTypeEntity productType,
             Double price,
             Double mass,
             String description,
+            CountryEntity country,
             byte[] profilePicture
     ) {
         _name = name;
         _area = area;
         _isSecondHand = isSecondHand;
-        _fabric = fabric;
+        _fabrics = fabrics;
         _productType = productType;
         _price = price;
         _mass = mass;
         _description = description;
         _profilePicture = profilePicture;
+        _country = country;
     }
 
     public int getId() {
@@ -82,12 +89,12 @@ public class ProductEntity {
         _name = name;
     }
 
-    public FabricsToProductEntity getFabric() {
-        return _fabric;
+    public List<FabricsToProductEntity> getFabrics() {
+        return _fabrics;
     }
 
-    public void setFabric(FabricsToProductEntity fabric) {
-        _fabric = fabric;
+    public void setFabrics(List<FabricsToProductEntity> fabric) {
+        _fabrics = fabric;
     }
 
     public double getArea() {
@@ -154,6 +161,13 @@ public class ProductEntity {
         this._profilePicture = profilePicture;
     }
 
+    public CountryEntity getCountry() {
+        return _country;
+    }
+
+    public void setCountry(CountryEntity country) {
+        this._country = country;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -169,13 +183,14 @@ public class ProductEntity {
                 Objects.equals(_name, that._name) &&
                 Objects.equals(_description, that._description) &&
                 Objects.equals(_productType, that._productType) &&
-                Objects.equals(_fabric, that._fabric);
+                Objects.equals(_country, that._country) &&
+                Objects.equals(_fabrics, that._fabrics);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(
-                _id, _name, _area, _isSecondHand, _isSold, _price, _mass, _description, _productType, _fabric
+                _id, _name, _area, _isSecondHand, _isSold, _price, _mass, _description, _productType, _country, _fabrics
         );
     }
 }

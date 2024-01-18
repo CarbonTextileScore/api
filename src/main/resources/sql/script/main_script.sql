@@ -58,6 +58,21 @@ VALUES
         'TMP'
     ),
     (
+        'ANGELINA',
+        (SELECT "id" FROM "UserInformation"."Role" WHERE "Name" = 'ROLE_USER'),
+        'TMP'
+    ),
+    (
+        'CHRISTELLE',
+        (SELECT "id" FROM "UserInformation"."Role" WHERE "Name" = 'ROLE_USER'),
+        'TMP'
+    ),
+    (
+        'RANDOM',
+        (SELECT "id" FROM "UserInformation"."Role" WHERE "Name" = 'ROLE_USER'),
+        'TMP'
+    ),
+    (
         'MAYOR-CAEN',
         (SELECT "id" FROM "UserInformation"."Role" WHERE "Name" = 'ROLE_CITY'),
         'TMP'
@@ -74,6 +89,9 @@ INSERT INTO "UserInformation"."Family" ("Address")
 VALUES
     (
         '3 Esp. Stéphane Hessel, 14000 Caen'
+    ),
+    (
+        '6 Bd Maréchal Juin, 14000 Caen'
     )
 ON CONFLICT ("Address") DO NOTHING;
 
@@ -103,10 +121,43 @@ VALUES
         (SELECT "id" FROM "UserInformation"."Family" WHERE "Address" = '3 Esp. Stéphane Hessel, 14000 Caen')
     ),
     (
+        'Angelina',
+        'GOUDO',
+        (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'CAEN'),
+        TO_TIMESTAMP('1999-01-29 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
+        null,
+        'profile_picture.jpg',
+        'F',
+        (SELECT "id" FROM "UserInformation"."Authority" WHERE "Username" = 'ANGELINA'),
+        (SELECT "id" FROM "UserInformation"."Family" WHERE "Address" = '3 Esp. Stéphane Hessel, 14000 Caen')
+    ),
+    (
+        'Christelle',
+        'BRONLESS',
+        (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'CAEN'),
+        TO_TIMESTAMP('1995-04-23 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
+        null,
+        'profile_picture.jpg',
+        'F',
+        (SELECT "id" FROM "UserInformation"."Authority" WHERE "Username" = 'CHRISTELLE'),
+        (SELECT "id" FROM "UserInformation"."Family" WHERE "Address" = '3 Esp. Stéphane Hessel, 14000 Caen')
+    ),
+    (
+        'Christelle',
+        'RANDOM',
+        (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'CAEN'),
+        TO_TIMESTAMP('1989-06-27 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
+        null,
+        'profile_picture.jpg',
+        'F',
+        (SELECT "id" FROM "UserInformation"."Authority" WHERE "Username" = 'RANDOM'),
+        (SELECT "id" FROM "UserInformation"."Family" WHERE "Address" = '6 Bd Maréchal Juin, 14000 Caen')
+    ),
+    (
         'Maire',
         'CAEN',
         (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'CAEN'),
-        TO_TIMESTAMP('2016-09-05 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
+        TO_TIMESTAMP('2017-05-15 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
         null,
         'profile_picture.jpg',
         'M',
@@ -117,7 +168,7 @@ VALUES
         'President',
         'FRANCE',
         (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'PARIS'),
-        TO_TIMESTAMP('2016-09-05 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
+        TO_TIMESTAMP('1968-10-09 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
         null,
         'profile_picture.jpg',
         'M',
@@ -130,37 +181,31 @@ ON CONFLICT ("AuthorityId") DO NOTHING;
 INSERT INTO "QuotaInformation"."UserRetribution" ("QuotaGains", "Retribution")
 VALUES
     (
-        100, 'Travaux forcés en usine de textile - Réparer une pièce'
+        100, 'Travaux forcés en usine de textile - unité : /kg de textile produit'
     ),
     (
-        50, 'Travaux forcés en usine de textile - 4h couture à la chaîne'
+        0.05, 'Transport du textile - unité : /km parcouru'
     ),
     (
-        100, 'Travaux forcés en usine de textile - 8h couture à la chaîne'
+        400, 'Culture du coton biologique - unité /kg recolté'
     ),
     (
-        200, 'Travaux forcés en usine de textile - 12h couture à la chaîne'
+        40, 'Vente d`un doigt'
     ),
     (
-        50, 'Vente d`un doigt'
+        175, 'Vente d`une main / pied'
     ),
     (
-        250, 'Vente d`une main / pied'
+        250, 'Vente d`un avant-bras'
     ),
     (
-        300, 'Vente d`un avant-bras'
+        350, 'Vente d`un bras'
     ),
     (
-        500, 'Vente d`un bras'
+        250, 'Vente d`un mollet'
     ),
     (
-        300, 'Vente d`un mollet'
-    ),
-    (
-        800, 'Vente d`une jambe'
-    ),
-    (
-        500, 'Utilisation des corps A à Z'
+        450, 'Vente d`une jambe'
     )
 ON CONFLICT ("Retribution") DO NOTHING;
 
@@ -199,32 +244,32 @@ INSERT INTO "MarketInformation"."Fabric"
      "KilogramCO2EquivalentPerSquareMetre", "FabricAnimalOriginId", "CountryId")
 VALUES
     (
-        ('LAINE'), 883, 13.89,
+        ('LAINE'), 0.000883, 13.89,
         (SELECT "id" FROM "MarketInformation"."FabricAnimalOrigin" WHERE "FabricAnimalOrigin"."Name" = 'ANIMAL'),
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'AUSTRALIE')
     ),
     (
-        ('COTON'), 50000, 8.3,
+        ('COTON'), 0.05, 8.3,
         (SELECT "id" FROM "MarketInformation"."FabricAnimalOrigin" WHERE "FabricAnimalOrigin"."Name" = 'OTHER'),
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'CHINE')
     ),
     (
-        ('SYNTHETIQUE'), 62, 6.4,
+        ('SYNTHETIQUE'), 0.000062, 6.4,
         (SELECT "id" FROM "MarketInformation"."FabricAnimalOrigin" WHERE "FabricAnimalOrigin"."Name" = 'OTHER'),
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'CHINE')
     ),
     (
-        ('CUIR_ANIMALE'), 37, 110,
+        ('CUIR_ANIMALE'), 0.000037, 110,
         (SELECT "id" FROM "MarketInformation"."FabricAnimalOrigin" WHERE "FabricAnimalOrigin"."Name" = 'ANIMAL'),
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'FRANCE')
     ),
     (
-        ('CUIR_VEGETAL'), 37, 15.8,
+        ('CUIR_VEGETAL'), 0.000037, 15.8,
         (SELECT "id" FROM "MarketInformation"."FabricAnimalOrigin" WHERE "FabricAnimalOrigin"."Name" = 'OTHER'),
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'BRESIL')
     ),
     (
-        ('LYOCELL'), 1000, 10.1,
+        ('LYOCELL'), 0.001, 10.1,
         (SELECT "id" FROM "MarketInformation"."FabricAnimalOrigin" WHERE "FabricAnimalOrigin"."Name" = 'OTHER'),
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'ETATS-UNIS')
     ),
@@ -244,55 +289,55 @@ ON CONFLICT ("Name") DO NOTHING;
 INSERT INTO "MarketInformation"."Product" ("Name", "Area", "CountryId", "ProductTypeId", "Price", "Mass", "Description", "ProfilePicture")
 VALUES
     (
-        'Tee-Shirt', 4800,
+        'Tee-Shirt', 0.48,
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'BANGLADESH'),
         (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'T-SHIRT'), 7.99, 150,
         'C`est un magnifique t-shirt !', 'picture.jpg'
     ),
     (
-        'Pull', 6100,
+        'Pull', 0.61,
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'TURQUIE'),
         (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'PULL'), 25.99, 300,
         'C`est un magnifique pull !', 'picture.jpg'
     ),
     (
-        'Jean droit-regular', 9500,
+        'Jean droit-regular', 0.95,
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'INDONESIE'),
         (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'PANTALON'), 34.99, 800,
         'C`est un magnifique jean !', 'picture.jpg'
     ),
     (
-        'Robe à effet drapé', 21000,
+        'Robe à effet drapé', 2.1,
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'BIRMANIE'),
         (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'ROBE'), 30, 200,
         'C`est une magnifique robe !', 'picture.jpg'
     ),
     (
-        'Trench-coat', 21000,
+        'Trench-coat', 2.1,
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'CHINE'),
         (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'MANTEAU'), 49.99, 600,
         'C`est un magnifique trench-coat !', 'picture.jpg'
     ),
     (
-        'Manteau', 21000,
+        'Manteau', 2.1,
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'CHINE'),
         (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'MANTEAU'), 78.99, 1200,
         'C`est un magnifique manteau !', 'picture.jpg'
     ),
     (
-        'Chemise Blanche', 6100,
+        'Chemise Blanche', 0.61,
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'CHINE'),
         (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'CHEMISE'), 25.99, 200,
         'C`est une magnifique chemise blanche !', 'picture.jpg'
     ),
     (
-        'Chaussure en Cuir', 1193.2,
+        'Chaussure en Cuir', 0.11932,
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'FRANCE'),
         (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'CHAUSSURE'), 135, 800,
         'C`est une paire de chausse magnifique !', 'picture.jpg'
     ),
     (
-        'Pantalon en Lin', 9500,
+        'Pantalon en Lin', 0.95,
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'FRANCE'),
         (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'PANTALON'), 145, 500,
         'C`est un magnifique pantalon en lin !', 'picture.jpg'
@@ -354,5 +399,27 @@ VALUES
     )
 ON CONFLICT ("ProductId", "FabricId") DO NOTHING;
 
+-- Video Category SCRIPT
+INSERT INTO "TrainingInformation"."VideoCategory" ("Name")
+VALUES ('CREATION'), ('REUTILISATION'), ('RECYCLAGE')
+ON CONFLICT DO NOTHING;
 
-
+-- Training SCRIPT
+INSERT INTO  "TrainingInformation"."Training" ("Name", "Video", "CategoryId", "Stars", "UserFullName", "UserPicture")
+VALUES
+    (
+        ('Transformer son jean en jupe !'), ('https://www.youtube.com/shorts/7KuD4rLadfM'),
+        (SELECT "id" FROM "TrainingInformation"."VideoCategory" WHERE "VideoCategory"."Name" = 'REUTILISATION'), 4,
+        '@jorjadela', 'picture.jpg'
+    ),
+    (
+        ('5 idées chouettes pour réparer tes vêtements'), ('https://www.youtube.com/shorts/IA8jPZKqnjQ'),
+        (SELECT "id" FROM "TrainingInformation"."VideoCategory" WHERE "VideoCategory"."Name" = 'RECYCLAGE'), 4,
+        '@lorenfascianel', 'picture.jpg'
+    ),
+    (
+        ('Créer ses propres vêtements ! (Patrons, couture & essayages)'), ('https://www.youtube.com/watch?v=SQAG7Chpbvw'),
+        (SELECT "id" FROM "TrainingInformation"."VideoCategory" WHERE "VideoCategory"."Name" = 'CREATION'), 4,
+        '@CarlotaMakeup', 'picture.jpg'
+    )
+ON CONFLICT DO NOTHING;

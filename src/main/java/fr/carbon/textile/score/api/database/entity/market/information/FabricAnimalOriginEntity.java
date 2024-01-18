@@ -9,10 +9,10 @@ import java.util.Objects;
 public class FabricAnimalOriginEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id")
+    @Column(name = "`id`")
     private Integer _id;
     @Basic
-    @Column(name = "Name", nullable = false)
+    @Column(name = "`Name`", nullable = false)
     private String _name;
 
     public FabricAnimalOriginEntity() {
