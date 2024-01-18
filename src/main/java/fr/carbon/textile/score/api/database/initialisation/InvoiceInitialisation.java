@@ -15,6 +15,7 @@ import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -86,14 +87,15 @@ public class InvoiceInitialisation {
             UserEntity user, int numberToGenerate, Random random, List<ProductTypeEntity> poolOfProductTypes
     ) {
         for (int i = 0; i < numberToGenerate; i++) {
-            Date date = new Date();
+            Date date = new Date(LocalDate.now().withYear(30).toEpochDay());
             int quota = random.nextInt(_minInvoiceQuotaToGenerate, _maxInvoiceQuotaToGenerate);
             ProductTypeEntity productType = poolOfProductTypes.get(
                     random.nextInt(0, poolOfProductTypes.size())
             );
             double price = random.nextDouble(_minInvoicePriceToGenerate, _maxInvoicePriceToGenerate);
-            if (random.nextBoolean()) {
+            if (random.nextDouble(0d, 1d) < 0.15) {
                 price = - price;
+                quota = - (quota / 2);
             }
             InvoiceDTO built = InvoiceDTO.builder()
                     .date(date)

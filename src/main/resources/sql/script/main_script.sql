@@ -58,6 +58,21 @@ VALUES
         'TMP'
     ),
     (
+        'ANGELINA',
+        (SELECT "id" FROM "UserInformation"."Role" WHERE "Name" = 'ROLE_USER'),
+        'TMP'
+    ),
+    (
+        'CHRISTELLE',
+        (SELECT "id" FROM "UserInformation"."Role" WHERE "Name" = 'ROLE_USER'),
+        'TMP'
+    ),
+    (
+        'RANDOM',
+        (SELECT "id" FROM "UserInformation"."Role" WHERE "Name" = 'ROLE_USER'),
+        'TMP'
+    ),
+    (
         'MAYOR-CAEN',
         (SELECT "id" FROM "UserInformation"."Role" WHERE "Name" = 'ROLE_CITY'),
         'TMP'
@@ -74,6 +89,9 @@ INSERT INTO "UserInformation"."Family" ("Address")
 VALUES
     (
         '3 Esp. Stéphane Hessel, 14000 Caen'
+    ),
+    (
+        '6 Bd Maréchal Juin, 14000 Caen'
     )
 ON CONFLICT ("Address") DO NOTHING;
 
@@ -103,10 +121,43 @@ VALUES
         (SELECT "id" FROM "UserInformation"."Family" WHERE "Address" = '3 Esp. Stéphane Hessel, 14000 Caen')
     ),
     (
+        'Angelina',
+        'GOUDO',
+        (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'CAEN'),
+        TO_TIMESTAMP('1999-01-29 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
+        null,
+        'profile_picture.jpg',
+        'F',
+        (SELECT "id" FROM "UserInformation"."Authority" WHERE "Username" = 'ANGELINA'),
+        (SELECT "id" FROM "UserInformation"."Family" WHERE "Address" = '3 Esp. Stéphane Hessel, 14000 Caen')
+    ),
+    (
+        'Christelle',
+        'BRONLESS',
+        (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'CAEN'),
+        TO_TIMESTAMP('1995-04-23 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
+        null,
+        'profile_picture.jpg',
+        'F',
+        (SELECT "id" FROM "UserInformation"."Authority" WHERE "Username" = 'CHRISTELLE'),
+        (SELECT "id" FROM "UserInformation"."Family" WHERE "Address" = '3 Esp. Stéphane Hessel, 14000 Caen')
+    ),
+    (
+        'Christelle',
+        'RANDOM',
+        (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'CAEN'),
+        TO_TIMESTAMP('1989-06-27 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
+        null,
+        'profile_picture.jpg',
+        'F',
+        (SELECT "id" FROM "UserInformation"."Authority" WHERE "Username" = 'RANDOM'),
+        (SELECT "id" FROM "UserInformation"."Family" WHERE "Address" = '6 Bd Maréchal Juin, 14000 Caen')
+    ),
+    (
         'Maire',
         'CAEN',
         (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'CAEN'),
-        TO_TIMESTAMP('2016-09-05 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
+        TO_TIMESTAMP('2017-05-15 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
         null,
         'profile_picture.jpg',
         'M',
@@ -117,7 +168,7 @@ VALUES
         'President',
         'FRANCE',
         (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'PARIS'),
-        TO_TIMESTAMP('2016-09-05 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
+        TO_TIMESTAMP('1968-10-09 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
         null,
         'profile_picture.jpg',
         'M',
@@ -130,37 +181,31 @@ ON CONFLICT ("AuthorityId") DO NOTHING;
 INSERT INTO "QuotaInformation"."UserRetribution" ("QuotaGains", "Retribution")
 VALUES
     (
-        100, 'Travaux forcés en usine de textile - Réparer une pièce'
+        100, 'Travaux forcés en usine de textile - unité : /kg de textile produit'
     ),
     (
-        50, 'Travaux forcés en usine de textile - 4h couture à la chaîne'
+        0.05, 'Transport du textile - unité : /km parcouru'
     ),
     (
-        100, 'Travaux forcés en usine de textile - 8h couture à la chaîne'
+        400, 'Culture du coton biologique - unité /kg recolté'
     ),
     (
-        200, 'Travaux forcés en usine de textile - 12h couture à la chaîne'
+        40, 'Vente d`un doigt'
     ),
     (
-        50, 'Vente d`un doigt'
+        175, 'Vente d`une main / pied'
     ),
     (
-        250, 'Vente d`une main / pied'
+        250, 'Vente d`un avant-bras'
     ),
     (
-        300, 'Vente d`un avant-bras'
+        350, 'Vente d`un bras'
     ),
     (
-        500, 'Vente d`un bras'
+        250, 'Vente d`un mollet'
     ),
     (
-        300, 'Vente d`un mollet'
-    ),
-    (
-        800, 'Vente d`une jambe'
-    ),
-    (
-        500, 'Utilisation des corps A à Z'
+        450, 'Vente d`une jambe'
     )
 ON CONFLICT ("Retribution") DO NOTHING;
 
@@ -354,5 +399,27 @@ VALUES
     )
 ON CONFLICT ("ProductId", "FabricId") DO NOTHING;
 
+-- Video Category SCRIPT
+INSERT INTO "TrainingInformation"."VideoCategory" ("Name")
+VALUES ('CREATION'), ('REUTILISATION'), ('RECYCLATION')
+ON CONFLICT DO NOTHING;
 
-
+-- Training SCRIPT
+INSERT INTO  "TrainingInformation"."Training" ("Name", "Video", "CategoryId", "Stars", "UserFullName", "UserPicture")
+VALUES
+    (
+        ('Transformer son jean en jupe !'), ('https://www.youtube.com/shorts/7KuD4rLadfM'),
+        (SELECT "id" FROM "TrainingInformation"."VideoCategory" WHERE "VideoCategory"."Name" = 'REUTILISATION'), 4,
+        '@jorjadela', 'picture.jpg'
+    ),
+    (
+        ('5 idées chouettes pour réparer tes vêtements'), ('https://www.youtube.com/shorts/IA8jPZKqnjQ'),
+        (SELECT "id" FROM "TrainingInformation"."VideoCategory" WHERE "VideoCategory"."Name" = 'RECYCLATION'), 4,
+        '@lorenfascianel', 'picture.jpg'
+    ),
+    (
+        ('Créer ses propres vêtements ! (Patrons, couture & essayages)'), ('https://www.youtube.com/watch?v=SQAG7Chpbvw'),
+        (SELECT "id" FROM "TrainingInformation"."VideoCategory" WHERE "VideoCategory"."Name" = 'CREATION'), 4,
+        '@CarlotaMakeup', 'picture.jpg'
+    )
+ON CONFLICT DO NOTHING;

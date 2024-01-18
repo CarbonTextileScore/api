@@ -11,10 +11,10 @@ public class FabricsToProductEntity {
     @Id
     @Column(name = "`id`")
     private Integer _id;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "`ProductId`", nullable = false)
     private ProductEntity _product;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "`FabricId`", nullable = false)
     private FabricEntity _fabric;
     @Basic
