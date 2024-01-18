@@ -20,6 +20,6 @@ public class UserDTO implements Serializable {
     byte[] picture;
     QuotaDTO availableQuota;
     CityDTO city;
-
+    FamilyDTO family;
     Integer numberOfChildren;
 }
