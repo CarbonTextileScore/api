@@ -31,11 +31,11 @@ public class UserController {
     @GetMapping("/identity")
     @ResponseStatus(HttpStatus.OK)
     @PreAuthorize("hasRole('ROLE_USER')")
-    public UserDTO getUserIdentity() throws CustomException {
+    public UserDTO getUserIdentity() {
         return _userService.getUserIdentity(_jwtDecoderService.recoverUserOfThisRequest());
     }
 
-    @GetMapping("/{id}/quota/personal")
+    @GetMapping("/quota/personal")
     @ResponseStatus(HttpStatus.OK)
     @PreAuthorize("hasRole('ROLE_USER')")
     public UserDTO getQuotaPersonal() throws CustomException {
