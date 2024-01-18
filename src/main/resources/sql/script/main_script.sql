@@ -307,24 +307,6 @@ VALUES
         'C`est un magnifique jean !', 'picture.jpg'
     ),
     (
-        'Robe à effet drapé', 2.1,
-        (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'BIRMANIE'),
-        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'ROBE'), 30, 200,
-        'C`est une magnifique robe !', 'picture.jpg'
-    ),
-    (
-        'Trench-coat', 2.1,
-        (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'CHINE'),
-        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'MANTEAU'), 49.99, 600,
-        'C`est un magnifique trench-coat !', 'picture.jpg'
-    ),
-    (
-        'Manteau', 2.1,
-        (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'CHINE'),
-        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'MANTEAU'), 78.99, 1200,
-        'C`est un magnifique manteau !', 'picture.jpg'
-    ),
-    (
         'Chemise Blanche', 0.61,
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'CHINE'),
         (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'CHEMISE'), 25.99, 200,
@@ -341,6 +323,28 @@ VALUES
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'FRANCE'),
         (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'PANTALON'), 145, 500,
         'C`est un magnifique pantalon en lin !', 'picture.jpg'
+    )
+ON CONFLICT ("Name") DO NOTHING;
+
+INSERT INTO "MarketInformation"."Product" ("Name", "Area", "CountryId", "ProductTypeId", "Price", "Mass", "Description", "ProfilePicture", "IsSecondHand")
+VALUES
+    (
+         'Robe à effet drapé', 2.1,
+         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'BIRMANIE'),
+         (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'ROBE'), 30, 200,
+         'C`est une magnifique robe !', 'picture.jpg', TRUE
+    ),
+    (
+         'Trench-coat', 2.1,
+         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'CHINE'),
+         (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'MANTEAU'), 49.99, 600,
+         'C`est un magnifique trench-coat !', 'picture.jpg', TRUE
+    ),
+    (
+         'Manteau', 2.1,
+         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'CHINE'),
+         (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'MANTEAU'), 78.99, 1200,
+         'C`est un magnifique manteau !', 'picture.jpg', TRUE
     )
 ON CONFLICT ("Name") DO NOTHING;
 

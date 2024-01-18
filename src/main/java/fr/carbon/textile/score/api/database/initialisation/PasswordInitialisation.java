@@ -49,6 +49,9 @@ public class PasswordInitialisation {
     private void initiateUsernamePasswordMap() {
         _usernamePassword.put("TAN", "intensive-project-03-tan");
         _usernamePassword.put("VAL", "intensive-project-03-val");
+        _usernamePassword.put("ANGELINA", "intensive-project-03-angelina");
+        _usernamePassword.put("CHRISTELLE", "intensive-project-03-christelle");
+        _usernamePassword.put("RANDOM", "intensive-project-03-random");
         _usernamePassword.put("MAYOR-CAEN", "intensive-project-03-mayor-caen");
         _usernamePassword.put("PRESIDENT-FRANCE", "intensive-project-03-president-france");
     }

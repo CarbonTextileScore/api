@@ -62,27 +62,38 @@ public class ProductServiceImpl implements ProductService {
         double total = 0;
         ProductEntity product = optionalProduct.get();
         for (FabricsToProductEntity data : product.getFabrics()) {
-            double quotaArea = C_1 * product.getArea();
-            double quotaWaterMass = C_2 *
-                    data.getFabric().getWaterConsumptionCubicCentimeterPerGram() *
-                    product.getMass();
-            double quotaCarbon = C_3 *
-                    data.getFabric().getKilogramCO2EquivalentPerSquareMetre();
-            double totalDistance = calculateHaversineDistance(
-                    product.getCountry().getLat(), product.getCountry().getLon(),
-                    france.getLat(), france.getLon()
-            );
-            totalDistance += calculateHaversineDistance(
-                    data.getFabric().getCountry().getLat(), data.getFabric().getCountry().getLon(),
-                    france.getLat(), france.getLon()
-            );
-            double quotaLength = C_5 * totalDistance;
-            double sum = (quotaArea + quotaLength + quotaCarbon + quotaWaterMass) *
-                    ((double) data.getPercentage() / 100);
+            double sum = calculteQuotaWithAGivenFabric(data, product, france);
+            if (product.isSecondHand()) {
+                sum = C_5 * calculateHaversineDistance(
+                        product.getCountry().getLat(), product.getCountry().getLon(),
+                        france.getLat(), france.getLon()
+                );
+            }
             total += sum;
         }
 
         return (int) (total / 100);
+    }
+
+    private static double calculteQuotaWithAGivenFabric(FabricsToProductEntity data, ProductEntity product, CountryEntity france) {
+        double quotaArea = C_1 * product.getArea();
+        double quotaWaterMass = C_2 *
+                data.getFabric().getWaterConsumptionCubicCentimeterPerGram() *
+                product.getMass();
+        double quotaCarbon = C_3 *
+                data.getFabric().getKilogramCO2EquivalentPerSquareMetre();
+        double totalDistance = calculateHaversineDistance(
+                product.getCountry().getLat(), product.getCountry().getLon(),
+                france.getLat(), france.getLon()
+        );
+        totalDistance += calculateHaversineDistance(
+                data.getFabric().getCountry().getLat(), data.getFabric().getCountry().getLon(),
+                france.getLat(), france.getLon()
+        );
+        double quotaLength = C_5 * totalDistance;
+        double sum = (quotaArea + quotaLength + quotaCarbon + quotaWaterMass) *
+                ((double) data.getPercentage() / 100);
+        return sum;
     }
 
     @Override
@@ -98,12 +109,16 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductDTO> getAllProducts() throws CustomException {
         List<ProductDTO> DTOs = new ArrayList<>();
         for (ProductEntity entity : _productRepository.findAll()) {
+            if (entity.isSold()) {
+                continue;
+            }
             DTOs.add(ProductDTO.builder()
                     .name(entity.getName())
                     .price(entity.getPrice())
                     .countryName(entity.getCountry().getName())
                     .description(entity.getDescription())
                     .quota(calculateQuotaFromProductId(entity.getId()))
+                    .isSecondHand(entity.isSecondHand())
                     .build());
         }
         return DTOs;
