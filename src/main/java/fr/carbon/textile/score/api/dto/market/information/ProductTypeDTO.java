@@ -9,13 +9,7 @@ import java.io.Serializable;
 @Builder
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ProductDTO implements Serializable {
+public class ProductTypeDTO implements Serializable {
     Integer id;
     String name;
-    Double area;
-    Double price;
-    Boolean isSecondHand;
-    Boolean isSold;
-    ProductTypeDTO productType;
-    FabricToProductDTO fabric;
 }
