@@ -27,7 +27,7 @@ public class TrainingEntity {
     @Basic
     @Column(name = "`UserPicture`", nullable = false)
     private byte[] _userPicture;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "`CategoryId`", nullable = false)
     private VideoCategoryEntity _videoCategory;
 

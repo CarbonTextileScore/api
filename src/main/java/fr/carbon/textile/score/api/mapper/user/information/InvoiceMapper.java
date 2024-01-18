@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -36,7 +37,7 @@ public class InvoiceMapper implements DTOEntityMapper<InvoiceDTO, InvoiceEntity>
     @Override
     public InvoiceEntity toEntity(InvoiceDTO dto) {
         InvoiceEntity entity = new InvoiceEntity(
-                Timestamp.valueOf(LocalDateTime.from(DateTimeFormatter.ofPattern("dd/MM/yyyy").parse(dto.getDate()))),
+                Timestamp.valueOf(LocalDate.parse(dto.getDate(), DateTimeFormatter.ofPattern("dd/MM/yyyy")).atStartOfDay()),
                 dto.getQuota(),
                 _userMapper.toEntity(dto.getUser()),
                 _productTypeMapper.toEntity(dto.getProductType()),
