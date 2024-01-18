@@ -133,11 +133,6 @@ CREATE TABLE "UserInformation"."User" (
                                           FOREIGN KEY ("QuotaId") REFERENCES "QuotaInformation"."Quota" ("id")
 );
 
-CREATE TABLE "UserInformation"."Family" (
-                                            "id" SERIAL PRIMARY KEY,
-                                            "Address" VARCHAR NOT NULL UNIQUE
-);
-
 CREATE TABLE "UserInformation"."UserToFamily" (
                                                   "id" SERIAL PRIMARY KEY,
                                                   "UserId" INT NOT NULL UNIQUE,
