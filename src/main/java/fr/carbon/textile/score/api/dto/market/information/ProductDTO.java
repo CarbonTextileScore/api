@@ -13,6 +13,7 @@ public class ProductDTO implements Serializable {
     Integer id;
     String name;
     Double area;
+    Double price;
     Boolean isSecondHand;
     Boolean isSold;
     ProductTypeDTO productType;

@@ -15,6 +15,7 @@ CREATE TABLE "MarketInformation"."Product" (
                                                "IsSold" BOOLEAN NOT NULL DEFAULT FALSE,
                                                "CountryId" INT NOT NULL,
                                                "ProductTypeId" INT NOT NULL,
+                                               "Price" FLOAT NOT NULL,
                                                FOREIGN KEY ("ProductTypeId") REFERENCES "MarketInformation"."ProductType" ("id"),
                                                FOREIGN KEY ("CountryId") REFERENCES "UserInformation"."Country" ("id")
 );
@@ -144,6 +145,7 @@ CREATE TABLE "UserInformation"."Invoice" (
                                              "Quota" INT NOT NULL,
                                              "UserId" INT NOT NULL,
                                              "ProductTypeId" INT NOT NULL,
+                                             "ProductPrice" FLOAT NOT NULL,
                                              FOREIGN KEY ("ProductTypeId") REFERENCES "MarketInformation"."ProductType" ("id"),
                                              FOREIGN KEY ("UserId") REFERENCES "UserInformation"."User" ("id")
 );

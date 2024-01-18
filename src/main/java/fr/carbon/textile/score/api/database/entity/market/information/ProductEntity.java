@@ -23,6 +23,9 @@ public class ProductEntity {
     @Basic
     @Column(name = "`IsSold`", nullable = false)
     private boolean _isSold = false;
+    @Basic
+    @Column(name = "`Price`", nullable = false)
+    private double _price;
     @OneToOne
     @JoinColumn(name = "`ProductTypeId`", nullable = false)
     ProductTypeEntity _productType;
@@ -37,13 +40,15 @@ public class ProductEntity {
             Double area,
             boolean isSecondHand,
             FabricsToProductEntity fabric,
-            ProductTypeEntity productType
+            ProductTypeEntity productType,
+            Double price
     ) {
         _name = name;
         _area = area;
         _isSecondHand = isSecondHand;
         _fabric = fabric;
         _productType = productType;
+        _price = price;
     }
 
     public int getId() {
@@ -102,6 +107,14 @@ public class ProductEntity {
         _productType = productType;
     }
 
+    public double getPrice() {
+        return _price;
+    }
+
+    public void setPrice(double price) {
+        this._price = price;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -110,6 +123,7 @@ public class ProductEntity {
         return Double.compare(_area, that._area) == 0 &&
                 _isSecondHand == that._isSecondHand &&
                 _isSold == that._isSold &&
+                Double.compare(_price, that._price) == 0 &&
                 Objects.equals(_id, that._id) &&
                 Objects.equals(_name, that._name) &&
                 Objects.equals(_productType, that._productType) &&
@@ -118,6 +132,6 @@ public class ProductEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(_id, _name, _area, _isSecondHand, _isSold, _productType, _fabric);
+        return Objects.hash(_id, _name, _area, _isSecondHand, _isSold, _price, _productType, _fabric);
     }
 }
