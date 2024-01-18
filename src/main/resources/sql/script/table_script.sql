@@ -133,14 +133,6 @@ CREATE TABLE "UserInformation"."User" (
                                           FOREIGN KEY ("QuotaId") REFERENCES "QuotaInformation"."Quota" ("id")
 );
 
-CREATE TABLE "UserInformation"."UserToFamily" (
-                                                  "id" SERIAL PRIMARY KEY,
-                                                  "UserId" INT NOT NULL UNIQUE,
-                                                  "FamilyId" INT NOT NULL,
-                                                  FOREIGN KEY ("UserId") REFERENCES "UserInformation"."User" ("id"),
-                                                  FOREIGN KEY ("FamilyId") REFERENCES "UserInformation"."Family" ("id")
-);
-
 CREATE TABLE "UserInformation"."Invoice" (
                                              "id" SERIAL PRIMARY KEY,
                                              "Date" TIMESTAMP NOT NULL,
