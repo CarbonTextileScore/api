@@ -401,7 +401,7 @@ ON CONFLICT ("ProductId", "FabricId") DO NOTHING;
 
 -- Video Category SCRIPT
 INSERT INTO "TrainingInformation"."VideoCategory" ("Name")
-VALUES ('CREATION'), ('REUTILISATION'), ('RECYCLATION')
+VALUES ('CREATION'), ('REUTILISATION'), ('RECYCLAGE')
 ON CONFLICT DO NOTHING;
 
 -- Training SCRIPT
