@@ -29,6 +29,12 @@ public class ProductEntity {
     @Basic
     @Column(name = "`Mass`", nullable = false, precision = 4)
     private double _mass;
+    @Basic
+    @Column(name = "`Description`", nullable = false)
+    private String _description;
+    @Basic
+    @Column(name = "`ProfilePicture`", nullable = false)
+    private byte[] _profilePicture;
     @OneToOne
     @JoinColumn(name = "`ProductTypeId`", nullable = false)
     ProductTypeEntity _productType;
@@ -45,7 +51,9 @@ public class ProductEntity {
             FabricsToProductEntity fabric,
             ProductTypeEntity productType,
             Double price,
-            Double mass
+            Double mass,
+            String description,
+            byte[] profilePicture
     ) {
         _name = name;
         _area = area;
@@ -54,6 +62,8 @@ public class ProductEntity {
         _productType = productType;
         _price = price;
         _mass = mass;
+        _description = description;
+        _profilePicture = profilePicture;
     }
 
     public int getId() {
@@ -128,6 +138,22 @@ public class ProductEntity {
         this._mass = mass;
     }
 
+    public String getDescription() {
+        return _description;
+    }
+
+    public void setDescription(String description) {
+        this._description = description;
+    }
+
+    public byte[] getProfilePicture() {
+        return _profilePicture;
+    }
+
+    public void setProfilePicture(byte[] profilePicture) {
+        this._profilePicture = profilePicture;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -141,6 +167,7 @@ public class ProductEntity {
                 Double.compare(_mass, that._mass) == 0 &&
                 Objects.equals(_id, that._id) &&
                 Objects.equals(_name, that._name) &&
+                Objects.equals(_description, that._description) &&
                 Objects.equals(_productType, that._productType) &&
                 Objects.equals(_fabric, that._fabric);
     }
@@ -148,7 +175,7 @@ public class ProductEntity {
     @Override
     public int hashCode() {
         return Objects.hash(
-                _id, _name, _area, _isSecondHand, _isSold, _price, _mass, _productType, _fabric
+                _id, _name, _area, _isSecondHand, _isSold, _price, _mass, _description, _productType, _fabric
         );
     }
 }
