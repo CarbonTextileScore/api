@@ -157,7 +157,7 @@ public class UserEntity {
     }
 
     public void setInvoices(List<InvoiceEntity> invoices) {
-        this._invoices = invoices;
+        _invoices = invoices;
     }
 
     @Override

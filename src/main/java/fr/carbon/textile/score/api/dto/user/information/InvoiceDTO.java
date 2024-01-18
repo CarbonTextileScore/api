@@ -14,6 +14,7 @@ public class InvoiceDTO {
     Integer id;
     Date date;
     Integer quota;
+    Double productPrice;
     UserDTO user;
     ProductTypeDTO productType;
 }

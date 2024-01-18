@@ -112,7 +112,7 @@ public class ProductEntity {
     }
 
     public void setPrice(double price) {
-        this._price = price;
+        _price = price;
     }
 
     @Override

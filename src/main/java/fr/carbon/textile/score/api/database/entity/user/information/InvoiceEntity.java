@@ -19,6 +19,9 @@ public class InvoiceEntity {
     @Basic
     @Column(name = "`Quota`", nullable = false)
     private int _quota;
+    @Basic
+    @Column(name = "`ProductPrice`", nullable = false)
+    private double _productPrice;
     @ManyToOne
     @JoinColumn(name = "`UserId`", nullable = false)
     private UserEntity _user;
@@ -29,11 +32,14 @@ public class InvoiceEntity {
     public InvoiceEntity() {
     }
 
-    public InvoiceEntity(Timestamp date, int quota, UserEntity user, ProductTypeEntity productType) {
+    public InvoiceEntity(
+            Timestamp date, int quota, UserEntity user, ProductTypeEntity productType, double productPrice
+    ) {
         _date = date;
         _quota = quota;
         _user = user;
         _productType = productType;
+        _productPrice = productPrice;
     }
 
     public int getId() {
@@ -73,23 +79,32 @@ public class InvoiceEntity {
     }
 
     public void setProductType(ProductTypeEntity productType) {
-        this._productType = productType;
+        _productType = productType;
+    }
+
+    public double getProductPrice() {
+        return _productPrice;
+    }
+
+    public void setProductPrice(double productPrice) {
+        _productPrice = productPrice;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        InvoiceEntity that = (InvoiceEntity) o;
-        return _quota == that._quota &&
-                Objects.equals(_id, that._id) &&
-                Objects.equals(_date, that._date) &&
-                Objects.equals(_user, that._user) &&
-                Objects.equals(_productType, that._productType);
+        InvoiceEntity entity = (InvoiceEntity) o;
+        return _quota == entity._quota &&
+                Double.compare(_productPrice, entity._productPrice) == 0 &&
+                Objects.equals(_id, entity._id) &&
+                Objects.equals(_date, entity._date) &&
+                Objects.equals(_user, entity._user) &&
+                Objects.equals(_productType, entity._productType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(_id, _date, _quota, _user, _productType);
+        return Objects.hash(_id, _date, _quota, _productPrice, _user, _productType);
     }
 }
