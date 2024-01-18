@@ -2,9 +2,11 @@ package fr.carbon.textile.score.api.service.market.information;
 
 import fr.carbon.textile.score.api.database.entity.market.information.FabricsToProductEntity;
 import fr.carbon.textile.score.api.database.entity.market.information.ProductEntity;
+import fr.carbon.textile.score.api.database.entity.user.information.CountryEntity;
 import fr.carbon.textile.score.api.dto.market.information.ProductDTO;
 import fr.carbon.textile.score.api.exception.CustomException;
 import fr.carbon.textile.score.api.repository.market.information.ProductRepository;
+import fr.carbon.textile.score.api.repository.user.information.CountryRepository;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.lang.NonNull;
@@ -18,15 +20,17 @@ import java.util.Optional;
 @Service
 @Validated
 public class ProductServiceImpl implements ProductService {
-    private ProductRepository _productRepository;
+    private final ProductRepository _productRepository;
+    private final CountryRepository _countryRepository;
     private final static double C_1 = 0.1d;
     private final static double C_2 = 0.3d;
     private final static double C_3 = 0.2d;
     private final static double C_5 = 0.4d;
 
-    public ProductServiceImpl(ProductRepository productRepository) {
+    public ProductServiceImpl(ProductRepository productRepository, CountryRepository countryRepository) {
         super();
         _productRepository = productRepository;
+        _countryRepository = countryRepository;
     }
 
     public static double calculateHaversineDistance(double lat1, double lon1, double lat2, double lon2) {
@@ -51,6 +55,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public int calculateQuotaFromProductId(@Valid @NonNull @PositiveOrZero Integer id) throws CustomException {
         Optional<ProductEntity> optionalProduct = _productRepository.queryByIdWithFabrics(id);
+        CountryEntity france = _countryRepository.queryFrance();
         if (optionalProduct.isEmpty()) {
             throw new CustomException("Error, this product id does not exists, id = " + id);
         }
@@ -58,10 +63,22 @@ public class ProductServiceImpl implements ProductService {
         ProductEntity product = optionalProduct.get();
         for (FabricsToProductEntity data : product.getFabrics()) {
             double quotaArea = C_1 * product.getArea();
-            double quotaWaterMass = C_2 * data.getFabric().getWaterConsumptionCubicCentimeterPerGram() * product.getMass();
-            double quotaCarbon = C_3 * data.getFabric().getKilogramCO2EquivalentPerSquareMetre();
-            double quotaLength = C_5 * calculateHaversineDistance(product.getCountry().getLat(), product.getCountry().getLon(), data.getFabric().getCountry().getLat(), data.getFabric().getCountry().getLon());
-            double sum = (quotaArea + quotaLength + quotaCarbon + quotaWaterMass) * ((double) data.getPercentage() / 100);
+            double quotaWaterMass = C_2 *
+                    data.getFabric().getWaterConsumptionCubicCentimeterPerGram() *
+                    product.getMass();
+            double quotaCarbon = C_3 *
+                    data.getFabric().getKilogramCO2EquivalentPerSquareMetre();
+            double totalDistance = calculateHaversineDistance(
+                    product.getCountry().getLat(), product.getCountry().getLon(),
+                    france.getLat(), france.getLon()
+            );
+            totalDistance += calculateHaversineDistance(
+                    data.getFabric().getCountry().getLat(), data.getFabric().getCountry().getLon(),
+                    france.getLat(), france.getLon()
+            );
+            double quotaLength = C_5 * totalDistance;
+            double sum = (quotaArea + quotaLength + quotaCarbon + quotaWaterMass) *
+                    ((double) data.getPercentage() / 100);
             total += sum;
         }
 
