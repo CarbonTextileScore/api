@@ -20,7 +20,7 @@ public class InvoiceEntity {
     @Column(name = "`Quota`", nullable = false)
     private int _quota;
     @Basic
-    @Column(name = "`ProductPrice`", nullable = false)
+    @Column(name = "`ProductPrice`", nullable = false, precision = 4)
     private double _productPrice;
     @ManyToOne
     @JoinColumn(name = "`UserId`", nullable = false)

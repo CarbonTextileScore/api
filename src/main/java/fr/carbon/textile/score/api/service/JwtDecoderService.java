@@ -1,8 +1,8 @@
 package fr.carbon.textile.score.api.service;
 
-import fr.carbon.textile.score.api.database.entity.user.information.UserEntity;
-import org.springframework.stereotype.Service;
+import fr.carbon.textile.score.api.dto.user.information.UserDTO;
+import fr.carbon.textile.score.api.exception.CustomException;
 
 public interface JwtDecoderService {
-    UserEntity recoverUserOfThisRequest();
+    UserDTO recoverUserOfThisRequest() throws CustomException;
 }
