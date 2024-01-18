@@ -14,9 +14,10 @@ public class TrainingDTO implements Serializable {
     Integer id;
     String name;
     String video;
-    Integer stars;
+    Integer score;
     String userFullName;
     byte[] userPicture;
     VideoCategoryDTO videoCategory;
+    Integer categoryId;
 
 }

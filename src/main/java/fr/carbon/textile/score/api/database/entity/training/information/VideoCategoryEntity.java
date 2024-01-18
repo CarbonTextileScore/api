@@ -12,7 +12,7 @@ public class VideoCategoryEntity {
     @Column(name = "id")
     private Integer _id;
     @Basic
-    @Column(name = "Name", nullable = false)
+    @Column(name = "`Name`", nullable = false)
     private String _name;
 
     public VideoCategoryEntity() {
