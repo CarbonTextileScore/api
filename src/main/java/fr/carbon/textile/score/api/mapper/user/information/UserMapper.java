@@ -1,5 +1,6 @@
 package fr.carbon.textile.score.api.mapper.user.information;
 
+import fr.carbon.textile.score.api.database.entity.user.information.InvoiceEntity;
 import fr.carbon.textile.score.api.database.entity.user.information.UserEntity;
 import fr.carbon.textile.score.api.dto.user.information.UserDTO;
 import fr.carbon.textile.score.api.mapper.DTOEntityMapper;
@@ -18,5 +19,12 @@ public class UserMapper implements DTOEntityMapper<UserDTO, UserEntity> {
     @Override
     public UserEntity toEntity(UserDTO dto) {
         return null;
+    }
+
+    public UserDTO toQuotaPersonal(UserEntity user) {
+        return UserDTO.builder()
+                .personalQuota(
+                        (double) user.getInvoices().stream().mapToInt(InvoiceEntity::getQuota).sum() / (double) user.getQuota().getMaxQuotaQuarterly())
+                .build();
     }
 }

@@ -46,6 +46,9 @@ public class UserEntity {
     @OneToMany(targetEntity = InvoiceEntity.class, mappedBy = "_user")
     List<InvoiceEntity> _invoices = new ArrayList<>();
 
+    @OneToMany(mappedBy = "_user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<InvoiceEntity> _invoices;
+
     public UserEntity() {
     }
 

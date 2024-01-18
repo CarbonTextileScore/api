@@ -21,5 +21,7 @@ public class UserDTO implements Serializable {
     QuotaDTO availableQuota;
     CityDTO city;
     FamilyDTO family;
+
     Integer numberOfChildren;
+    Double personalQuota;
 }
