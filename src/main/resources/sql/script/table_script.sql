@@ -47,7 +47,7 @@ CREATE TABLE "MarketInformation"."FabricsToProduct" (
 
 -- QuotaInformation schema
 DROP SCHEMA "QuotaInformation" CASCADE ;
-CREATE SCHEMA "QuotaInformation"
+CREATE SCHEMA "QuotaInformation";
 
 CREATE TABLE "QuotaInformation"."UserRetribution" (
                                                       "id"         SERIAL PRIMARY KEY,
@@ -111,6 +111,11 @@ CREATE TABLE "UserInformation"."Authority" (
                                                FOREIGN KEY ("RoleId") REFERENCES "UserInformation"."Role" ("id")
 );
 
+CREATE TABLE "UserInformation"."Family" (
+                                            "id" SERIAL PRIMARY KEY,
+                                            "Address" VARCHAR NOT NULL UNIQUE
+);
+
 CREATE TABLE "UserInformation"."User" (
                                           "id" SERIAL PRIMARY KEY,
                                           "Name" VARCHAR NOT NULL,
@@ -121,7 +126,9 @@ CREATE TABLE "UserInformation"."User" (
                                           "ProfilePicture" BYTEA NOT NULL,
                                           "Gender" VARCHAR NOT NULL,
                                           "AuthorityId" int NOT NULL UNIQUE,
+                                          "FamilyId" INT,
                                           FOREIGN KEY ("CityId") REFERENCES "UserInformation"."City" ("id"),
+                                          FOREIGN KEY ("FamilyId") REFERENCES "UserInformation"."Family" ("id"),
                                           FOREIGN KEY ("AuthorityId") REFERENCES "UserInformation"."Authority" ("id"),
                                           FOREIGN KEY ("QuotaId") REFERENCES "QuotaInformation"."Quota" ("id")
 );
