@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
@@ -67,8 +68,8 @@ public class InvoiceServiceImpl implements InvoiceService {
             }
             invoiceDTOs.add(InvoiceDTO.builder()
                     .quota(entity.getQuota())
-                    .date(entity.getDate())
-                    .productPrice(entity.getProductPrice())
+                    .date(new SimpleDateFormat("dd/MM/yyyy").format(entity.getDate()))
+                    .productPrice(Math.round(entity.getProductPrice() * 100.0) / 100.0)
                     .productQualifier(productQualifier + entity.getProductType().getName())
                     .build());
         }

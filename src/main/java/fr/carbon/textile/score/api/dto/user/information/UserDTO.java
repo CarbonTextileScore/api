@@ -21,7 +21,7 @@ public class UserDTO implements Serializable {
     @NotBlank(message = "User lastname must not be blank")
     String lastname;
     @NotNull(message = "User birthdate must not be null")
-    Date birthdate;
+    String birthdate;
     @NotEmpty(message = "User picture must not be empty")
     byte[] picture;
     @NotBlank(message = "User gender must not be blank")
@@ -37,4 +37,7 @@ public class UserDTO implements Serializable {
     @Null
     List<InvoiceDTO> invoices;
     Double personalQuota;
+    Double familyQuota;
+    List<UserDTO> familyMembers;
+    Integer age;
 }

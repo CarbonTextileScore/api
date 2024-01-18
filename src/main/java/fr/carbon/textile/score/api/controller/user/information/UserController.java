@@ -31,7 +31,7 @@ public class UserController {
     @GetMapping("/identity")
     @ResponseStatus(HttpStatus.OK)
     @PreAuthorize("hasRole('ROLE_USER')")
-    public UserDTO getUserIdentity() {
+    public UserDTO getUserIdentity() throws CustomException {
         return _userService.getUserIdentity(_jwtDecoderService.recoverUserOfThisRequest());
     }
 
@@ -40,5 +40,13 @@ public class UserController {
     @PreAuthorize("hasRole('ROLE_USER')")
     public UserDTO getQuotaPersonal() throws CustomException {
         return _userService.getQuotaPersonal(_jwtDecoderService.recoverUserOfThisRequest());
+    }
+
+    @GetMapping("/dashboard")
+    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public UserDTO getDashboard() throws CustomException {
+        System.out.println("getDashboard");
+        return _userService.getDashboard(_jwtDecoderService.recoverUserOfThisRequest());
     }
 }

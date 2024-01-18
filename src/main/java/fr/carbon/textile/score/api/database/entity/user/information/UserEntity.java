@@ -22,7 +22,7 @@ public class UserEntity {
     @Basic
     @Column(name = "`Lastname`", nullable = false)
     private String _lastname;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "`CityId`", nullable = false)
     private CityEntity _city;
     @Basic
@@ -45,9 +45,6 @@ public class UserEntity {
     private AuthorityEntity _authority;
     @OneToMany(targetEntity = InvoiceEntity.class, mappedBy = "_user")
     List<InvoiceEntity> _invoices = new ArrayList<>();
-
-    @OneToMany(mappedBy = "_user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<InvoiceEntity> _invoices;
 
     public UserEntity() {
     }
