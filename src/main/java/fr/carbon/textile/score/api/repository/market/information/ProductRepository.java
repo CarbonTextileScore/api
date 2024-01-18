@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity, Integer> {
     @Query(
-            "SELECT product FROM Product product LEFT JOIN FETCH product._fabric WHERE product._id = :id"
+            "SELECT product FROM Product product LEFT JOIN FETCH product._fabrics WHERE product._id = :id"
     )
     Optional<ProductEntity> queryByIdWithFabrics(
             @PositiveOrZero @Param("id") Integer id
