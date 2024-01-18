@@ -4,6 +4,7 @@ import fr.carbon.textile.score.api.database.entity.quota.information.QuotaEntity
 import jakarta.persistence.*;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "User")
@@ -40,6 +41,9 @@ public class UserEntity {
     @OneToOne
     @JoinColumn(name = "`AuthorityId`", nullable = false)
     private AuthorityEntity _authority;
+
+    @OneToMany(mappedBy = "_user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<InvoiceEntity> _invoices;
 
     public UserEntity() {
     }
@@ -144,6 +148,10 @@ public class UserEntity {
 
     public void setAuthority(AuthorityEntity authority) {
         _authority = authority;
+    }
+
+    public List<InvoiceEntity> getInvoices() {
+        return _invoices;
     }
 
     @Override

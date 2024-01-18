@@ -41,7 +41,7 @@ public class JwtUtils {
     }
 
     public String parseJwt(@NonNull HttpServletRequest request) {
-        String headerAuth = request.getHeader("Authorization");
+        String headerAuth = request.getHeader("Token");
 
         if (!StringUtils.hasText(headerAuth) || !headerAuth.startsWith("Bearer ")) {
             return null;

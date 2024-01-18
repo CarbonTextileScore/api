@@ -18,7 +18,7 @@ public class InvoiceEntity {
     @Basic
     @Column(name = "`Quota`", nullable = false)
     private int _quota;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "`UserId`", nullable = false)
     private UserEntity _user;
 
