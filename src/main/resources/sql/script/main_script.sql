@@ -241,52 +241,61 @@ VALUES ('T-SHIRT'), ('PULL'), ('PANTALON'), ('ROBE'), ('MANTEAU'), ('CHEMISE'), 
 ON CONFLICT ("Name") DO NOTHING;
 
 -- Product SCRIPT
-INSERT INTO "MarketInformation"."Product" ("Name", "Area", "CountryId", "ProductTypeId", "Price", "Mass")
+INSERT INTO "MarketInformation"."Product" ("Name", "Area", "CountryId", "ProductTypeId", "Price", "Mass", "Description", "ProfilePicture")
 VALUES
     (
         'Tee-Shirt', 4800,
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'BANGLADESH'),
-        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'T-SHIRT'), 7.99, 150
+        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'T-SHIRT'), 7.99, 150,
+        'C`est un magnifique t-shirt !', 'picture.jpg'
     ),
     (
         'Pull', 6100,
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'TURQUIE'),
-        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'PULL'), 25.99, 300
+        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'PULL'), 25.99, 300,
+        'C`est un magnifique pull !', 'picture.jpg'
     ),
     (
         'Jean droit-regular', 9500,
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'INDONESIE'),
-        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'PANTALON'), 34.99, 800
+        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'PANTALON'), 34.99, 800,
+        'C`est un magnifique jean !', 'picture.jpg'
     ),
     (
         'Robe à effet drapé', 21000,
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'BIRMANIE'),
-        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'ROBE'), 30, 200
+        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'ROBE'), 30, 200,
+        'C`est une magnifique robe !', 'picture.jpg'
     ),
     (
         'Trench-coat', 21000,
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'CHINE'),
-        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'MANTEAU'), 49.99, 600
+        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'MANTEAU'), 49.99, 600,
+        'C`est un magnifique trench-coat !', 'picture.jpg'
     ),
     (
         'Manteau', 21000,
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'CHINE'),
-        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'MANTEAU'), 78.99, 1200
+        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'MANTEAU'), 78.99, 1200,
+        'C`est un magnifique manteau !', 'picture.jpg'
     ),
     (
         'Chemise Blanche', 6100,
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'CHINE'),
-        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'CHEMISE'), 25.99, 200
+        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'CHEMISE'), 25.99, 200,
+        'C`est une magnifique chemise blanche !', 'picture.jpg'
     ),
     (
         'Chaussure en Cuir', 1193.2,
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'FRANCE'),
-        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'CHAUSSURE'), 135, 800
+        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'CHAUSSURE'), 135, 800,
+        'C`est une paire de chausse magnifique !', 'picture.jpg'
     ),
     (
         'Pantalon en Lin', 9500,
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'FRANCE'),
-        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'PANTALON'), 145, 500
+        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'PANTALON'), 145, 500,
+        'C`est un magnifique pantalon en lin !', 'picture.jpg'
     )
 ON CONFLICT ("Name") DO NOTHING;
 
