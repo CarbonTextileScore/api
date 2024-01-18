@@ -31,7 +31,7 @@ public class UserController {
     @GetMapping("/identity")
     @ResponseStatus(HttpStatus.OK)
     @PreAuthorize("hasRole('ROLE_USER')")
-    public UserDTO getUserIdentity() {
+    public UserDTO getUserIdentity() throws CustomException {
         return _userService.getUserIdentity(_jwtDecoderService.recoverUserOfThisRequest());
     }
 

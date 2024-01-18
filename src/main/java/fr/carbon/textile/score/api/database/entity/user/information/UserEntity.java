@@ -43,10 +43,7 @@ public class UserEntity {
     @OneToOne
     @JoinColumn(name = "`AuthorityId`", nullable = false)
     private AuthorityEntity _authority;
-    @OneToMany(targetEntity = InvoiceEntity.class, mappedBy = "_user")
-    List<InvoiceEntity> _invoices = new ArrayList<>();
-
-    @OneToMany(mappedBy = "_user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(targetEntity = InvoiceEntity.class, mappedBy = "_user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<InvoiceEntity> _invoices;
 
     public UserEntity() {
