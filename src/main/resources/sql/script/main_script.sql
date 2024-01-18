@@ -63,51 +63,6 @@ VALUES
     )
 ON CONFLICT ("Username") DO NOTHING;
 
--- User SCRIPT
-INSERT INTO "UserInformation"."User" ("Name", "Lastname", "CityId", "Birthdate", "QuotaId", "ProfilePicture", "Gender", "AuthorityId")
-VALUES
-    (
-        'Tangui',
-        'STEIMETZ',
-        (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'CAEN'),
-        TO_TIMESTAMP('2016-09-05 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
-        null,
-        'profile_picture.jpg',
-        'M',
-        (SELECT "id" FROM "UserInformation"."Authority" WHERE "Username" = 'TAN')
-    ),
-    (
-        'Valentin',
-        'LEBARBANCHON',
-        (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'CAEN'),
-        TO_TIMESTAMP('2016-09-05 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
-        null,
-        'profile_picture.jpg',
-        'M',
-        (SELECT "id" FROM "UserInformation"."Authority" WHERE "Username" = 'VAL')
-    ),
-    (
-        'Maire',
-        'CAEN',
-        (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'CAEN'),
-        TO_TIMESTAMP('2016-09-05 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
-        null,
-        'profile_picture.jpg',
-        'M',
-        (SELECT "id" FROM "UserInformation"."Authority" WHERE "Username" = 'MAYOR-CAEN')
-    ),
-    (
-        'President',
-        'FRANCE',
-        (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'PARIS'),
-        TO_TIMESTAMP('2016-09-05 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
-        null,
-        'profile_picture.jpg',
-        'M',
-        (SELECT "id" FROM "UserInformation"."Authority" WHERE "Username" = 'PRESIDENT-FRANCE')
-    )
-ON CONFLICT ("AuthorityId") DO NOTHING;
-
 -- Family SCRIPT
 INSERT INTO "UserInformation"."Family" ("Address")
 VALUES
@@ -119,26 +74,54 @@ VALUES
     )
 ON CONFLICT ("Address") DO NOTHING;
 
--- userToFamily SCRIPT
-INSERT INTO "UserInformation"."UserToFamily" ("UserId", "FamilyId")
+-- User SCRIPT
+INSERT INTO "UserInformation"."User" ("Name", "Lastname", "CityId", "Birthdate", "QuotaId", "ProfilePicture", "Gender", "AuthorityId", "FamilyId")
 VALUES
     (
-        (SELECT "id" FROM "UserInformation"."User" WHERE "Name" = 'Valentin' AND "Lastname" = 'LEBARBANCHON'),
+        'Tangui',
+        'STEIMETZ',
+        (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'CAEN'),
+        TO_TIMESTAMP('2016-09-05 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
+        null,
+        'profile_picture.jpg',
+        'M',
+        (SELECT "id" FROM "UserInformation"."Authority" WHERE "Username" = 'TAN'),
         (SELECT "id" FROM "UserInformation"."Family" WHERE "Address" = '3 Esp. Stéphane Hessel, 14000 Caen')
     ),
     (
-        (SELECT "id" FROM "UserInformation"."User" WHERE "Name" = 'Tangui' AND "Lastname" = 'STEIMETZ'),
+        'Valentin',
+        'LEBARBANCHON',
+        (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'CAEN'),
+        TO_TIMESTAMP('2016-09-05 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
+        null,
+        'profile_picture.jpg',
+        'M',
+        (SELECT "id" FROM "UserInformation"."Authority" WHERE "Username" = 'VAL'),
         (SELECT "id" FROM "UserInformation"."Family" WHERE "Address" = '3 Esp. Stéphane Hessel, 14000 Caen')
     ),
     (
-        (SELECT "id" FROM "UserInformation"."User" WHERE "Name" = 'Maire' AND "Lastname" = 'CAEN'),
-        (SELECT "id" FROM "UserInformation"."Family" WHERE "Address" = 'testing')
+        'Maire',
+        'CAEN',
+        (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'CAEN'),
+        TO_TIMESTAMP('2016-09-05 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
+        null,
+        'profile_picture.jpg',
+        'M',
+        (SELECT "id" FROM "UserInformation"."Authority" WHERE "Username" = 'MAYOR-CAEN'),
+        null
     ),
     (
-        (SELECT "id" FROM "UserInformation"."User" WHERE "Name" = 'President' AND "Lastname" = 'FRANCE'),
-        (SELECT "id" FROM "UserInformation"."Family" WHERE "Address" = 'testing')
+        'President',
+        'FRANCE',
+        (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'PARIS'),
+        TO_TIMESTAMP('2016-09-05 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
+        null,
+        'profile_picture.jpg',
+        'M',
+        (SELECT "id" FROM "UserInformation"."Authority" WHERE "Username" = 'PRESIDENT-FRANCE'),
+        null
     )
-ON CONFLICT ("UserId") DO NOTHING;
+ON CONFLICT ("AuthorityId") DO NOTHING;
 
 -- User Retribution SCRIPT
 INSERT INTO "QuotaInformation"."UserRetribution" ("QuotaGains", "Retribution")
@@ -217,8 +200,3 @@ VALUES
     ()
 
  */
-
-
-
-
-

@@ -16,14 +16,14 @@ public class FamilyEntity {
     @Column(name = "`Address`", nullable = false)
     private String _address;
     @OneToMany(mappedBy = "_family")
-    private List<UserToFamilyEntity> _userToFamily;
+    private List<UserEntity> _users;
 
     public FamilyEntity() {
     }
 
-    public FamilyEntity(String address, List<UserToFamilyEntity> userToFamily) {
+    public FamilyEntity(String address, List<UserEntity> users) {
         _address = address;
-        _userToFamily = userToFamily;
+        _users = users;
     }
 
     public int getId() {
@@ -42,12 +42,12 @@ public class FamilyEntity {
         _address = address;
     }
 
-    public List<UserToFamilyEntity> getUserToFamily() {
-        return _userToFamily;
+    public List<UserEntity> getUsers() {
+        return _users;
     }
 
-    public void setUserToFamily(List<UserToFamilyEntity> userToFamily) {
-        _userToFamily = userToFamily;
+    public void setUsers(List<UserEntity> users) {
+        _users = users;
     }
 
     @Override
@@ -57,11 +57,11 @@ public class FamilyEntity {
         FamilyEntity that = (FamilyEntity) o;
         return Objects.equals(_id, that._id) &&
                 Objects.equals(_address, that._address) &&
-                Objects.equals(_userToFamily, that._userToFamily);
+                Objects.equals(_users, that._users);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(_id, _address, _userToFamily);
+        return Objects.hash(_id, _address, _users);
     }
 }
