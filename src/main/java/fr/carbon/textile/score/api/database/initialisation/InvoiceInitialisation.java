@@ -17,6 +17,8 @@ import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDate;
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -88,7 +90,7 @@ public class InvoiceInitialisation {
             UserEntity user, int numberToGenerate, Random random, List<ProductTypeEntity> poolOfProductTypes
     ) {
         for (int i = 0; i < numberToGenerate; i++) {
-            Date date = new Date(LocalDate.now().withYear(30).toEpochDay());
+            Date date = Date.from(LocalDate.now().plusYears(30).atStartOfDay(ZoneId.systemDefault()).toInstant());
             int quota = random.nextInt(_minInvoiceQuotaToGenerate, _maxInvoiceQuotaToGenerate);
             ProductTypeEntity productType = poolOfProductTypes.get(
                     random.nextInt(0, poolOfProductTypes.size())
