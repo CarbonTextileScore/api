@@ -41,4 +41,12 @@ public class UserController {
     public UserDTO getQuotaPersonal() throws CustomException {
         return _userService.getQuotaPersonal(_jwtDecoderService.recoverUserOfThisRequest());
     }
+
+    @GetMapping("/dashboard")
+    @ResponseStatus(HttpStatus.OK)
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public UserDTO getDashboard() throws CustomException {
+        System.out.println("getDashboard");
+        return _userService.getDashboard(_jwtDecoderService.recoverUserOfThisRequest());
+    }
 }

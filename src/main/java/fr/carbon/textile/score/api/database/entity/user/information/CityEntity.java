@@ -2,6 +2,8 @@ package fr.carbon.textile.score.api.database.entity.user.information;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity(name = "City")
@@ -17,6 +19,10 @@ public class CityEntity {
     @OneToOne
     @JoinColumn(name = "`CountryId`", nullable = false)
     private CountryEntity _country;
+
+    @OneToMany(targetEntity = UserEntity.class, mappedBy = "_city")
+    List<UserEntity> _users = new ArrayList<>();
+
 
     public CityEntity() {
     }
@@ -48,6 +54,10 @@ public class CityEntity {
 
     public void setCountry(CountryEntity country) {
         _country = country;
+    }
+
+    public List<UserEntity> getUsers() {
+        return _users;
     }
 
     @Override

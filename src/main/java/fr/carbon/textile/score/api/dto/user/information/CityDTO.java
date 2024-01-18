@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Builder
 @Getter
@@ -13,4 +14,8 @@ public class CityDTO implements Serializable {
     Integer id;
     String name;
     CountryDTO country;
+
+    Double quota;
+    List<String> punishments;
+    List<String> punishmentsSoon;
 }

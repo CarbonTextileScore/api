@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 import java.time.LocalDate;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -98,7 +99,7 @@ public class InvoiceInitialisation {
                 quota = - (quota / 2);
             }
             InvoiceDTO built = InvoiceDTO.builder()
-                    .date(date)
+                    .date(new SimpleDateFormat("dd/MM/yyyy").format(date))
                     .quota(quota)
                     .productType(_productTypeMapper.toDTO(productType))
                     .user(_userMapper.toDTO(user))
