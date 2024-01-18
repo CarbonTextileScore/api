@@ -1,4 +1,4 @@
-package fr.carbon.textile.score.api.dto.user.information;
+package fr.carbon.textile.score.api.dto.market.information;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Builder;
@@ -9,9 +9,7 @@ import java.io.Serializable;
 @Builder
 @Getter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CountryDTO implements Serializable {
+public class FabricAnimalOriginDTO implements Serializable {
     Integer id;
     String name;
-    Double lat;
-    Double lon;
 }

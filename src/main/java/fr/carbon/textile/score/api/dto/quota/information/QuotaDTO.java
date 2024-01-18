@@ -12,5 +12,5 @@ import java.io.Serializable;
 public class QuotaDTO implements Serializable {
     Integer id;
     RetributionRequirementDTO characteristic;
-    Integer maxQuotaQuaterly;
+    Integer maxQuotaQuarterly;
 }
