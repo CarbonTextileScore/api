@@ -75,7 +75,7 @@ public class ProductServiceImpl implements ProductService {
             total += sum;
         }
 
-        return (int) (total / 100);
+        return (int) Math.round(total / 100);
     }
 
     private static double calculateQuotaWithAGivenFabric(FabricsToProductEntity data, ProductEntity product, CountryEntity france, Map<String, Double> originCoefficient) {
