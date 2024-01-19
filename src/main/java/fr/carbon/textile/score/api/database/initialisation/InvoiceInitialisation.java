@@ -109,7 +109,7 @@ public class InvoiceInitialisation {
             ProductTypeEntity productType = poolOfProductTypes.get(
                     random.nextInt(0, poolOfProductTypes.size())
             );
-            double price = random.nextDouble(_minInvoicePriceToGenerate, _maxInvoicePriceToGenerate);
+            double price = - random.nextDouble(_minInvoicePriceToGenerate, _maxInvoicePriceToGenerate);
             if (random.nextDouble(0d, 1d) < 0.15) {
                 price = - price;
                 quota = - (quota / 2);
