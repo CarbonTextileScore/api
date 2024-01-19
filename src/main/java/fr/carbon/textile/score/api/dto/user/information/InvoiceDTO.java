@@ -29,4 +29,5 @@ public class InvoiceDTO {
     String productQualifier;
 
     String label;
+    Integer productTypeId;
 }

@@ -13,4 +13,6 @@ public interface InvoiceService {
     List<InvoiceDTO> getQuarterlyInvoices(
             @Valid @PositiveOrZero(message = "Id must be positive or zero") Integer id
     ) throws CustomException;
+
+    void postInvoice(InvoiceDTO invoiceDTO, Integer id) throws CustomException;
 }
