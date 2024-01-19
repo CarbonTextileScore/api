@@ -119,7 +119,7 @@ public class InvoiceInitialisation {
                     .quota(quota)
                     .productType(_productTypeMapper.toDTO(productType))
                     .user(_userMapper.toDTO(user))
-                    .productPrice(price)
+                    .price(price)
                     .build();
             _invoiceRepository.save(_invoiceMapper.toEntity(built));
         }

@@ -30,7 +30,7 @@ public class InvoiceMapper implements DTOEntityMapper<InvoiceDTO, InvoiceEntity>
                 .date(new SimpleDateFormat("dd/MM/yyyy").format(entity.getDate()))
                 .productType(_productTypeMapper.toDTO(entity.getProductType()))
                 .user(_userMapper.toDTO(entity.getUser()))
-                .productPrice(entity.getProductPrice())
+                .price(entity.getProductPrice())
                 .build();
     }
 
@@ -41,7 +41,7 @@ public class InvoiceMapper implements DTOEntityMapper<InvoiceDTO, InvoiceEntity>
                 dto.getQuota(),
                 _userMapper.toEntity(dto.getUser()),
                 _productTypeMapper.toEntity(dto.getProductType()),
-                dto.getProductPrice()
+                dto.getPrice()
         );
         entity.setId(dto.getId());
         return entity;
