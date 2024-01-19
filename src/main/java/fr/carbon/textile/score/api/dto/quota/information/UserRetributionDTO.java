@@ -13,4 +13,5 @@ public class UserRetributionDTO implements Serializable {
     Integer id;
     Integer quota;
     String label;
+    String tigName;
 }
