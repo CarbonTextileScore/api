@@ -76,15 +76,18 @@ public class InvoiceServiceImpl implements InvoiceService {
         );
         List<InvoiceDTO> invoiceDTOs = new ArrayList<>();
         for (InvoiceEntity entity : entities) {
-            String productQualifier = "VENTE ";
-            if (entity.getProductPrice() > 0) {
-                productQualifier = "ACHAT ";
+            String productQualifier = "ACHAT ";
+            int quota = entity.getQuota();
+            double price = Math.round(entity.getProductPrice() * Math.pow(10, 2)) / Math.pow(10, 2);
+            if (entity.getProductPrice() < 0) {
+                productQualifier = "VENTE ";
+                quota = - quota;
             }
             invoiceDTOs.add(InvoiceDTO.builder()
                     .productTypeId(entity.getProductType().getId())
-                    .quota(entity.getQuota())
+                    .quota(quota)
                     .date(new SimpleDateFormat("dd/MM/yyyy").format(entity.getDate()))
-                    .price(Math.round(entity.getProductPrice() * 100.0) / 100.0)
+                    .price(price)
                     .productQualifier(productQualifier + entity.getProductType().getName())
                     .build());
         }

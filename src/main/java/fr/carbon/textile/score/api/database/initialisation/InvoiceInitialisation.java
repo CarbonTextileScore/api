@@ -109,10 +109,10 @@ public class InvoiceInitialisation {
             ProductTypeEntity productType = poolOfProductTypes.get(
                     random.nextInt(0, poolOfProductTypes.size())
             );
-            double price = - random.nextDouble(_minInvoicePriceToGenerate, _maxInvoicePriceToGenerate);
-            if (random.nextDouble(0d, 1d) < 0.15) {
+            double price = random.nextDouble(_minInvoicePriceToGenerate, _maxInvoicePriceToGenerate);
+            if (random.nextBoolean()) {
                 price = - price;
-                quota = - (quota / 2);
+                quota = (quota / 2);
             }
             InvoiceDTO built = InvoiceDTO.builder()
                     .date(new SimpleDateFormat("dd/MM/yyyy").format(date))
