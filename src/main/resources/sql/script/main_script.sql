@@ -102,7 +102,7 @@ VALUES
         'Tangui',
         'STEIMETZ',
         (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'CAEN'),
-        TO_TIMESTAMP('2031-09-05 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
+        TO_TIMESTAMP('2041-09-05 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
         null,
         'profile_picture.jpg',
         'M',
@@ -124,7 +124,7 @@ VALUES
         'Angelina',
         'GOUDO',
         (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'CAEN'),
-        TO_TIMESTAMP('2029-01-29 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
+        TO_TIMESTAMP('1954-01-29 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
         null,
         'profile_picture.jpg',
         'F',
@@ -184,7 +184,7 @@ VALUES
         100, 'Travaux forcés en usine de textile - unité : /kg de textile produit'
     ),
     (
-        0.05, 'Transport du textile - unité : /km parcouru'
+        1, 'Transport du textile - unité : /km parcouru'
     ),
     (
         400, 'Culture du coton biologique - unité /kg recolté'

@@ -77,7 +77,7 @@ public class InvoiceServiceImpl implements InvoiceService {
         List<InvoiceDTO> invoiceDTOs = new ArrayList<>();
         for (InvoiceEntity entity : entities) {
             String productQualifier = "VENTE ";
-            if (entity.getProductPrice() < 0) {
+            if (entity.getProductPrice() > 0) {
                 productQualifier = "ACHAT ";
             }
             invoiceDTOs.add(InvoiceDTO.builder()
