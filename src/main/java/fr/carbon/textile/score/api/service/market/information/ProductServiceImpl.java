@@ -13,9 +13,7 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Validated
@@ -26,11 +24,16 @@ public class ProductServiceImpl implements ProductService {
     private final static double C_2 = 0.3d;
     private final static double C_3 = 0.2d;
     private final static double C_5 = 0.4d;
+    private final Map<String, Double> _map;
 
     public ProductServiceImpl(ProductRepository productRepository, CountryRepository countryRepository) {
         super();
         _productRepository = productRepository;
         _countryRepository = countryRepository;
+        _map = new HashMap<>();
+        _map.put("ANIMAL", 2d);
+        _map.put("ORGANIC_VEGETATION", 1d);
+        _map.put("OTHER", 1.5d);
     }
 
     public static double calculateHaversineDistance(double lat1, double lon1, double lat2, double lon2) {
@@ -62,7 +65,7 @@ public class ProductServiceImpl implements ProductService {
         double total = 0;
         ProductEntity product = optionalProduct.get();
         for (FabricsToProductEntity data : product.getFabrics()) {
-            double sum = calculteQuotaWithAGivenFabric(data, product, france);
+            double sum = calculateQuotaWithAGivenFabric(data, product, france, _map);
             if (product.isSecondHand()) {
                 sum = C_5 * calculateHaversineDistance(
                         product.getCountry().getLat(), product.getCountry().getLon(),
@@ -75,7 +78,7 @@ public class ProductServiceImpl implements ProductService {
         return (int) (total / 100);
     }
 
-    private static double calculteQuotaWithAGivenFabric(FabricsToProductEntity data, ProductEntity product, CountryEntity france) {
+    private static double calculateQuotaWithAGivenFabric(FabricsToProductEntity data, ProductEntity product, CountryEntity france, Map<String, Double> originCoefficient) {
         double quotaArea = C_1 * product.getArea();
         double quotaWaterMass = C_2 *
                 data.getFabric().getWaterConsumptionCubicCentimeterPerGram() *
@@ -92,6 +95,7 @@ public class ProductServiceImpl implements ProductService {
         );
         double quotaLength = C_5 * totalDistance;
         double sum = (quotaArea + quotaLength + quotaCarbon + quotaWaterMass) *
+                originCoefficient.get(data.getFabric().getFabricAnimalOrigin().getName()) *
                 ((double) data.getPercentage() / 100);
         return sum;
     }
