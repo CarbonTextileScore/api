@@ -51,8 +51,8 @@ public class InvoiceServiceImpl implements InvoiceService {
     }
 
     @Override
-    public List<InvoiceDTO> getQuarterlyInvoices(Integer id) throws CustomException {
-        LocalDate firstDayOfQuarter = getFirstDayOfCurrentQuarter(LocalDate.now());
+    public List<InvoiceDTO> getQuarterlyInvoices(Integer id) {
+        LocalDate firstDayOfQuarter = getFirstDayOfCurrentQuarter(LocalDate.now().plusYears(30));
         LocalDate lastDayOfQuarter = getLastDayOfGivenFirstDayQuarter(firstDayOfQuarter);
 
         List<InvoiceEntity> entities = _invoiceRepository.queryAllByUserAndBetweenTimestamp(

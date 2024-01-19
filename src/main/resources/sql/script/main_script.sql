@@ -102,7 +102,7 @@ VALUES
         'Tangui',
         'STEIMETZ',
         (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'CAEN'),
-        TO_TIMESTAMP('2001-09-05 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
+        TO_TIMESTAMP('2031-09-05 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
         null,
         'profile_picture.jpg',
         'M',
@@ -113,7 +113,7 @@ VALUES
         'Valentin',
         'LEBARBANCHON',
         (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'CAEN'),
-        TO_TIMESTAMP('2000-09-05 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
+        TO_TIMESTAMP('2030-09-05 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
         null,
         'profile_picture.jpg',
         'M',
@@ -124,7 +124,7 @@ VALUES
         'Angelina',
         'GOUDO',
         (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'CAEN'),
-        TO_TIMESTAMP('1999-01-29 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
+        TO_TIMESTAMP('2029-01-29 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
         null,
         'profile_picture.jpg',
         'F',
@@ -135,7 +135,7 @@ VALUES
         'Christelle',
         'BRONLESS',
         (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'CAEN'),
-        TO_TIMESTAMP('1995-04-23 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
+        TO_TIMESTAMP('2025-04-23 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
         null,
         'profile_picture.jpg',
         'F',
@@ -146,7 +146,7 @@ VALUES
         'Christelle',
         'RANDOM',
         (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'CAEN'),
-        TO_TIMESTAMP('1989-06-27 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
+        TO_TIMESTAMP('2019-06-27 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
         null,
         'profile_picture.jpg',
         'F',
@@ -157,7 +157,7 @@ VALUES
         'Maire',
         'CAEN',
         (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'CAEN'),
-        TO_TIMESTAMP('2017-05-15 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
+        TO_TIMESTAMP('2047-05-15 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
         null,
         'profile_picture.jpg',
         'M',
@@ -168,7 +168,7 @@ VALUES
         'President',
         'FRANCE',
         (SELECT "id" FROM "UserInformation"."City" WHERE "City"."Name" = 'PARIS'),
-        TO_TIMESTAMP('1968-10-09 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
+        TO_TIMESTAMP('1998-10-09 16:00:00', 'YYYY-MM-DD HH24:MI:SS'),
         null,
         'profile_picture.jpg',
         'M',
@@ -213,13 +213,13 @@ ON CONFLICT ("Retribution") DO NOTHING;
 INSERT INTO "QuotaInformation"."CityRetribution" ("TriggerPercentage", "Retribution")
 VALUES
     (
-        5, 'Public shaming'
+        75, 'Public shaming'
     ),
     (
-        10, 'Privation des aides de l’Etat'
+        85, 'Privation des aides de l’Etat'
     ),
     (
-        20, 'Augmentation du prix du textile'
+        95, 'Augmentation du prix du textile'
     )
 ON CONFLICT ("Retribution") DO NOTHING;
 
@@ -307,24 +307,6 @@ VALUES
         'C`est un magnifique jean !', 'picture.jpg'
     ),
     (
-        'Robe à effet drapé', 2.1,
-        (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'BIRMANIE'),
-        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'ROBE'), 30, 200,
-        'C`est une magnifique robe !', 'picture.jpg'
-    ),
-    (
-        'Trench-coat', 2.1,
-        (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'CHINE'),
-        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'MANTEAU'), 49.99, 600,
-        'C`est un magnifique trench-coat !', 'picture.jpg'
-    ),
-    (
-        'Manteau', 2.1,
-        (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'CHINE'),
-        (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'MANTEAU'), 78.99, 1200,
-        'C`est un magnifique manteau !', 'picture.jpg'
-    ),
-    (
         'Chemise Blanche', 0.61,
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'CHINE'),
         (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'CHEMISE'), 25.99, 200,
@@ -341,6 +323,28 @@ VALUES
         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'FRANCE'),
         (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'PANTALON'), 145, 500,
         'C`est un magnifique pantalon en lin !', 'picture.jpg'
+    )
+ON CONFLICT ("Name") DO NOTHING;
+
+INSERT INTO "MarketInformation"."Product" ("Name", "Area", "CountryId", "ProductTypeId", "Price", "Mass", "Description", "ProfilePicture", "IsSecondHand")
+VALUES
+    (
+         'Robe à effet drapé', 2.1,
+         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'BIRMANIE'),
+         (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'ROBE'), 30, 200,
+         'C`est une magnifique robe !', 'picture.jpg', TRUE
+    ),
+    (
+         'Trench-coat', 2.1,
+         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'CHINE'),
+         (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'MANTEAU'), 49.99, 600,
+         'C`est un magnifique trench-coat !', 'picture.jpg', TRUE
+    ),
+    (
+         'Manteau', 2.1,
+         (SELECT "id" FROM "UserInformation"."Country" WHERE "Country"."Name" = 'CHINE'),
+         (SELECT "id" FROM "MarketInformation"."ProductType" WHERE "ProductType"."Name" = 'MANTEAU'), 78.99, 1200,
+         'C`est un magnifique manteau !', 'picture.jpg', TRUE
     )
 ON CONFLICT ("Name") DO NOTHING;
 
@@ -413,9 +417,54 @@ VALUES
         '@jorjadela', 'picture.jpg'
     ),
     (
+        ('Transformer son jean en jupe !'), ('https://www.youtube.com/shorts/7KuD4rLadfM'),
+        (SELECT "id" FROM "TrainingInformation"."VideoCategory" WHERE "VideoCategory"."Name" = 'REUTILISATION'), 4,
+        '@jorjadela', 'picture.jpg'
+    ),
+    (
+        ('Transformer son jean en jupe !'), ('https://www.youtube.com/shorts/7KuD4rLadfM'),
+        (SELECT "id" FROM "TrainingInformation"."VideoCategory" WHERE "VideoCategory"."Name" = 'REUTILISATION'), 4,
+        '@jorjadela', 'picture.jpg'
+    ),
+    (
+        ('Transformer son jean en jupe !'), ('https://www.youtube.com/shorts/7KuD4rLadfM'),
+        (SELECT "id" FROM "TrainingInformation"."VideoCategory" WHERE "VideoCategory"."Name" = 'REUTILISATION'), 4,
+        '@jorjadela', 'picture.jpg'
+    ),
+    (
         ('5 idées chouettes pour réparer tes vêtements'), ('https://www.youtube.com/shorts/IA8jPZKqnjQ'),
         (SELECT "id" FROM "TrainingInformation"."VideoCategory" WHERE "VideoCategory"."Name" = 'RECYCLAGE'), 4,
         '@lorenfascianel', 'picture.jpg'
+    ),
+    (
+        ('5 idées chouettes pour réparer tes vêtements'), ('https://www.youtube.com/shorts/IA8jPZKqnjQ'),
+        (SELECT "id" FROM "TrainingInformation"."VideoCategory" WHERE "VideoCategory"."Name" = 'RECYCLAGE'), 4,
+        '@lorenfascianel', 'picture.jpg'
+    ),
+    (
+        ('5 idées chouettes pour réparer tes vêtements'), ('https://www.youtube.com/shorts/IA8jPZKqnjQ'),
+        (SELECT "id" FROM "TrainingInformation"."VideoCategory" WHERE "VideoCategory"."Name" = 'RECYCLAGE'), 4,
+        '@lorenfascianel', 'picture.jpg'
+    ),
+    (
+        ('Créer ses propres vêtements ! (Patrons, couture & essayages)'), ('https://www.youtube.com/watch?v=SQAG7Chpbvw'),
+        (SELECT "id" FROM "TrainingInformation"."VideoCategory" WHERE "VideoCategory"."Name" = 'CREATION'), 4,
+        '@CarlotaMakeup', 'picture.jpg'
+    ),
+    (
+        ('Créer ses propres vêtements ! (Patrons, couture & essayages)'), ('https://www.youtube.com/watch?v=SQAG7Chpbvw'),
+        (SELECT "id" FROM "TrainingInformation"."VideoCategory" WHERE "VideoCategory"."Name" = 'CREATION'), 4,
+        '@CarlotaMakeup', 'picture.jpg'
+    ),
+    (
+        ('Créer ses propres vêtements ! (Patrons, couture & essayages)'), ('https://www.youtube.com/watch?v=SQAG7Chpbvw'),
+        (SELECT "id" FROM "TrainingInformation"."VideoCategory" WHERE "VideoCategory"."Name" = 'CREATION'), 4,
+        '@CarlotaMakeup', 'picture.jpg'
+    ),
+    (
+        ('Créer ses propres vêtements ! (Patrons, couture & essayages)'), ('https://www.youtube.com/watch?v=SQAG7Chpbvw'),
+        (SELECT "id" FROM "TrainingInformation"."VideoCategory" WHERE "VideoCategory"."Name" = 'CREATION'), 4,
+        '@CarlotaMakeup', 'picture.jpg'
     ),
     (
         ('Créer ses propres vêtements ! (Patrons, couture & essayages)'), ('https://www.youtube.com/watch?v=SQAG7Chpbvw'),
