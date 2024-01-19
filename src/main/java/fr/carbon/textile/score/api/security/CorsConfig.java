@@ -13,7 +13,7 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:4200")
+                .allowedOrigins("http://localhost:4200", "http://192.93.212.213:8443")
                 .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE")
                 .allowedHeaders(CorsConfiguration.ALL)
                 .exposedHeaders("Token")
@@ -26,6 +26,7 @@ public class CorsConfig implements WebMvcConfigurer {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.addAllowedOrigin("http://localhost:4200");
+        corsConfiguration.addAllowedOrigin("http://192.93.212.213:8443");
         corsConfiguration.addAllowedHeader("*");
         corsConfiguration.addAllowedMethod("GET");
         corsConfiguration.addAllowedMethod("POST");
