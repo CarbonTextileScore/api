@@ -84,7 +84,7 @@ public class InvoiceServiceImpl implements InvoiceService {
                     .productTypeId(entity.getProductType().getId())
                     .quota(entity.getQuota())
                     .date(new SimpleDateFormat("dd/MM/yyyy").format(entity.getDate()))
-                    .productPrice(Math.round(entity.getProductPrice() * 100.0) / 100.0)
+                    .price(Math.round(entity.getProductPrice() * 100.0) / 100.0)
                     .productQualifier(productQualifier + entity.getProductType().getName())
                     .build());
         }
@@ -95,7 +95,7 @@ public class InvoiceServiceImpl implements InvoiceService {
     public void postInvoice(InvoiceDTO invoiceDTO, Integer id) throws CustomException {
         UserEntity userEntity = _userRepository.findById(id).orElseThrow(() -> new CustomException("User not found"));
         ProductTypeEntity productTypeEntity = _productTypeRepository.findById(invoiceDTO.getProductTypeId()).orElseThrow(() -> new CustomException("Product type not found"));
-        InvoiceEntity invoiceEntity = new InvoiceEntity(new Timestamp(Date.from(LocalDate.now().plusYears(30).atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime()), invoiceDTO.getQuota(), userEntity, productTypeEntity, invoiceDTO.getProductPrice());
+        InvoiceEntity invoiceEntity = new InvoiceEntity(new Timestamp(Date.from(LocalDate.now().plusYears(30).atStartOfDay(ZoneId.systemDefault()).toInstant()).getTime()), invoiceDTO.getQuota(), userEntity, productTypeEntity, invoiceDTO.getPrice());
         _invoiceRepository.save(invoiceEntity);
     }
 }

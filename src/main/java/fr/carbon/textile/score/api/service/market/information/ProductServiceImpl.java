@@ -117,6 +117,7 @@ public class ProductServiceImpl implements ProductService {
                 continue;
             }
             DTOs.add(ProductDTO.builder()
+                    .productTypeId(entity.getProductType().getId())
                     .name(entity.getName())
                     .price(entity.getPrice())
                     .countryName(entity.getCountry().getName())
