@@ -25,4 +25,6 @@ public class ProductDTO implements Serializable {
     Integer quota;
     CountryDTO countryDTO;
     String countryName;
+
+    Integer productTypeId;
 }

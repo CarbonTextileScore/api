@@ -20,7 +20,7 @@ public class InvoiceDTO {
     String date;
     @NotNull(message = "Invoice quota must not be null")
     Integer quota;
-    Double productPrice;
+    Double price;
     @NotNull(message = "Invoice user must not be null")
     UserDTO user;
     @NotNull(message = "Invoice product type must not be null")
@@ -29,4 +29,5 @@ public class InvoiceDTO {
     String productQualifier;
 
     String label;
+    Integer productTypeId;
 }

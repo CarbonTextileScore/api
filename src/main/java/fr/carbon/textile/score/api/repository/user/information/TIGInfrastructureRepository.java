@@ -4,6 +4,9 @@ import fr.carbon.textile.score.api.database.entity.user.information.TIGInfrastru
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface TIGInfrastructureRepository extends JpaRepository<TIGInfrastructureEntity, Integer> {
+    Optional<TIGInfrastructureEntity> findBy_city__id(Integer _id);
 }

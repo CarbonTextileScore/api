@@ -28,4 +28,11 @@ public class InvoiceController {
     public List<InvoiceDTO> getQuarterlyInvoices() throws CustomException {
         return _invoiceService.getQuarterlyInvoices(_jwtDecoderService.recoverUserOfThisRequest().getId());
     }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public void postInvoice(@RequestBody InvoiceDTO invoiceDTO) throws CustomException {
+        _invoiceService.postInvoice(invoiceDTO, _jwtDecoderService.recoverUserOfThisRequest().getId());
+    }
 }
