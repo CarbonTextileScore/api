@@ -37,10 +37,10 @@ public class ProductEntity {
     @Basic
     @Column(name = "`ProfilePicture`", nullable = false)
     private byte[] _profilePicture;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "`ProductTypeId`", nullable = false)
     ProductTypeEntity _productType;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "`CountryId`", nullable = false)
     CountryEntity _country;
     @OneToMany(mappedBy = "_product")
