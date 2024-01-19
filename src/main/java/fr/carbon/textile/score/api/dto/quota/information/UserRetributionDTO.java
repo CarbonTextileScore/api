@@ -11,6 +11,6 @@ import java.io.Serializable;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserRetributionDTO implements Serializable {
     Integer id;
-    Integer quotaGains;
-    Integer punishment;
+    Integer quota;
+    String label;
 }
