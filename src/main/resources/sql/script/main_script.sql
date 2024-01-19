@@ -213,13 +213,13 @@ ON CONFLICT ("Retribution") DO NOTHING;
 INSERT INTO "QuotaInformation"."CityRetribution" ("TriggerPercentage", "Retribution")
 VALUES
     (
-        5, 'Public shaming'
+        75, 'Public shaming'
     ),
     (
-        10, 'Privation des aides de l’Etat'
+        85, 'Privation des aides de l’Etat'
     ),
     (
-        20, 'Augmentation du prix du textile'
+        95, 'Augmentation du prix du textile'
     )
 ON CONFLICT ("Retribution") DO NOTHING;
 

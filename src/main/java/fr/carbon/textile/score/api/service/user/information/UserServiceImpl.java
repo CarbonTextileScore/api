@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
                 .lastname(userEntity.getLastname())
                 .gender(userEntity.getGender().equals("M") ? "Homme" : "Femme")
                 .birthdate(new SimpleDateFormat("dd/MM/yyyy").format(userEntity.getBirthdate()))
-                .age(Period.between(userEntity.getBirthdate().toLocalDateTime().toLocalDate(), LocalDate.now()).getYears())
+                .age(Period.between(userEntity.getBirthdate().toLocalDateTime().toLocalDate(), LocalDate.now().plusYears(30)).getYears())
                 .personalQuota(personalQuota)
                 .invoices(personalInvoices)
                 .city(_cityService.getCityQuota(userEntity.getCity().getId()))
@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService {
                                 .birthdate(new SimpleDateFormat("dd/MM/yyyy").format(u.getBirthdate()))
                                 .gender(u.getGender().equals("M") ? "Homme" : "Femme")
                                 .personalQuota(Math.round(_invoiceService.getQuarterlyInvoices(u.getId()).stream().mapToDouble(InvoiceDTO::getQuota).sum() / 450.0 * 1000.0) / 10.0)
-                                .age(Period.between(u.getBirthdate().toLocalDateTime().toLocalDate(), LocalDate.now()).getYears())
+                                .age(Period.between(u.getBirthdate().toLocalDateTime().toLocalDate(), LocalDate.now().plusYears(30)).getYears())
                         .build());
             } catch (CustomException ignored) {}
         });
