@@ -417,17 +417,17 @@ VALUES
         '@jorjadela', 'picture.jpg'
     ),
     (
-        ('Transformer son jean en jupe !'), ('https://www.youtube.com/shorts/7KuD4rLadfM'),
+        ('Transformer son jean en jupe 2 !'), ('https://www.youtube.com/shorts/7KuD4rLadfM'),
         (SELECT "id" FROM "TrainingInformation"."VideoCategory" WHERE "VideoCategory"."Name" = 'REUTILISATION'), 4,
         '@jorjadela', 'picture.jpg'
     ),
     (
-        ('Transformer son jean en jupe !'), ('https://www.youtube.com/shorts/7KuD4rLadfM'),
+        ('Transformer son jean en jupe 3 !'), ('https://www.youtube.com/shorts/7KuD4rLadfM'),
         (SELECT "id" FROM "TrainingInformation"."VideoCategory" WHERE "VideoCategory"."Name" = 'REUTILISATION'), 4,
         '@jorjadela', 'picture.jpg'
     ),
     (
-        ('Transformer son jean en jupe !'), ('https://www.youtube.com/shorts/7KuD4rLadfM'),
+        ('Transformer son jean en jupe 4 !'), ('https://www.youtube.com/shorts/7KuD4rLadfM'),
         (SELECT "id" FROM "TrainingInformation"."VideoCategory" WHERE "VideoCategory"."Name" = 'REUTILISATION'), 4,
         '@jorjadela', 'picture.jpg'
     ),
@@ -437,12 +437,12 @@ VALUES
         '@lorenfascianel', 'picture.jpg'
     ),
     (
-        ('5 idées chouettes pour réparer tes vêtements'), ('https://www.youtube.com/shorts/IA8jPZKqnjQ'),
+        ('5 idées chouettes pour réparer tes vêtements 2'), ('https://www.youtube.com/shorts/IA8jPZKqnjQ'),
         (SELECT "id" FROM "TrainingInformation"."VideoCategory" WHERE "VideoCategory"."Name" = 'RECYCLAGE'), 4,
         '@lorenfascianel', 'picture.jpg'
     ),
     (
-        ('5 idées chouettes pour réparer tes vêtements'), ('https://www.youtube.com/shorts/IA8jPZKqnjQ'),
+        ('5 idées chouettes pour réparer tes vêtements 3'), ('https://www.youtube.com/shorts/IA8jPZKqnjQ'),
         (SELECT "id" FROM "TrainingInformation"."VideoCategory" WHERE "VideoCategory"."Name" = 'RECYCLAGE'), 4,
         '@lorenfascianel', 'picture.jpg'
     ),
@@ -452,22 +452,22 @@ VALUES
         '@CarlotaMakeup', 'picture.jpg'
     ),
     (
-        ('Créer ses propres vêtements ! (Patrons, couture & essayages)'), ('https://www.youtube.com/watch?v=SQAG7Chpbvw'),
+        ('Créer ses propres vêtements ! (Patrons, couture & essayages) 1'), ('https://www.youtube.com/watch?v=SQAG7Chpbvw'),
         (SELECT "id" FROM "TrainingInformation"."VideoCategory" WHERE "VideoCategory"."Name" = 'CREATION'), 4,
         '@CarlotaMakeup', 'picture.jpg'
     ),
     (
-        ('Créer ses propres vêtements ! (Patrons, couture & essayages)'), ('https://www.youtube.com/watch?v=SQAG7Chpbvw'),
+        ('Créer ses propres vêtements ! (Patrons, couture & essayages) 2'), ('https://www.youtube.com/watch?v=SQAG7Chpbvw'),
         (SELECT "id" FROM "TrainingInformation"."VideoCategory" WHERE "VideoCategory"."Name" = 'CREATION'), 4,
         '@CarlotaMakeup', 'picture.jpg'
     ),
     (
-        ('Créer ses propres vêtements ! (Patrons, couture & essayages)'), ('https://www.youtube.com/watch?v=SQAG7Chpbvw'),
+        ('Créer ses propres vêtements ! (Patrons, couture & essayages) 3'), ('https://www.youtube.com/watch?v=SQAG7Chpbvw'),
         (SELECT "id" FROM "TrainingInformation"."VideoCategory" WHERE "VideoCategory"."Name" = 'CREATION'), 4,
         '@CarlotaMakeup', 'picture.jpg'
     ),
     (
-        ('Créer ses propres vêtements ! (Patrons, couture & essayages)'), ('https://www.youtube.com/watch?v=SQAG7Chpbvw'),
+        ('Créer ses propres vêtements ! (Patrons, couture & essayages) 4'), ('https://www.youtube.com/watch?v=SQAG7Chpbvw'),
         (SELECT "id" FROM "TrainingInformation"."VideoCategory" WHERE "VideoCategory"."Name" = 'CREATION'), 4,
         '@CarlotaMakeup', 'picture.jpg'
     )
